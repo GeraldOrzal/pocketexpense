@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/screens/entry_screen.dart';
 import 'package:pocketexpense/screens/login_screen.dart';
 import 'package:pocketexpense/screens/register_screen.dart';
 
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: RegisterScreen(),
+      home: EntryScreen(),
     );
   }
 }

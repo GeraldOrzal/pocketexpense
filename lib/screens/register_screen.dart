@@ -104,6 +104,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const Text("Register", style: AuthStyle.getButtonText1),
                   ))
             ])),
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Already have an account? ',
+                style: AuthStyle.getBodyText1(16, Colors.black),
+                children: [
+                  TextSpan(text: "Login", style: AuthStyle.getTextLink1(16))
+                ]),
           )
         ],
       )),
