@@ -1,8 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../models/user.dart';
+import '../styles.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: const [
               Text(
                 "Welcome Back!",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                style: AuthText.getHeader1,
               ),
             ],
           ),
