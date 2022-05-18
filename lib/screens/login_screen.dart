@@ -22,16 +22,24 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              Text(
-                "Welcome Back!",
-                style: AuthStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15.0, 20.0, 40.0, 50.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  'assets/images/logo.png',
+                  scale: 1.3,
+                ),
+                Text(
+                  "Welcome Back!",
+                  style: AuthStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
+                ),
+              ],
+            ),
           ),
           Container(
-            height: 300.0,
+            height: double.infinity,
             child: Form(
                 child: Column(children: [
               Padding(
@@ -70,15 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   "Don't have an account yet? ",
-                  style: AuthStyle.getBodyText1,
+                  style: AuthStyle.getBodyText1(16, Colors.black),
                 ),
                 GestureDetector(
                   onTap: () => {debugPrint("TAP SIGN")},
-                  child: const Text(
+                  child: Text(
                     "Sign up",
-                    style: AuthStyle.getTextLink1,
+                    style: AuthStyle.getTextLink1(16),
                   ),
                 )
               ],
