@@ -23,10 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
-            children: const [
+            children: [
               Text(
                 "Welcome Back!",
-                style: AuthText.getHeader1,
+                style: AuthStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
               ),
             ],
           ),
@@ -37,12 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
-                  decoration: const InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(13)),
-                          borderSide:
-                              BorderSide(color: Colors.black, width: 1)),
-                      hintText: "Email"),
+                  decoration: AuthStyle.getInputDecoration1("Email"),
                   onChanged: (data) => _setCred(data),
                 ),
               ),
@@ -50,42 +45,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
                     onChanged: (data) => _setCred(data),
-                    decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(13)),
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 1)),
-                        hintText: "Password")),
+                    decoration: AuthStyle.getInputDecoration1("Password")),
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: ElevatedButton(
+                  padding: const EdgeInsets.all(15.0),
+                  child: ElevatedButton(
                     onPressed: _onPressed,
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      shadowColor: Colors.transparent,
-                      minimumSize: const Size.fromHeight(40),
-                    ),
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    )),
-              )
+                    style: AuthStyle.getButtonStyle1,
+                    child: const Text("Login", style: AuthStyle.getButtonText1),
+                  ))
             ])),
           ),
           GestureDetector(
             onTap: () => {debugPrint("FORGOT")},
-            child: const Center(
+            child: Center(
               child: Text(
                 "Forgot Password?",
-                style: TextStyle(
-                    color: Color.fromRGBO(255, 0, 0, 1),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0),
+                style: AuthStyle.getHeader1(const Color.fromRGBO(255, 0, 0, 1)),
               ),
             ),
           ),
@@ -96,17 +72,13 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const Text(
                   "Don't have an account yet? ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                  style: AuthStyle.getBodyText1,
                 ),
                 GestureDetector(
                   onTap: () => {debugPrint("TAP SIGN")},
                   child: const Text(
                     "Sign up",
-                    style: TextStyle(
-                        color: Color.fromRGBO(255, 0, 0, 1),
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0),
+                    style: AuthStyle.getTextLink1,
                   ),
                 )
               ],
