@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/styles.dart';
 
 class PageViewScreen extends StatelessWidget {
   String? path;
@@ -17,7 +18,10 @@ class PageViewScreen extends StatelessWidget {
       children: [
         Center(child: Image.asset(this.path ?? "default")),
         Center(
-          child: Text(this.text ?? "default"),
+          child: Text(
+            this.text ?? "default",
+            style: AuthStyle.getBodyText1(22, Colors.black),
+          ),
         ),
       ],
     );
