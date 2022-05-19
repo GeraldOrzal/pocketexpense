@@ -53,111 +53,158 @@ class _SetupScreenState extends State<SetupScreen> {
                     scale: 1.5,
                   ),
                   onChanged: onChanged),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          width: 80.0,
-                          height: 40.0,
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(241, 241, 250, 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          child: Image.asset(
-                            'assets/images/bank1.png',
-                            scale: 1,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(241, 241, 250, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Image.asset(
+                                'assets/images/bank.png',
+                                scale: 1,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          width: 80.0,
-                          height: 40.0,
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(241, 241, 250, 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          child: Image.asset(
-                            'assets/images/bank2.png',
-                            scale: 1,
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(241, 241, 250, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Image.asset(
+                                'assets/images/bank1.png',
+                                scale: 1,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          width: 80.0,
-                          height: 40.0,
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(241, 241, 250, 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          child: Image.asset(
-                            'assets/images/bank3.png',
-                            scale: 1,
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(241, 241, 250, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Image.asset(
+                                'assets/images/bank2.png',
+                                scale: 1,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          width: 80.0,
-                          height: 40.0,
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(241, 241, 250, 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          child: Image.asset(
-                            'assets/images/bank4.png',
-                            scale: 1,
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(241, 241, 250, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Image.asset(
+                                'assets/images/bank3.png',
+                                scale: 1,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          color: Colors.red,
-                          width: 20.0,
-                          height: 20.0,
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(241, 241, 250, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Image.asset(
+                                'assets/images/bank4.png',
+                                scale: 1,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          color: Colors.red,
-                          width: 20.0,
-                          height: 20.0,
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(241, 241, 250, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Image.asset(
+                                'assets/images/bank5.png',
+                                scale: 1,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          color: Colors.red,
-                          width: 20.0,
-                          height: 20.0,
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(241, 241, 250, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Image.asset(
+                                'assets/images/bank6.png',
+                                scale: 1,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          color: Colors.red,
-                          width: 20.0,
-                          height: 20.0,
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(241, 241, 250, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Image.asset(
+                                'assets/images/other.png',
+                                scale: 1,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Padding(
                   padding: const EdgeInsets.all(15.0),

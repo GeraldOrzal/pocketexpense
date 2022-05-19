@@ -5,7 +5,10 @@ import 'pageview_screen.dart';
 class CustomCarousel extends StatefulWidget {
   Map<String, String>? imagePaths;
 
-  CustomCarousel({Key? key, this.imagePaths}) : super(key: key);
+  CustomCarousel({
+    Key? key,
+    this.imagePaths,
+  }) : super(key: key);
 
   @override
   State<CustomCarousel> createState() => _CustomCarouselState();

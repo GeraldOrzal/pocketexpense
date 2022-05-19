@@ -22,6 +22,7 @@ class EntryScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomCarousel(
               imagePaths: this._imagePaths,
