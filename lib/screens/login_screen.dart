@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/constant.dart';
 
 import '../models/user.dart';
 import '../styles.dart';
@@ -38,25 +39,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
           ),
-          Container(
-            height: double.infinity,
+          Expanded(
             child: Form(
                 child: Column(children: [
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                   decoration: AuthStyle.getInputDecoration1("Email"),
                   onChanged: (data) => _setCred(data),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                     onChanged: (data) => _setCred(data),
                     decoration: AuthStyle.getInputDecoration1("Password")),
               ),
               Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: ElevatedButton(
                     onPressed: _onPressed,
                     style: AuthStyle.getButtonStyle1,
@@ -83,7 +83,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: AuthStyle.getBodyText1(16, Colors.black),
                 ),
                 GestureDetector(
-                  onTap: () => {debugPrint("TAP SIGN")},
+                  onTap: () =>
+                      {Navigator.popAndPushNamed(context, REGISTER_ROUTE)},
                   child: Text(
                     "Sign up",
                     style: AuthStyle.getTextLink1(16),

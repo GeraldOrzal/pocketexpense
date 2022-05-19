@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/constant.dart';
 import '../styles.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -47,8 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          Container(
-            height: 400.0,
+          Expanded(
             child: Form(
                 child: Column(children: [
               Padding(
@@ -110,7 +111,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 text: 'Already have an account? ',
                 style: AuthStyle.getBodyText1(16, Colors.black),
                 children: [
-                  TextSpan(text: "Login", style: AuthStyle.getTextLink1(16))
+                  TextSpan(
+                      text: "Login",
+                      style: AuthStyle.getTextLink1(16),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.popAndPushNamed(context, LOGIN_ROUTE);
+                        })
                 ]),
           )
         ],

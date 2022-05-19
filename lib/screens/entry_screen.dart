@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/widgets/custom_carousel.dart';
 import 'package:pocketexpense/widgets/pageview_screen.dart';
 import '../styles.dart';
@@ -16,9 +17,17 @@ class EntryScreen extends StatelessWidget {
     "assets/images/slide2.png": "You will spend mindfully",
     "assets/images/slide3.png": "Tracking your financial progress"
   };
-  void _onPressed() {}
+
   @override
   Widget build(BuildContext context) {
+    void _onPressed(data) {
+      if (data == "LOGIN") {
+        Navigator.pushNamed(context, LOGIN_ROUTE);
+      } else {
+        Navigator.pushNamed(context, REGISTER_ROUTE);
+      }
+    }
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -31,7 +40,7 @@ class EntryScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(
                     LEFT_PAD, TOP_PAD + 20, RIGHT_PAD, BOTTOM_PAD),
                 child: ElevatedButton(
-                  onPressed: _onPressed,
+                  onPressed: () => {_onPressed("REGISTER")},
                   style: AuthStyle.getButtonStyle1,
                   child:
                       const Text("Register", style: AuthStyle.getButtonText1),
@@ -40,7 +49,7 @@ class EntryScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(
                     LEFT_PAD, TOP_PAD, RIGHT_PAD, BOTTOM_PAD),
                 child: ElevatedButton(
-                  onPressed: _onPressed,
+                  onPressed: () => {_onPressed("LOGIN")},
                   style: AuthStyle.getButtonStyle1,
                   child: const Text("Login", style: AuthStyle.getButtonText1),
                 ))
