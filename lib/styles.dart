@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const BORDER_RADIUS = 30.0;
+const BORDER_RADIUS = 17.0;
 const BUTTON_HEIGHT = 40.0;
 
 abstract class AuthStyle {
