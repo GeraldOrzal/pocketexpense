@@ -53,7 +53,7 @@ class _CustomCarouselState extends State<CustomCarousel> {
                   decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     //      ,
-                    color: Colors.red,
+                    color: Color.fromRGBO(220, 4, 25, 1),
                   )),
             ),
             Padding(
@@ -65,7 +65,7 @@ class _CustomCarouselState extends State<CustomCarousel> {
                   decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     //      ,
-                    color: Colors.red,
+                    color: Color.fromRGBO(220, 4, 25, 1),
                   )),
             ),
             Padding(
@@ -77,7 +77,7 @@ class _CustomCarouselState extends State<CustomCarousel> {
                   decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     //      ,
-                    color: Colors.red,
+                    color: Color.fromRGBO(220, 4, 25, 1),
                   )),
             )
           ],
