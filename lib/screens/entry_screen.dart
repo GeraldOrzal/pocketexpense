@@ -50,8 +50,8 @@ class EntryScreen extends StatelessWidget {
                     LEFT_PAD, TOP_PAD, RIGHT_PAD, BOTTOM_PAD),
                 child: ElevatedButton(
                   onPressed: () => {_onPressed("LOGIN")},
-                  style: AuthStyle.getButtonStyle1,
-                  child: const Text("Login", style: AuthStyle.getButtonText1),
+                  style: AuthStyle.getButtonStyle2,
+                  child: const Text("Login", style: AuthStyle.getButtonText2),
                 ))
           ],
         ),

@@ -14,6 +14,10 @@ abstract class AuthStyle {
 
   static const TextStyle getButtonText1 = TextStyle(
       color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Inter');
+  static const TextStyle getButtonText2 = TextStyle(
+      color: Color.fromRGBO(255, 0, 0, 1),
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Inter');
   static TextStyle getBodyText1(double size, Color color) {
     return TextStyle(
         color: color,
@@ -37,11 +41,24 @@ abstract class AuthStyle {
           borderRadius: BorderRadius.all(Radius.circular(13)),
           borderSide: BorderSide(color: Colors.black, width: 1),
         ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(13)),
+          borderSide: BorderSide(color: Colors.black, width: 1),
+        ),
         hintText: data);
   }
 
   static ButtonStyle getButtonStyle1 = ElevatedButton.styleFrom(
-    primary: Colors.red,
+    primary: Color.fromRGBO(220, 4, 25, 1),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(BORDER_RADIUS),
+    ),
+    shadowColor: Colors.transparent,
+    minimumSize: const Size.fromHeight(BUTTON_HEIGHT),
+  );
+
+  static ButtonStyle getButtonStyle2 = ElevatedButton.styleFrom(
+    primary: Color.fromRGBO(255, 204, 203, 1),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(BORDER_RADIUS),
     ),
