@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const BORDER_RADIUS = 17.0;
-const BUTTON_HEIGHT = 40.0;
+const BUTTON_HEIGHT = 48.0;
 
 abstract class AuthStyle {
   static TextStyle getHeader1(Color color) {
@@ -14,10 +14,12 @@ abstract class AuthStyle {
 
   static const TextStyle getButtonText1 = TextStyle(
       color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Inter');
+
   static const TextStyle getButtonText2 = TextStyle(
       color: Color.fromRGBO(255, 0, 0, 1),
       fontWeight: FontWeight.bold,
       fontFamily: 'Inter');
+
   static TextStyle getBodyText1(double size, Color color) {
     return TextStyle(
         color: color,
@@ -55,7 +57,7 @@ abstract class AuthStyle {
     ),
     shadowColor: Colors.transparent,
     minimumSize: const Size.fromHeight(BUTTON_HEIGHT),
-  );
+  ); //REGISTER BUTTON
 
   static ButtonStyle getButtonStyle2 = ElevatedButton.styleFrom(
     primary: Color.fromRGBO(255, 204, 203, 1),
@@ -66,3 +68,4 @@ abstract class AuthStyle {
     minimumSize: const Size.fromHeight(BUTTON_HEIGHT),
   );
 }
+//LOGIN BUTTON
