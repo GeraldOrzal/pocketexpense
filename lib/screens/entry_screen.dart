@@ -36,9 +36,12 @@ class EntryScreen extends StatelessWidget {
             CustomCarousel(
               imagePaths: this._imagePaths,
             ),
+            const SizedBox(
+              height: 80,
+            ),
             Padding(
                 padding: const EdgeInsets.fromLTRB(
-                    LEFT_PAD, TOP_PAD + 20, RIGHT_PAD, BOTTOM_PAD),
+                    LEFT_PAD, TOP_PAD + 30, RIGHT_PAD, BOTTOM_PAD),
                 child: ElevatedButton(
                   onPressed: () => {_onPressed("REGISTER")},
                   style: AuthStyle.getButtonStyle1,
