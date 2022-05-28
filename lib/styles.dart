@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/constant.dart';
 
-const BORDER_RADIUS = 17.0;
-const BUTTON_HEIGHT = 40.0;
 
 abstract class AuthStyle {
   static TextStyle getHeader1(Color color) {

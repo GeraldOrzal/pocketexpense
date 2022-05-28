@@ -4,10 +4,7 @@ import 'package:pocketexpense/widgets/custom_carousel.dart';
 import 'package:pocketexpense/widgets/pageview_screen.dart';
 import '../styles.dart';
 
-const TOP_PAD = 5.0;
-const LEFT_PAD = 20.0;
-const BOTTOM_PAD = 5.0;
-const RIGHT_PAD = 20.0;
+
 
 class EntryScreen extends StatelessWidget {
   EntryScreen({Key? key}) : super(key: key);
