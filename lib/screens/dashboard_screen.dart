@@ -25,7 +25,7 @@ class _DashboardState extends State<Dashboard> {
             children: [
               Text(
                 "Spend Frequency",
-                style: AuthStyle.getHeader1(Colors.black),
+                style: FontStyle.getHeader1(Colors.black),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -33,7 +33,7 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Recent Transaction",
-                        style: AuthStyle.getHeader1(Colors.black)),
+                        style: FontStyle.getHeader1(Colors.black)),
                     Container(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),

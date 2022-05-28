@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
 
-
-abstract class AuthStyle {
+abstract class FontStyle {
   static TextStyle getHeader1(Color color) {
     return TextStyle(
         fontWeight: FontWeight.bold,
@@ -33,7 +32,9 @@ abstract class AuthStyle {
         fontWeight: FontWeight.bold,
         fontSize: size);
   }
+}
 
+abstract class InputStyle {
   static InputDecoration getInputDecoration1(String data) {
     return InputDecoration(
         enabledBorder: const OutlineInputBorder(
@@ -46,7 +47,9 @@ abstract class AuthStyle {
         ),
         hintText: data);
   }
+}
 
+abstract class CustomButtonStyle {
   static ButtonStyle getButtonStyle1 = ElevatedButton.styleFrom(
     primary: Color.fromRGBO(220, 4, 25, 1),
     shape: RoundedRectangleBorder(

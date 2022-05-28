@@ -52,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Text(
                     "Create Account",
                     style:
-                        AuthStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
+                        FontStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
                   ),
                 ],
               ),
@@ -64,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
-                    decoration: AuthStyle.getInputDecoration1("Email"),
+                    decoration: InputStyle.getInputDecoration1("Email"),
                     onChanged: (data) => _setCred(data),
                   ),
                 ),
@@ -72,14 +72,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
                       onChanged: (data) => _setCred(data),
-                      decoration: AuthStyle.getInputDecoration1("Password")),
+                      decoration: InputStyle.getInputDecoration1("Password")),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
                       onChanged: (data) => _setCred(data),
                       decoration:
-                          AuthStyle.getInputDecoration1("Confirm Password")),
+                          InputStyle.getInputDecoration1("Confirm Password")),
                 ),
                 Row(
                   children: [
@@ -95,11 +95,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: RichText(
                         text: TextSpan(
                             text: 'By signing up, you agree to the ',
-                            style: AuthStyle.getBodyText1(12, Colors.black),
+                            style: FontStyle.getBodyText1(12, Colors.black),
                             children: [
                               TextSpan(
                                   text: "Terms of Service and Privacy Policy",
-                                  style: AuthStyle.getTextLink1(12))
+                                  style: FontStyle.getTextLink1(12))
                             ]),
                       ),
                     ),
@@ -109,20 +109,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: const EdgeInsets.all(15.0),
                     child: ElevatedButton(
                       onPressed: _onPressed,
-                      style: AuthStyle.getButtonStyle1,
+                      style: CustomButtonStyle.getButtonStyle1,
                       child: const Text("Register",
-                          style: AuthStyle.getButtonText1),
+                          style: FontStyle.getButtonText1),
                     ))
               ])),
             ),
             RichText(
               text: TextSpan(
                   text: 'Already have an account? ',
-                  style: AuthStyle.getBodyText1(16, Colors.black),
+                  style: FontStyle.getBodyText1(16, Colors.black),
                   children: [
                     TextSpan(
                         text: "Login",
-                        style: AuthStyle.getTextLink1(16),
+                        style: FontStyle.getTextLink1(16),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.popAndPushNamed(context, LOGIN_ROUTE);

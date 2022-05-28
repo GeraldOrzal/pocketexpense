@@ -210,8 +210,8 @@ class _SetupScreenState extends State<SetupScreen> {
                   padding: const EdgeInsets.all(15.0),
                   child: ElevatedButton(
                     onPressed: isEnabled ? _onPressed : null,
-                    style: AuthStyle.getButtonStyle1,
-                    child: const Text("Setup", style: AuthStyle.getButtonText1),
+                    style: CustomButtonStyle.getButtonStyle1,
+                    child: const Text("Setup", style: FontStyle.getButtonText1),
                   )),
             ],
           ))
