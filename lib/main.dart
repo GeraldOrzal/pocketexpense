@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/screens/entry_screen.dart';
+import 'package:pocketexpense/screens/transaction_screen.dart';
 import 'routes.dart';
 
 void main() => runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       onGenerateRoute: generateRoute,
-      home: EntryScreen(),
+      home: TransactionScreen(),
     );
   }
 }

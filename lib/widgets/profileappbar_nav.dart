@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AppBarNav extends StatefulWidget implements PreferredSizeWidget {
+class ProfileAppBarNav extends StatefulWidget implements PreferredSizeWidget {
   final AppBar appBar = AppBar();
-  AppBarNav({Key? key}) : super(key: key);
+  ProfileAppBarNav({Key? key}) : super(key: key);
 
   @override
-  State<AppBarNav> createState() => _AppBarNavState();
+  State<ProfileAppBarNav> createState() => _ProfileAppBarNavState();
 
   @override
   // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
 }
 
-class _AppBarNavState extends State<AppBarNav> {
+class _ProfileAppBarNavState extends State<ProfileAppBarNav> {
   void _onChanged(data) {}
   @override
   Widget build(BuildContext context) {

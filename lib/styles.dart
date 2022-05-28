@@ -49,6 +49,12 @@ abstract class InputStyle {
   }
 }
 
+abstract class LayoutStyle {
+  static getUpperStyle(Color color) {
+    return BoxDecoration(color: color);
+  }
+}
+
 abstract class CustomButtonStyle {
   static ButtonStyle getButtonStyle1 = ElevatedButton.styleFrom(
     primary: Color.fromRGBO(220, 4, 25, 1),

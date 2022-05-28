@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/styles.dart';
-import 'package:pocketexpense/widgets/appbar_nav.dart';
+import 'package:pocketexpense/widgets/profileappbar_nav.dart';
 import 'package:pocketexpense/widgets/bottom_nav.dart';
 import 'package:pocketexpense/widgets/transaction_box.dart';
 
@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBarNav(),
+        appBar: ProfileAppBarNav(),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
