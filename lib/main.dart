@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/screens/dashboard_screen.dart';
 import 'package:pocketexpense/screens/entry_screen.dart';
+import 'package:pocketexpense/screens/home_screen.dart';
 import 'package:pocketexpense/screens/login_screen.dart';
 import 'package:pocketexpense/screens/register_screen.dart';
+import 'package:pocketexpense/screens/start_screen.dart';
+import 'package:pocketexpense/screens/createAcc_screen.dart';
+import 'package:pocketexpense/screens/success_screen.dart';
 import 'screens/setup_screen.dart';
 
 void main() => runApp(MyApp());
@@ -18,10 +22,14 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case REGISTER_ROUTE:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
-      case DASHBOARD_ROUTE:
-        return MaterialPageRoute(builder: (_) => Dashboard());
-      case SETUP_ROUTE:
-        return MaterialPageRoute(builder: (_) => SetupScreen());
+      case startScreen:
+        return MaterialPageRoute(builder: (_) => StartScreen());
+      case crtAccountScreen:
+        return MaterialPageRoute(builder: (_) => CreateAccScreen());
+      case successScreen:
+        return MaterialPageRoute(builder: (_) => SuccessScreen());
+      case homeScreen:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

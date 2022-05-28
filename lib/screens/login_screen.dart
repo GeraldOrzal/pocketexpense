@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return SafeArea(
         child: Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/bg.png"),
             fit: BoxFit.cover,
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     "Welcome Back!",
                     style:
-                        AuthStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
+                        TxtStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
                   ),
                 ],
               ),
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
-                    decoration: AuthStyle.getInputDecoration1("Email"),
+                    decoration: TxtStyle.getInputDecoration1("Email"),
                     onChanged: (data) => _setCred(data),
                   ),
                 ),
@@ -62,15 +62,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
                       onChanged: (data) => _setCred(data),
-                      decoration: AuthStyle.getInputDecoration1("Password")),
+                      decoration: TxtStyle.getInputDecoration1("Password")),
                 ),
                 Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ElevatedButton(
                       onPressed: _onPressed,
-                      style: AuthStyle.getButtonStyle1,
+                      style: BtnStyle.getButtonStyle1,
                       child:
-                          const Text("Login", style: AuthStyle.getButtonText1),
+                          const Text("Login", style: TxtStyle.getButtonText1),
                     ))
               ])),
             ),
@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Text(
                   "Forgot Password?",
                   style:
-                      AuthStyle.getHeader1(const Color.fromRGBO(255, 0, 0, 1)),
+                      TxtStyle.getHeader1(const Color.fromRGBO(255, 0, 0, 1)),
                 ),
               ),
             ),
@@ -91,14 +91,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Text(
                     "Don't have an account yet? ",
-                    style: AuthStyle.getBodyText1(16, Colors.black),
+                    style: TxtStyle.getBodyText1(16, Colors.black),
                   ),
                   GestureDetector(
                     onTap: () =>
                         {Navigator.popAndPushNamed(context, REGISTER_ROUTE)},
                     child: Text(
                       "Sign up",
-                      style: AuthStyle.getTextLink1(16),
+                      style: TxtStyle.getTextLink1(16),
                     ),
                   )
                 ],

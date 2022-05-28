@@ -44,17 +44,16 @@ class EntryScreen extends StatelessWidget {
                     LEFT_PAD, TOP_PAD + 30, RIGHT_PAD, BOTTOM_PAD),
                 child: ElevatedButton(
                   onPressed: () => {_onPressed("REGISTER")},
-                  style: AuthStyle.getButtonStyle1,
-                  child:
-                      const Text("Register", style: AuthStyle.getButtonText1),
+                  style: BtnStyle.getButtonStyle1,
+                  child: const Text("Register", style: TxtStyle.getButtonText1),
                 )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(
                     LEFT_PAD, TOP_PAD, RIGHT_PAD, BOTTOM_PAD),
                 child: ElevatedButton(
                   onPressed: () => {_onPressed("LOGIN")},
-                  style: AuthStyle.getButtonStyle2,
-                  child: const Text("Login", style: AuthStyle.getButtonText2),
+                  style: BtnStyle.getButtonStyle2,
+                  child: const Text("Login", style: TxtStyle.getButtonText2),
                 ))
           ],
         ),

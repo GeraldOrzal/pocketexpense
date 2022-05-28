@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/styles.dart';
-import 'package:pocketexpense/widgets/appbar_nav.dart';
-import 'package:pocketexpense/widgets/bottom_nav.dart';
+import 'package:pocketexpense/widgets/bottombar_nav.dart';
+import 'package:pocketexpense/widgets/topbar_nav.dart';
 import 'package:pocketexpense/widgets/transaction_box.dart';
 
-class Dashboard extends StatefulWidget {
-  Dashboard({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _DashboardState extends State<Dashboard> {
-  void _onPressed() {}
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBarNav(),
+        appBar: TopBarNav(),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -26,6 +26,9 @@ class _DashboardState extends State<Dashboard> {
               Text(
                 "Spend Frequency",
                 style: TxtStyle.getHeader1(Colors.black),
+              ),
+              const SizedBox(
+                height: 470,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -35,18 +38,18 @@ class _DashboardState extends State<Dashboard> {
                     Text("Recent Transaction",
                         style: TxtStyle.getHeader1(Colors.black)),
                     Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 238, 121, 113),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0))),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "See All",
                           style:
                               TextStyle(color: Color.fromARGB(255, 252, 18, 1)),
                         ),
                       ),
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 238, 121, 113),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
                     )
                   ],
                 ),
@@ -55,7 +58,7 @@ class _DashboardState extends State<Dashboard> {
                 height: 200.0,
                 child: ListView(
                   scrollDirection: Axis.vertical,
-                  children: [
+                  children: const [
                     TransactionBox(),
                     TransactionBox(),
                     TransactionBox(),
@@ -72,12 +75,26 @@ class _DashboardState extends State<Dashboard> {
                 ),
               )
             ]),
-        bottomNavigationBar: BottomNav(),
+        bottomNavigationBar: BottomBar(),
         floatingActionButton: FloatingActionButton(
-          onPressed: _onPressed,
+          onPressed: (() {
+            _tripModalBottomSheet(context);
+          }),
+          backgroundColor: kPrimaryColor,
+          child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
+}
+
+void _tripModalBottomSheet(context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+            height: MediaQuery.of(context).size.height * .35,
+            child: const Text("Add"));
+      });
 }
