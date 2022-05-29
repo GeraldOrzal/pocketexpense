@@ -42,11 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     "Welcome Back!",
                     style:
-<<<<<<< HEAD
-                        FontStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
-=======
                         TxtStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
->>>>>>> origin/origin/jacob-branch
                   ),
                 ],
               ),
@@ -58,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
-                    decoration: TxtStyle.getInputDecoration1("Email"),
+                    decoration: InputStyle.getInputDecoration1("Email"),
                     onChanged: (data) => _setCred(data),
                   ),
                 ),
@@ -66,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
                       onChanged: (data) => _setCred(data),
-                      decoration: TxtStyle.getInputDecoration1("Password")),
+                      decoration: InputStyle.getInputDecoration1("Password")),
                 ),
                 Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -99,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () =>
-                        {Navigator.popAndPushNamed(context, REGISTER_ROUTE)},
+                        {Navigator.popAndPushNamed(context, registerRoute)},
                     child: Text(
                       "Sign up",
                       style: TxtStyle.getTextLink1(16),

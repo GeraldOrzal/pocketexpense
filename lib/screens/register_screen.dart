@@ -64,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
-                    decoration: TxtStyle.getInputDecoration1("Email"),
+                    decoration: InputStyle.getInputDecoration1("Email"),
                     onChanged: (data) => _setCred(data),
                   ),
                 ),
@@ -72,14 +72,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
                       onChanged: (data) => _setCred(data),
-                      decoration: TxtStyle.getInputDecoration1("Password")),
+                      decoration: InputStyle.getInputDecoration1("Password")),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
                       onChanged: (data) => _setCred(data),
                       decoration:
-                          TxtStyle.getInputDecoration1("Confirm Password")),
+                          InputStyle.getInputDecoration1("Confirm Password")),
                 ),
                 Row(
                   children: [
@@ -125,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: TxtStyle.getTextLink1(16),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.popAndPushNamed(context, LOGIN_ROUTE);
+                            Navigator.popAndPushNamed(context, loginRoute);
                           })
                   ]),
             )

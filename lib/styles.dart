@@ -81,18 +81,13 @@ abstract class InputStyle {
   }
 }
 
-<<<<<<< HEAD
 abstract class LayoutStyle {
   static getUpperStyle(Color color) {
     return BoxDecoration(color: color);
   }
 }
 
-abstract class CustomButtonStyle {
-=======
-// Class style for buttons
 abstract class BtnStyle {
->>>>>>> origin/origin/jacob-branch
   static ButtonStyle getButtonStyle1 = ElevatedButton.styleFrom(
     primary: kPrimaryColor,
     shape: RoundedRectangleBorder(

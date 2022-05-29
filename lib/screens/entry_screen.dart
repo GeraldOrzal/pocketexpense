@@ -17,9 +17,9 @@ class EntryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     void _onPressed(data) {
       if (data == "LOGIN") {
-        Navigator.pushNamed(context, LOGIN_ROUTE);
+        Navigator.pushNamed(context, loginRoute);
       } else {
-        Navigator.pushNamed(context, REGISTER_ROUTE);
+        Navigator.pushNamed(context, registerRoute);
       }
     }
 
@@ -36,7 +36,7 @@ class EntryScreen extends StatelessWidget {
             ),
             Padding(
                 padding: const EdgeInsets.fromLTRB(
-                    LEFT_PAD, TOP_PAD + 30, RIGHT_PAD, BOTTOM_PAD),
+                    leftPad, topPad + 30, rightPad, bottomPad),
                 child: ElevatedButton(
                   onPressed: () => {_onPressed("REGISTER")},
                   style: BtnStyle.getButtonStyle1,
@@ -44,7 +44,7 @@ class EntryScreen extends StatelessWidget {
                 )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(
-                    LEFT_PAD, TOP_PAD, RIGHT_PAD, BOTTOM_PAD),
+                    leftPad, topPad, rightPad, bottomPad),
                 child: ElevatedButton(
                   onPressed: () => {_onPressed("LOGIN")},
                   style: BtnStyle.getButtonStyle2,

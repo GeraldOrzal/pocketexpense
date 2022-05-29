@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pocketexpense/widgets/transactionappbar_nav.dart';
 
 import '../constant.dart';
 import '../styles.dart';
@@ -15,19 +14,19 @@ class _TransactionScreenState extends State<TransactionScreen> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double computedHeight = screenHeight * CONTAINER_PERCENTAGE;
+    // double computedHeight = screenHeight * CONTAINER_PERCENTAGE;
     return SafeArea(
       child: Scaffold(
-        appBar: TransactionAppBarNav(
-          header: "Detail Transaction",
-          color: Colors.red,
-        ),
+        // appBar: TransactionAppBarNav(
+        //   header: "Detail Transaction",
+        //   color: Colors.red,
+        // ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: computedHeight,
+              // height: computedHeight,
               decoration: LayoutStyle.getUpperStyle(Colors.red),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
