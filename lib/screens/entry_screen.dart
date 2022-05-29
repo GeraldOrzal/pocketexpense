@@ -4,8 +4,6 @@ import 'package:pocketexpense/widgets/custom_carousel.dart';
 import 'package:pocketexpense/widgets/pageview_screen.dart';
 import '../styles.dart';
 
-
-
 class EntryScreen extends StatelessWidget {
   EntryScreen({Key? key}) : super(key: key);
 
@@ -33,22 +31,24 @@ class EntryScreen extends StatelessWidget {
             CustomCarousel(
               imagePaths: this._imagePaths,
             ),
+            const SizedBox(
+              height: 80,
+            ),
             Padding(
                 padding: const EdgeInsets.fromLTRB(
-                    LEFT_PAD, TOP_PAD + 20, RIGHT_PAD, BOTTOM_PAD),
+                    LEFT_PAD, TOP_PAD + 30, RIGHT_PAD, BOTTOM_PAD),
                 child: ElevatedButton(
                   onPressed: () => {_onPressed("REGISTER")},
-                  style: CustomButtonStyle.getButtonStyle1,
-                  child:
-                      const Text("Register", style: FontStyle.getButtonText1),
+                  style: BtnStyle.getButtonStyle1,
+                  child: const Text("Register", style: TxtStyle.getButtonText1),
                 )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(
                     LEFT_PAD, TOP_PAD, RIGHT_PAD, BOTTOM_PAD),
                 child: ElevatedButton(
                   onPressed: () => {_onPressed("LOGIN")},
-                  style: CustomButtonStyle.getButtonStyle2,
-                  child: const Text("Login", style: FontStyle.getButtonText2),
+                  style: BtnStyle.getButtonStyle2,
+                  child: const Text("Login", style: TxtStyle.getButtonText2),
                 ))
           ],
         ),

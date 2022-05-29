@@ -28,7 +28,7 @@ class TransactionBox extends StatelessWidget {
                 ),
                 Column(children: [
                   Text("Bumili ng Pares",
-                      style: FontStyle.getHeader1(Colors.black)),
+                      style: TxtStyle.getHeader1(Colors.black)),
                 ]),
                 const Text("-P20,000")
               ],
