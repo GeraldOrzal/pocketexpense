@@ -3,7 +3,8 @@ import 'package:pocketexpense/styles.dart';
 import '../styles.dart';
 
 class TransactionBox extends StatelessWidget {
-  const TransactionBox({Key? key}) : super(key: key);
+  bool isExpense;
+  TransactionBox({Key? key, required this.isExpense}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +12,9 @@ class TransactionBox extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
                   decoration: new BoxDecoration(
@@ -23,16 +23,45 @@ class TransactionBox extends StatelessWidget {
                           new BorderRadius.all(const Radius.circular(6.0))),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(" 12 \n May"),
+                    child: Text(
+                      "  12 \n May",
+                      style: Theme.of(context).textTheme.headline3?.copyWith(
+                          decoration: TextDecoration.none, color: Colors.black),
+                    ),
                   ),
                 ),
-                Column(children: [
-                  Text(
-                    "Bumili ng Pares",
-                    // style: TxtStyle.getHeader1(Colors.black)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Bumili ng Pares",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2
+                                ?.copyWith(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
+                          Icon(
+                            Icons.restaurant,
+                            color: isExpense
+                                ? Colors.red
+                                : Color.fromRGBO(217, 154, 61, 1),
+                          )
+                        ]),
                   ),
-                ]),
-                const Text("-P20,000")
+                ),
+                Text(
+                  (isExpense ? "-" : "+") + "₱ 20,000",
+                  style: Theme.of(context).textTheme.headline2?.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: isExpense
+                          ? Colors.red
+                          : Color.fromRGBO(217, 154, 61, 1)),
+                )
               ],
             ),
           ),

@@ -88,107 +88,105 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomCarousel(
-                  isEntryScreen: false,
-                  listCount: 2,
-                  widgetsList: [
-                    Container(
-                      child: Column(
-                        children: [
-                          Align(
+              CustomCarousel(
+                isEntryScreen: false,
+                listCount: 2,
+                widgetsList: [
+                  Container(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
                               "Spend Frequency",
                               style: Theme.of(context).textTheme.headline2,
                             ),
                           ),
-                          Container(
-                            height: 200.0,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: LineChart(
-                                sampleData1,
-                                swapAnimationDuration:
-                                    Duration(milliseconds: 150), // Optional
-                                swapAnimationCurve: Curves.linear, // Optional
-                              ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: LineChart(
+                              sampleData1,
+                              swapAnimationDuration:
+                                  Duration(milliseconds: 150), // Optional
+                              swapAnimationCurve: Curves.linear, // Optional
                             ),
                           ),
-                          BottomRowItems()
-                        ],
-                      ),
+                        ),
+                        BottomRowItems()
+                      ],
                     ),
-                    Container(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                          Text("Account Balance"),
-                          Text("₱ 9,400",
-                              style: Theme.of(context).textTheme.headline1),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0)),
-                                      color: Color.fromRGBO(217, 154, 61, 1)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Row(children: [
-                                      Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10.0)),
-                                            color: Colors.white,
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Icon(Icons.send),
-                                          )),
-                                      Text(
-                                        'Income \n ₱ 5000',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1,
-                                      )
-                                    ]),
-                                  )),
-                              Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0)),
-                                      color: Colors.red),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                color: Colors.white,
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Icon(Icons.send),
-                                              )),
-                                          Text('Expenses \n ₱ 5000',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1)
-                                        ]),
-                                  ))
-                            ],
-                          )
-                        ]))
-                  ],
-                ),
+                  ),
+                  Container(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                        Text("Account Balance"),
+                        Text("₱ 9,400",
+                            style: Theme.of(context).textTheme.headline1),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    color: Color.fromRGBO(217, 154, 61, 1)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Row(children: [
+                                    Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          color: Colors.white,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Icon(Icons.send),
+                                        )),
+                                    Text(
+                                      'Income \n ₱ 5000',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    )
+                                  ]),
+                                )),
+                            Container(
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    color: Colors.red),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10.0)),
+                                              color: Colors.white,
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Icon(Icons.send),
+                                            )),
+                                        Text('Expenses \n ₱ 5000',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1)
+                                      ]),
+                                ))
+                          ],
+                        )
+                      ]))
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -218,19 +216,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 200.0,
                 child: ListView(
                   scrollDirection: Axis.vertical,
-                  children: const [
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
-                    TransactionBox(),
+                  children: [
+                    TransactionBox(
+                      isExpense: true,
+                    ),
+                    TransactionBox(
+                      isExpense: false,
+                    ),
                   ],
                 ),
               )

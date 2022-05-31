@@ -24,7 +24,7 @@ class _StartScreenState extends State<StartScreen> {
                 style: Theme.of(context).textTheme.headline1,
               )),
           GestureDetector(
-            onTap: () => {Navigator.popAndPushNamed(context, crtAccountScreen)},
+            onTap: () => {Navigator.popAndPushNamed(context, crtAccountRoute)},
             child: Container(
               padding: const EdgeInsets.fromLTRB(30, 20, 20, 100),
               child: Row(
