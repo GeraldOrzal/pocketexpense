@@ -11,9 +11,6 @@ const crtAccountRoute = '/createAcc';
 const successRoute = '/success';
 const homeRoute = '/home';
 const forgotPasswordRoute = '/forgotpassword';
-const transationRoute = '/transaction';
-const settingsRoute = '/settings';
-const profileRoute = '/profile';
 
 const topPad = 5.0;
 const leftPad = 20.0;

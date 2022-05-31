@@ -12,19 +12,6 @@ class TransactionListScreen extends StatefulWidget {
 class _TransactionListScreenState extends State<TransactionListScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: TopBarNav(),
-        bottomNavigationBar: BottomBar(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (() {
-            // _tripModalBottomSheet(context);
-          }),
-          child: const Icon(Icons.add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: Container(),
-      ),
-    );
+    return Container();
   }
 }

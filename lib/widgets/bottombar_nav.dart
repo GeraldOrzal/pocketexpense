@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({Key? key}) : super(key: key);
+  Function callback;
+  int currentIndex;
+  BottomBar({Key? key, required this.callback, required this.currentIndex})
+      : super(key: key);
 
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
-  int currentIndex = 0;
-  void _onPressed(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -31,19 +27,21 @@ class _BottomBarState extends State<BottomBar> {
               children: [
                 MaterialButton(
                   minWidth: 40,
-                  onPressed: () => {_onPressed(0)},
+                  onPressed: () => {widget.callback(0)},
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.home,
-                        color: currentIndex == 0 ? Colors.red : Colors.grey,
+                        color:
+                            widget.currentIndex == 0 ? Colors.red : Colors.grey,
                       ),
                       Text(
                         'Home',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                              color:
-                                  currentIndex == 0 ? Colors.red : Colors.grey,
+                              color: widget.currentIndex == 0
+                                  ? Colors.red
+                                  : Colors.grey,
                             ),
                       )
                     ],
@@ -51,19 +49,21 @@ class _BottomBarState extends State<BottomBar> {
                 ),
                 MaterialButton(
                   minWidth: 40,
-                  onPressed: () => {_onPressed(1)},
+                  onPressed: () => {widget.callback(1)},
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.code,
-                        color: currentIndex == 1 ? Colors.red : Colors.grey,
+                        color:
+                            widget.currentIndex == 1 ? Colors.red : Colors.grey,
                       ),
                       Text(
                         'Transaction',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                              color:
-                                  currentIndex == 1 ? Colors.red : Colors.grey,
+                              color: widget.currentIndex == 1
+                                  ? Colors.red
+                                  : Colors.grey,
                             ),
                       )
                     ],
@@ -76,19 +76,21 @@ class _BottomBarState extends State<BottomBar> {
               children: [
                 MaterialButton(
                   minWidth: 40,
-                  onPressed: () => {_onPressed(2)},
+                  onPressed: () => {widget.callback(2)},
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.settings,
-                        color: currentIndex == 2 ? Colors.red : Colors.grey,
+                        color:
+                            widget.currentIndex == 2 ? Colors.red : Colors.grey,
                       ),
                       Text(
                         'Settings',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                              color:
-                                  currentIndex == 2 ? Colors.red : Colors.grey,
+                              color: widget.currentIndex == 2
+                                  ? Colors.red
+                                  : Colors.grey,
                             ),
                       )
                     ],
@@ -96,19 +98,21 @@ class _BottomBarState extends State<BottomBar> {
                 ),
                 MaterialButton(
                   minWidth: 40,
-                  onPressed: () => {_onPressed(3)},
+                  onPressed: () => {widget.callback(3)},
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.account_circle,
-                        color: currentIndex == 3 ? Colors.red : Colors.grey,
+                        color:
+                            widget.currentIndex == 3 ? Colors.red : Colors.grey,
                       ),
                       Text(
                         'Profile',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                              color:
-                                  currentIndex == 3 ? Colors.red : Colors.grey,
+                              color: widget.currentIndex == 3
+                                  ? Colors.red
+                                  : Colors.grey,
                             ),
                       )
                     ],

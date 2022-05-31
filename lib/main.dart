@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pocketexpense/routes.dart';
 import 'package:pocketexpense/screens/createacc_screen.dart';
 import 'package:pocketexpense/screens/home_screen.dart';
+import 'package:pocketexpense/screens/mainhome_screen.dart';
 import 'package:pocketexpense/screens/start_screen.dart';
 import 'package:pocketexpense/styles.dart';
 import 'firebase_options.dart';
@@ -22,11 +23,10 @@ class MyApp extends StatelessWidget {
         if (snapshot.hasError) {}
 
         return MaterialApp(
-          title: 'Material App',
-          theme: defaultThemeData,
-          onGenerateRoute: generateRoute,
-          home: HomeScreen(),
-        );
+            title: 'Material App',
+            theme: defaultThemeData,
+            onGenerateRoute: generateRoute,
+            home: MainHomeScreen());
       },
     );
   }
