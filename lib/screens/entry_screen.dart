@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/widgets/custom_carousel.dart';
@@ -7,14 +9,10 @@ import '../styles.dart';
 class EntryScreen extends StatelessWidget {
   EntryScreen({Key? key}) : super(key: key);
 
-  final Map<String, String> _imagePaths = {
-    "assets/images/slide1.png": "Make a better budget",
-    "assets/images/slide2.png": "You will spend mindfully",
-    "assets/images/slide3.png": "Tracking your financial progress"
-  };
-
   @override
   Widget build(BuildContext context) {
+    List items = jsonDecode(entryScreenItems);
+
     void _onPressed(data) {
       if (data == "LOGIN") {
         Navigator.pushNamed(context, loginRoute);
@@ -29,7 +27,9 @@ class EntryScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomCarousel(
-              imagePaths: this._imagePaths,
+              imagePaths: items,
+              isEntryScreen: true,
+              widgetsList: [],
             ),
             const SizedBox(
               height: 80,

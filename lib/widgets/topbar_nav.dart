@@ -33,14 +33,16 @@ class _TopBarNavState extends State<TopBarNav> {
               bottom: 0,
               right: 0,
             ),
-            height: 35,
-            width: 110,
-            decoration: BoxStyle.getMonthBox,
             child: DropdownButton(
+              style: Theme.of(context).textTheme.bodyText2,
               value: 1,
               hint: const Text("Month"),
-              items: const [
-                DropdownMenuItem(value: 1, child: Text("January")),
+              items: [
+                DropdownMenuItem(
+                    value: 1,
+                    child: Text(
+                      "January",
+                    )),
                 DropdownMenuItem(value: 2, child: Text("February")),
                 DropdownMenuItem(value: 3, child: Text("March")),
                 DropdownMenuItem(value: 4, child: Text("April")),

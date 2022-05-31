@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
           title: 'Material App',
           theme: defaultThemeData,
           onGenerateRoute: generateRoute,
+          home: HomeScreen(),
         );
       },
     );

@@ -41,9 +41,10 @@ class _BottomBarState extends State<BottomBar> {
                       ),
                       Text(
                         'Home',
-                        style: TextStyle(
-                            color:
-                                currentIndex == 0 ? Colors.red : Colors.grey),
+                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                              color:
+                                  currentIndex == 0 ? Colors.red : Colors.grey,
+                            ),
                       )
                     ],
                   ),
@@ -60,9 +61,10 @@ class _BottomBarState extends State<BottomBar> {
                       ),
                       Text(
                         'Transaction',
-                        style: TextStyle(
-                            color:
-                                currentIndex == 1 ? Colors.red : Colors.grey),
+                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                              color:
+                                  currentIndex == 1 ? Colors.red : Colors.grey,
+                            ),
                       )
                     ],
                   ),
@@ -84,9 +86,10 @@ class _BottomBarState extends State<BottomBar> {
                       ),
                       Text(
                         'Settings',
-                        style: TextStyle(
-                            color:
-                                currentIndex == 2 ? Colors.red : Colors.grey),
+                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                              color:
+                                  currentIndex == 2 ? Colors.red : Colors.grey,
+                            ),
                       )
                     ],
                   ),
@@ -103,9 +106,10 @@ class _BottomBarState extends State<BottomBar> {
                       ),
                       Text(
                         'Profile',
-                        style: TextStyle(
-                            color:
-                                currentIndex == 3 ? Colors.red : Colors.grey),
+                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                              color:
+                                  currentIndex == 3 ? Colors.red : Colors.grey,
+                            ),
                       )
                     ],
                   ),

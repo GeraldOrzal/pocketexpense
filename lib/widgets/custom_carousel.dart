@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'pageview_screen.dart';
 
 class CustomCarousel extends StatefulWidget {
-  Map<String, String>? imagePaths;
-
-  CustomCarousel({
-    Key? key,
-    this.imagePaths,
-  }) : super(key: key);
+  List? imagePaths;
+  int? listCount;
+  bool isEntryScreen;
+  List<Widget> widgetsList;
+  CustomCarousel(
+      {Key? key,
+      this.imagePaths,
+      required this.isEntryScreen,
+      this.listCount,
+      required this.widgetsList})
+      : super(key: key);
 
   @override
   State<CustomCarousel> createState() => _CustomCarouselState();
@@ -16,6 +21,16 @@ class CustomCarousel extends StatefulWidget {
 
 class _CustomCarouselState extends State<CustomCarousel> {
   int currentIndex = 0;
+  int tempIndex = 0;
+
+  List<Widget> generateWidgets(data) {
+    List<Widget> list = <Widget>[];
+    for (var i = 0; i < data.length; i++) {
+      list.add(PageViewScreen(path: data[i]['path'], text: data[i]['text']));
+    }
+
+    return list;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +43,27 @@ class _CustomCarouselState extends State<CustomCarousel> {
               })
             }
         });
+    List<Widget> generateCircle(data) {
+      List<Widget> listofCircle = <Widget>[];
+      for (var i = 0; i < data; i++) {
+        listofCircle.add(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                width: currentIndex == i ? 20.0 : 10.0,
+                height: currentIndex == i ? 20.0 : 10.0,
+                padding: const EdgeInsets.all(20.0),
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  //      ,
+                  color: Color.fromRGBO(220, 4, 25, 1),
+                )),
+          ),
+        );
+      }
+
+      return listofCircle;
+    }
 
     return Column(
       children: [
@@ -36,52 +72,16 @@ class _CustomCarouselState extends State<CustomCarousel> {
           child: PageView(
             scrollDirection: Axis.horizontal,
             controller: pageController,
-            children: widget.imagePaths!.entries.map((entry) {
-              return PageViewScreen(path: entry.key, text: entry.value);
-            }).toList(),
+            children: widget.isEntryScreen
+                ? generateWidgets(widget.imagePaths)
+                : widget.widgetsList,
           ),
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  width: this.currentIndex == 0 ? 20.0 : 10.0,
-                  height: this.currentIndex == 0 ? 20.0 : 10.0,
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    //      ,
-                    color: Color.fromRGBO(220, 4, 25, 1),
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  width: this.currentIndex == 1 ? 20.0 : 10.0,
-                  height: this.currentIndex == 1 ? 20.0 : 10.0,
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    //      ,
-                    color: Color.fromRGBO(220, 4, 25, 1),
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  width: this.currentIndex == 2 ? 20.0 : 10.0,
-                  height: this.currentIndex == 2 ? 20.0 : 10.0,
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    //      ,
-                    color: Color.fromRGBO(220, 4, 25, 1),
-                  )),
-            )
-          ],
-        )
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: generateCircle(widget.isEntryScreen
+                ? widget.imagePaths?.length
+                : widget.listCount))
       ],
     );
   }
