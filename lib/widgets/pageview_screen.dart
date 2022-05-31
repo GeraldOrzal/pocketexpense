@@ -20,7 +20,7 @@ class PageViewScreen extends StatelessWidget {
         Center(
           child: Text(
             this.text ?? "default",
-            style: TxtStyle.getBodyText1(22, Colors.black),
+            style: Theme.of(context).textTheme.headline2,
           ),
         ),
       ],

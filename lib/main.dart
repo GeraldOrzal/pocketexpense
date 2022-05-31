@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/routes.dart';
+import 'package:pocketexpense/screens/createacc_screen.dart';
+import 'package:pocketexpense/screens/home_screen.dart';
+import 'package:pocketexpense/screens/start_screen.dart';
+import 'package:pocketexpense/styles.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'dart:async';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
 
         return MaterialApp(
           title: 'Material App',
+          theme: defaultThemeData,
           onGenerateRoute: generateRoute,
         );
       },

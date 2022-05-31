@@ -41,8 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Text(
                     "Welcome Back!",
-                    style:
-                        TxtStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
+                    style: Theme.of(context).textTheme.headline2,
                   ),
                 ],
               ),
@@ -54,34 +53,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
-                    decoration: InputStyle.getInputDecoration1("Email"),
+                    style: Theme.of(context).textTheme.bodyText1,
+                    decoration: InputDecoration(hintText: "Email"),
                     onChanged: (data) => _setCred(data),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
-                      onChanged: (data) => _setCred(data),
-                      decoration: InputStyle.getInputDecoration1("Password")),
+                    onChanged: (data) => _setCred(data),
+                    style: Theme.of(context).textTheme.bodyText1,
+                    decoration: InputDecoration(hintText: "Password"),
+                  ),
                 ),
                 Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ElevatedButton(
                       onPressed: _onPressed,
-                      style: BtnStyle.getButtonStyle1,
-                      child:
-                          const Text("Login", style: TxtStyle.getButtonText1),
+                      child: Text("Login",
+                          style: Theme.of(context).textTheme.button),
                     ))
               ])),
             ),
             GestureDetector(
-              onTap: () => {debugPrint("FORGOT")},
+              onTap: () => {Navigator.pushNamed(context, forgotPasswordRoute)},
               child: Center(
-                child: Text(
-                  "Forgot Password?",
-                  style:
-                      TxtStyle.getHeader1(const Color.fromRGBO(255, 0, 0, 1)),
-                ),
+                child: Text("Forgot Password?",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2
+                        ?.copyWith(color: Colors.red)),
               ),
             ),
             Padding(
@@ -91,14 +92,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Text(
                     "Don't have an account yet? ",
-                    style: TxtStyle.getBodyText1(16, Colors.black),
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                   GestureDetector(
                     onTap: () =>
                         {Navigator.popAndPushNamed(context, registerRoute)},
                     child: Text(
                       "Sign up",
-                      style: TxtStyle.getTextLink1(16),
+                      style: Theme.of(context).textTheme.headline3,
                     ),
                   )
                 ],

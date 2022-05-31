@@ -21,7 +21,7 @@ class _StartScreenState extends State<StartScreen> {
               padding: const EdgeInsets.fromLTRB(30, 140, 100, 20),
               child: Text(
                 "First we need to setup your account",
-                style: TxtStyle.getWelcomeTxt(const Color.fromRGBO(0, 0, 0, 1)),
+                style: Theme.of(context).textTheme.headline1,
               )),
           GestureDetector(
             onTap: () => {Navigator.popAndPushNamed(context, crtAccountScreen)},

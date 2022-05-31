@@ -51,8 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Text(
                     "Create Account",
-                    style:
-                        TxtStyle.getHeader1(const Color.fromRGBO(0, 0, 0, 1)),
+                    style: Theme.of(context).textTheme.headline2,
                   ),
                 ],
               ),
@@ -64,7 +63,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
-                    decoration: InputStyle.getInputDecoration1("Email"),
+                    decoration: InputDecoration(hintText: "Email"),
+                    style: Theme.of(context).textTheme.bodyText1,
                     onChanged: (data) => _setCred(data),
                   ),
                 ),
@@ -72,14 +72,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
                       onChanged: (data) => _setCred(data),
-                      decoration: InputStyle.getInputDecoration1("Password")),
+                      style: Theme.of(context).textTheme.bodyText1,
+                      decoration: InputDecoration(hintText: "Password")),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
                       onChanged: (data) => _setCred(data),
+                      style: Theme.of(context).textTheme.bodyText1,
                       decoration:
-                          InputStyle.getInputDecoration1("Confirm Password")),
+                          InputDecoration(hintText: "Confirm Password")),
                 ),
                 Row(
                   children: [
@@ -99,7 +101,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             children: [
                               TextSpan(
                                   text: "Terms of Service and Privacy Policy",
-                                  style: TxtStyle.getTextLink1(12))
+                                  style: Theme.of(context).textTheme.headline4,
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      showModalBottomSheet<void>(
+                                          context: context,
+                                          builder: (BuildContext builder) {
+                                            return DraggableScrollableSheet(
+                                                snap: true,
+                                                initialChildSize: 1,
+                                                builder: (context,
+                                                    scrollController) {
+                                                  return SingleChildScrollView(
+                                                      child: Column(
+                                                    children: [
+                                                      Text(
+                                                        "Terms and Condition",
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline2,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: RichText(
+                                                            text: TextSpan(
+                                                                text:
+                                                                    "Minim reprehenderit sit eiusmod minim. Mollit commodo non velit aliquip et enim voluptate exercitation. Ut reprehenderit adipisicing cillum nulla anim. Fugiat eiusmod consectetur mollit aute nulla exercitation ea labore ut velit elit. Enim cillum dolor voluptate culpa cillum mollit aliqua. Occaecat aute nisi aute consectetur esse sint amet. Tempor eu nulla aliquip ea sunt cupidatat sunt aliquip anim excepteur et. Dolor pariatur nulla non nostrud laborum magna. Est exercitation veniam do anim id. Ipsum aute ad eiusmod enim mollit aute elit exercitation dolor nostrud. Pariatur eu amet quis incididunt pariatur ipsum adipisicing est magna. Velit cillum magna minim veniam amet laborum labore ullamco adipisicing proident. Quis eiusmod commodo anim ad exercitation fugiat eiusmod proident in amet sint ex. Do ullamco ad cillum fugiat. Ullamco veniam anim cupidatat qui sunt eu laborum occaecat dolor. Commodo sunt labore reprehenderit duis dolore esse reprehenderit cupidatat anim adipisicing laborum labore tempor.",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .bodyText1),
+                                                            textAlign: TextAlign
+                                                                .justify),
+                                                      )
+                                                    ],
+                                                  ));
+                                                });
+                                          });
+                                    })
                             ]),
                       ),
                     ),
@@ -108,21 +149,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ElevatedButton(
-                      onPressed: _onPressed,
-                      style: BtnStyle.getButtonStyle1,
-                      child: const Text("Register",
-                          style: TxtStyle.getButtonText1),
-                    ))
+                        onPressed: _onPressed,
+                        child: Text("Register",
+                            style: Theme.of(context).textTheme.button)))
               ])),
             ),
             RichText(
               text: TextSpan(
                   text: 'Already have an account? ',
-                  style: TxtStyle.getBodyText1(16, Colors.black),
+                  style: Theme.of(context).textTheme.bodyText1,
                   children: [
                     TextSpan(
                         text: "Login",
-                        style: TxtStyle.getTextLink1(16),
+                        style: Theme.of(context).textTheme.headline3,
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.popAndPushNamed(context, loginRoute);

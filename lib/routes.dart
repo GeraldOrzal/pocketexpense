@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/screens/entry_screen.dart';
+import 'package:pocketexpense/screens/forgotpassword_screen.dart';
 import 'package:pocketexpense/screens/home_screen.dart';
 import 'package:pocketexpense/screens/login_screen.dart';
 import 'package:pocketexpense/screens/register_screen.dart';
 import 'package:pocketexpense/screens/start_screen.dart';
 import 'package:pocketexpense/screens/createAcc_screen.dart';
 import 'package:pocketexpense/screens/success_screen.dart';
-import 'screens/setup_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -15,6 +15,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => EntryScreen());
     case registerRoute:
       return MaterialPageRoute(builder: (_) => RegisterScreen());
+    case forgotPasswordRoute:
+      return MaterialPageRoute(builder: (_) => ForgotPasswordScreen());
     case loginRoute:
       return MaterialPageRoute(builder: (_) => LoginScreen());
     case startScreen:

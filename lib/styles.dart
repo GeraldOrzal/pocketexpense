@@ -4,26 +4,80 @@ import 'package:pocketexpense/constant.dart';
 const BORDER_RADIUS = 17.0;
 const BUTTON_HEIGHT = 48.0;
 
+//lightmode
+ThemeData get defaultThemeData {
+  return ThemeData.light().copyWith(
+      colorScheme: const ColorScheme(
+          brightness: brightness,
+          primary: primary,
+          onPrimary: onPrimary,
+          secondary: secondary,
+          onSecondary: onSecondary,
+          error: error,
+          onError: onError,
+          background: background,
+          onBackground: onBackground,
+          surface: surface,
+          onSurface: onSurface),
+      textTheme: const TextTheme(
+        headline1: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 40.0,
+            color: onPrimary,
+            fontFamily: 'Inter'),
+        headline2: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20.0,
+            color: onPrimary,
+            fontFamily: 'Inter'),
+        headline3: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+            color: primary,
+            decoration: TextDecoration.underline,
+            fontFamily: 'Inter'),
+        headline4: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12.0,
+            decoration: TextDecoration.underline,
+            color: primary,
+            fontFamily: 'Inter'),
+        bodyText1:
+            TextStyle(color: onPrimary, fontSize: 14.0, fontFamily: 'Inter'),
+        bodyText2:
+            TextStyle(color: onPrimary, fontSize: 12.0, fontFamily: 'Inter'),
+        button: TextStyle(
+            color: background,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Inter'),
+      ),
+      buttonTheme: ButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(BORDER_RADIUS),
+          ),
+          minWidth: 200.0),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(BORDER_RADIUS),
+        ),
+        shadowColor: Colors.transparent,
+        minimumSize: const Size.fromHeight(BUTTON_HEIGHT),
+      )),
+      inputDecorationTheme: const InputDecorationTheme(
+        fillColor: onPrimary,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(13)),
+          borderSide: BorderSide(color: Colors.black, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(13)),
+          borderSide: BorderSide(color: Colors.black, width: 1),
+        ),
+      ));
+}
+
 abstract class TxtStyle {
-  static TextStyle getHeader1(Color color) {
-    return TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 20.0,
-        color: color,
-        fontFamily: 'Inter');
-  }
-
-  static TextStyle getWelcomeTxt(Color color) {
-    return TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 40.0,
-        color: color,
-        fontFamily: 'Inter');
-  }
-
-  static const TextStyle getButtonText1 = TextStyle(
-      color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Inter');
-
   static const TextStyle getAmountTxt = TextStyle(
       color: Colors.white,
       fontSize: 40.0,
@@ -69,15 +123,8 @@ abstract class TxtStyle {
 abstract class InputStyle {
   static InputDecoration getInputDecoration1(String data) {
     return InputDecoration(
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(13)),
-          borderSide: BorderSide(color: Colors.black, width: 1),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(13)),
-          borderSide: BorderSide(color: Colors.black, width: 1),
-        ),
-        hintText: data);
+      hintText: data,
+    );
   }
 }
 
@@ -89,7 +136,6 @@ abstract class LayoutStyle {
 
 abstract class BtnStyle {
   static ButtonStyle getButtonStyle1 = ElevatedButton.styleFrom(
-    primary: kPrimaryColor,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(BORDER_RADIUS),
     ),

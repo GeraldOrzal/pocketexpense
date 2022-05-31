@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 "Spend Frequency",
-                style: TxtStyle.getHeader1(Colors.black),
+                style: Theme.of(context).textTheme.headline2,
               ),
               const SizedBox(
                 height: 470,
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Recent Transaction",
-                        style: TxtStyle.getHeader1(Colors.black)),
+                        style: Theme.of(context).textTheme.headline2),
                     Container(
                       decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 238, 121, 113),
@@ -80,7 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: (() {
             _tripModalBottomSheet(context);
           }),
-          backgroundColor: kPrimaryColor,
           child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

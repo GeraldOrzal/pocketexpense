@@ -58,7 +58,6 @@ class _TopBarNavState extends State<TopBarNav> {
           ),
           const Icon(
             Icons.notifications,
-            color: kPrimaryColor,
             size: 32,
           )
         ],
