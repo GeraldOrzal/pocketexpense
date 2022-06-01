@@ -26,6 +26,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => StartScreen());
     case crtAccountRoute:
       return MaterialPageRoute(builder: (_) => CreateAccScreen());
+    case transactionRoute:
+      return MaterialPageRoute(builder: (_) => TransactionScreen());
     case successRoute:
       return MaterialPageRoute(builder: (_) => SuccessScreen());
     case homeRoute:

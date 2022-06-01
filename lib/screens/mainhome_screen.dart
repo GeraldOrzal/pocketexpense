@@ -30,7 +30,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
 
     void _onTap(newValue) {
       pageController.animateToPage(newValue,
-          curve: Curves.ease, duration: Duration(milliseconds: 800));
+          curve: Curves.ease, duration: Duration(milliseconds: 700));
       setState(() {
         currentIndex = newValue;
       });

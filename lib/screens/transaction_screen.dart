@@ -11,23 +11,68 @@ class TransactionScreen extends StatefulWidget {
 }
 
 class _TransactionScreenState extends State<TransactionScreen> {
+  void onPressed() {}
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    // double computedHeight = screenHeight * CONTAINER_PERCENTAGE;
+    double computedHeight = screenHeight * 0.3;
     return SafeArea(
       child: Scaffold(
-        // appBar: TransactionAppBarNav(
-        //   header: "Detail Transaction",
-        //   color: Colors.red,
-        // ),
+        appBar: AppBar(
+            // leading: Icon(Icons.arrow_back, color: Colors.white),
+            foregroundColor: background,
+            backgroundColor: Colors.red,
+            elevation: 0,
+            title: Row(
+              children: [
+                Expanded(
+                    child: Center(
+                        child: Text("Detail Transaction",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2
+                                ?.copyWith(color: background)))),
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet<void>(
+                        enableDrag: true,
+                        context: context,
+                        builder: (BuildContext builder) {
+                          return Container(
+                            height: 200.0,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Remove this transaction?",
+                                  style: Theme.of(context).textTheme.headline2,
+                                ),
+                                Text(
+                                  "Are you sure do you wanna remove this transaction",
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                                ElevatedButton(
+                                    onPressed: onPressed, child: Text("No"))
+                              ],
+                            ),
+                          );
+                        });
+                  },
+                  child: Icon(
+                    Icons.settings,
+                  ),
+                )
+              ],
+            )),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              // height: computedHeight,
-              decoration: LayoutStyle.getUpperStyle(Colors.red),
+              height: computedHeight,
+              color: Colors.red,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
