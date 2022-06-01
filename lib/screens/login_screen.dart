@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user.dart';
 import '../styles.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(LoginScreen());
+}
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -12,9 +19,25 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  User? userCred;
-  void _setCred(String data) {}
-  void _onPressed() {}
+  // void _setCred(String data) {}
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  String errorMessage = '';
+  void _onPressed() async {
+    if (_formkey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _email.text, password: _password.text);
+        Navigator.of(context).pushNamed(startScreen);
+      } on FirebaseAuthException catch (error) {
+        errorMessage = error.message!;
+      }
+
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,31 +72,38 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
+                  key: _formkey,
                   child: Column(children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: TextField(
-                    style: Theme.of(context).textTheme.bodyText1,
-                    decoration: InputDecoration(hintText: "Email"),
-                    onChanged: (data) => _setCred(data),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: TextField(
-                    onChanged: (data) => _setCred(data),
-                    style: Theme.of(context).textTheme.bodyText1,
-                    decoration: InputDecoration(hintText: "Password"),
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: ElevatedButton(
-                      onPressed: _onPressed,
-                      child: Text("Login",
-                          style: Theme.of(context).textTheme.button),
-                    ))
-              ])),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                        controller: _email,
+                        style: Theme.of(context).textTheme.bodyText1,
+                        decoration: const InputDecoration(hintText: "Email"),
+                        // onChanged: (data) => _setCred(data),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                        controller: _password,
+                        obscureText: true,
+                        // onChanged: (data) => _setCred(data),
+                        style: Theme.of(context).textTheme.bodyText1,
+                        decoration: const InputDecoration(hintText: "Password"),
+                      ),
+                    ),
+                    Center(
+                      child: Text(errorMessage),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ElevatedButton(
+                          onPressed: _onPressed,
+                          child: Text("Login",
+                              style: Theme.of(context).textTheme.button),
+                        ))
+                  ])),
             ),
             GestureDetector(
               onTap: () => {Navigator.pushNamed(context, forgotPasswordRoute)},

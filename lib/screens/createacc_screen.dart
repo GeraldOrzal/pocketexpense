@@ -71,7 +71,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
             child: Row(
               children: [
                 Text(
-                  'P ${currentAmount}',
+                  '₱ ${currentAmount}',
                   style: TxtStyle.getAmountTxt,
                 )
               ],
