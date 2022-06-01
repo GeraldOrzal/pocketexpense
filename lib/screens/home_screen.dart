@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/styles.dart';
-import 'package:pocketexpense/widgets/bottombar_nav.dart';
+
 import 'package:pocketexpense/widgets/bottomrowitems.dart';
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 import 'package:pocketexpense/widgets/transaction_box.dart';
@@ -11,7 +11,8 @@ import 'package:fl_chart/fl_chart.dart';
 import '../widgets/custom_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  Function callback;
+  HomeScreen({Key? key, required this.callback}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -47,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             LineChartBarData(
               color: Colors.red,
               spots: const [
-                FlSpot(0, 3),
+                FlSpot(0, 0),
                 FlSpot(2.6, 2),
                 FlSpot(4.9, 5),
                 FlSpot(6.8, 3.1),
@@ -193,16 +194,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text("Recent Transaction",
                       style: Theme.of(context).textTheme.headline2),
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 238, 121, 113),
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "See All",
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 252, 18, 1)),
+                  GestureDetector(
+                    onTap: () => {widget.callback(1)},
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 238, 121, 113),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0))),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "See All",
+                          style:
+                              TextStyle(color: Color.fromARGB(255, 252, 18, 1)),
+                        ),
                       ),
                     ),
                   )

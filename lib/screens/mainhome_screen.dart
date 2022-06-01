@@ -3,7 +3,7 @@ import 'package:pocketexpense/screens/home_screen.dart';
 import 'package:pocketexpense/screens/profile_screen.dart';
 import 'package:pocketexpense/screens/setting_screen.dart';
 import 'package:pocketexpense/screens/transactionlist_screen.dart';
-import 'package:pocketexpense/widgets/bottombar_nav.dart';
+
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 
 class MainHomeScreen extends StatefulWidget {
@@ -159,7 +159,9 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
           controller: pageController,
           scrollDirection: Axis.horizontal,
           children: [
-            HomeScreen(),
+            HomeScreen(
+              callback: _onTap,
+            ),
             TransactionListScreen(),
             SettingScreen(),
             ProfileScreen()
