@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/constant.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -8,8 +10,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  void onPressed() {
+    FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushNamed(entryRoute);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: [ElevatedButton(onPressed: onPressed, child: Text("Logout"))],
+    );
   }
 }

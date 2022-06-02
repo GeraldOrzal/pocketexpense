@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/styles.dart';
@@ -12,6 +13,8 @@ class CreateAccScreen extends StatefulWidget {
 class _CreateAccScreenState extends State<CreateAccScreen> {
   String? accountType;
   bool isEnabled = false;
+  final DatabaseReference userDetailsRef =
+      FirebaseDatabase.instance.ref().child('users');
   String? currentAmount = "0.00";
 
   bool isValid(String data) {
@@ -46,7 +49,10 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
     });
   }
 
-  void _onPressed() {}
+  void _onPressed() {
+    userService.updateDetails();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
