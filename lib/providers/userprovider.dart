@@ -4,11 +4,21 @@ import 'package:flutter/cupertino.dart';
 import '../models/userdetails.dart';
 
 class UserProvider extends ChangeNotifier {
-  var currentUser = FirebaseAuth.instance.currentUser;
+  DatabaseReference userDetailsRef =
+      FirebaseDatabase.instance.ref().child('users');
+  User? user = FirebaseAuth.instance.currentUser;
 
   UserDetails? userDetails;
 
   void setUserDetails(UserDetails userDetails) {
     this.userDetails = userDetails;
+  }
+
+  void saveDetails(UserDetails userDetails) {
+    userDetailsRef.child(user!.uid).set(userDetails.toJson());
+  }
+
+  void updateDetails() {
+    userDetailsRef.child("${user!.uid}/isFirstTime").set(false);
   }
 }

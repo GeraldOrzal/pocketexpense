@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/styles.dart';
 
+import '../constant.dart';
+
 class SuccessScreen extends StatefulWidget {
   const SuccessScreen({Key? key}) : super(key: key);
 
@@ -9,6 +11,11 @@ class SuccessScreen extends StatefulWidget {
 }
 
 class _SuccessScreenState extends State<SuccessScreen> {
+  void initState() {
+    Future.delayed(Duration(seconds: 2),
+        () => {Navigator.of(context).pushReplacementNamed(homeRoute)});
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

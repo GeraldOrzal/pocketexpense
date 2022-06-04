@@ -2,6 +2,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/styles.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/userprovider.dart';
 
 class CreateAccScreen extends StatefulWidget {
   const CreateAccScreen({Key? key}) : super(key: key);
@@ -49,9 +52,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
     });
   }
 
-  void _onPressed() {
-    userService.updateDetails();
-  }
+  void _onPressed() {}
 
   @override
   Widget build(BuildContext context) {
@@ -264,7 +265,14 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ElevatedButton(
-                      onPressed: isEnabled ? _onPressed : null,
+                      onPressed: isEnabled
+                          ? () {
+                              Provider.of<UserProvider>(context, listen: false)
+                                  .updateDetails();
+                              Navigator.of(context)
+                                  .pushReplacementNamed(successRoute);
+                            }
+                          : null,
                       child: Text("Setup",
                           style: Theme.of(context).textTheme.button),
                     )),

@@ -33,13 +33,12 @@ class _LoginScreenState extends State<LoginScreen> {
         var user = FirebaseAuth.instance.currentUser;
         DataSnapshot snapshot =
             await userDetailsRef.child("${user!.uid}/isFirstTime").get();
-        if (snapshot.value as bool) {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              startRoute, (Route<dynamic> route) => false);
-          return;
-        }
+        
         Navigator.of(context).pushNamedAndRemoveUntil(
-            homeRoute, (Route<dynamic> route) => false);
+            snapshot.value as bool ? startRoute:homeRoute, (Route<dynamic> route) => false);
+        
+        
+        
       }
     }, builder: (context, state, controller, _) {
       return SafeArea(

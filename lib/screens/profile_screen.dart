@@ -12,7 +12,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   void onPressed() {
     FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushNamed(entryRoute);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(entryRoute, (Route<dynamic> route) => false);
   }
 
   @override

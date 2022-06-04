@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:pocketexpense/service/userservice.dart';
 
 const entryScreenItems =
     '[{"path":"assets/images/slide1.png","text":"Make a better budget"},{"path":"assets/images/slide2.png","text":"You will spend mindfully"},{"path":"assets/images/slide3.png","text":"Tracking your financial progress"}]';
@@ -36,5 +35,3 @@ const onSurface = Color.fromARGB(90, 66, 66, 65);
 
 DatabaseReference firebase = FirebaseDatabase.instance.ref();
 FirebaseAuth auth = FirebaseAuth.instance;
-
-UserService userService = UserService();

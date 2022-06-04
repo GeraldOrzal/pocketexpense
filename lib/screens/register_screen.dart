@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/models/userdetails.dart';
-import 'package:pocketexpense/service/userservice.dart';
+import 'package:pocketexpense/providers/userprovider.dart';
+
 import 'package:pocketexpense/widgets/checkbox.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import '../styles.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -27,22 +29,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _confirmpassword = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   String errorMessage = '';
-
-  void _onPressed() async {
-    if (_formkey.currentState!.validate()) {
-      try {
-        await auth.createUserWithEmailAndPassword(
-            email: _email.text, password: _password.text);
-
-        userService
-            .saveDetails(UserDetails(firstname: "Gerald", middlename: "Lerio"));
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            startRoute, (Route<dynamic> route) => false);
-      } on FirebaseAuthException catch (error) {
-        errorMessage = error.message!;
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -241,7 +227,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: ElevatedButton(
-                                    onPressed: _onPressed,
+                                    onPressed: () async {
+                                      if (_formkey.currentState!.validate()) {
+                                        try {
+                                          await auth
+                                              .createUserWithEmailAndPassword(
+                                                  email: _email.text,
+                                                  password: _password.text);
+
+                                          Provider.of<UserProvider>(context,
+                                                  listen: false)
+                                              .saveDetails(UserDetails(
+                                                  firstname: "",
+                                                  middlename: ""));
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil(
+                                                  startRoute,
+                                                  (Route<dynamic> route) =>
+                                                      false);
+                                        } on FirebaseAuthException catch (error) {
+                                          errorMessage = error.message!;
+                                        }
+                                      }
+                                    },
                                     child: Text("Register",
                                         style: Theme.of(context)
                                             .textTheme
