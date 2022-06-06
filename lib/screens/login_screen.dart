@@ -33,12 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
         var user = FirebaseAuth.instance.currentUser;
         DataSnapshot snapshot =
             await userDetailsRef.child("${user!.uid}/isFirstTime").get();
-        
+
         Navigator.of(context).pushNamedAndRemoveUntil(
-            snapshot.value as bool ? startRoute:homeRoute, (Route<dynamic> route) => false);
-        
-        
-        
+            snapshot.value as bool ? startRoute : homeRoute,
+            (Route<dynamic> route) => false);
+      } else if (state is AuthFailed) {
+        setState(() {
+          errorMessage = state.exception.toString();
+        });
       }
     }, builder: (context, state, controller, _) {
       return SafeArea(
@@ -91,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: true,
                           // onChanged: (data) => _setCred(data),
                           style: Theme.of(context).textTheme.bodyText1,
+
                           decoration:
                               const InputDecoration(hintText: "Password"),
                         ),
