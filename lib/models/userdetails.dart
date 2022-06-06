@@ -1,29 +1,79 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:pocketexpense/models/account.dart';
 
 class UserDetails {
-  String? firstname;
-  String? middlename;
-  String? lastname;
-  bool isFirstTime = true;
+  final String firstname;
+  final bool isFirstTime;
+  final String middlename;
+  final List<Account> accounts;
 
-  UserDetails({this.firstname, this.middlename});
+  UserDetails({
+    required this.firstname,
+    required this.isFirstTime,
+    required this.middlename,
+    required this.accounts,
+  });
 
-  // String get userid => useruid;
+  UserDetails copyWith({
+    String? firstname,
+    bool? isFirstTime,
+    String? middlename,
+    List<Account>? accounts,
+  }) {
+    return UserDetails(
+      firstname: firstname ?? this.firstname,
+      isFirstTime: isFirstTime ?? this.isFirstTime,
+      middlename: middlename ?? this.middlename,
+      accounts: accounts ?? this.accounts,
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        'firstname': firstname,
-        'middlename': middlename,
-        'isFirstTime': isFirstTime
-      };
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'firstname': firstname,
+      'isFirstTime': isFirstTime,
+      'middlename': middlename,
+      'accounts': accounts,
+    };
+  }
 
-  // UserDetails.fromJson(Map json) {
-  //   this.firstname = json['firstname'];
-  //   this.middlename = json['middlename'];
-  //   this.lastname = json['lastname'];
-  //   this.isFirstTime = json['isFirstTime'];
-  // }
-  // static UserDetails fromJson(Map<String, dynamic> json) => UserDetails(
-  //     firstname: json['idUser'],
-  //     middlename: json['message'],
-  //     useruid: json['lastname']);
+  factory UserDetails.fromMap(Map<String, dynamic> map) {
+    return UserDetails(
+      firstname: map['firstname'] as String,
+      isFirstTime: map['isFirstTime'] as bool,
+      middlename: map['middlename'] as String,
+      accounts: List<Account>.from((map['accounts'] as List<dynamic>)),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserDetails.fromJson(String source) =>
+      UserDetails.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'Userdetails(firstname: $firstname, isFirstTime: $isFirstTime, middlename: $middlename, accounts: $accounts)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is UserDetails &&
+        other.firstname == firstname &&
+        other.isFirstTime == isFirstTime &&
+        other.middlename == middlename &&
+        listEquals(other.accounts, accounts);
+  }
+
+  @override
+  int get hashCode {
+    return firstname.hashCode ^
+        isFirstTime.hashCode ^
+        middlename.hashCode ^
+        accounts.hashCode;
+  }
 }
