@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/styles.dart';
 
 import 'package:pocketexpense/widgets/bottomrowitems.dart';
@@ -217,15 +218,14 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               height: 200.0,
               child: ListView(
-                scrollDirection: Axis.vertical,
                 children: [
-                  TransactionBox(
-                    isExpense: true,
-                  ),
-                  TransactionBox(
-                    isExpense: false,
-                  ),
+                  Center(
+                      child: Text(
+                    "Nothing to show",
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ))
                 ],
+                scrollDirection: Axis.vertical,
               ),
             )
           ]),

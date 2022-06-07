@@ -23,9 +23,15 @@ class _TopBarNavState extends State<TopBarNav> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            "assets/images/logo.png",
-            scale: 3,
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: primary),
+                borderRadius: BorderRadius.all(Radius.circular(200.0))),
+            padding: EdgeInsets.all(2.0),
+            child: Image.asset(
+              "assets/images/logo.png",
+              scale: 4,
+            ),
           ),
           Container(
             padding: const EdgeInsets.only(
@@ -59,9 +65,14 @@ class _TopBarNavState extends State<TopBarNav> {
               onChanged: _onChanged,
             ),
           ),
-          const Icon(
-            Icons.notifications,
-            size: 32,
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(notificationRoute);
+            },
+            child: const Icon(
+              Icons.notifications,
+              size: 32,
+            ),
           )
         ],
       ),

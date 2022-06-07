@@ -1,9 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/models/account.dart';
 import 'package:pocketexpense/styles.dart';
 import 'package:provider/provider.dart';
 
+import '../models/userdetails.dart';
+import '../providers/accountprovider.dart';
 import '../providers/userprovider.dart';
 
 class CreateAccScreen extends StatefulWidget {
@@ -14,6 +17,7 @@ class CreateAccScreen extends StatefulWidget {
 }
 
 class _CreateAccScreenState extends State<CreateAccScreen> {
+  String? bankName;
   String? accountType;
   bool isEnabled = false;
   final DatabaseReference userDetailsRef =
@@ -267,10 +271,22 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                     child: ElevatedButton(
                       onPressed: isEnabled
                           ? () {
+                              print("${accountType} sadsd ${currentAmount}");
                               Provider.of<UserProvider>(context, listen: false)
-                                  .updateDetails();
-                              Navigator.of(context)
-                                  .pushReplacementNamed(successRoute);
+                                  .updateDetails(UserDetails(
+                                      firstname: "Gerald",
+                                      isFirstTime: false,
+                                      middlename: "Lerio"));
+                              Provider.of<AccountProvider>(context,
+                                      listen: false)
+                                  .addAccount(Account(
+                                accountype: accountType as String,
+                                amount: currentAmount,
+                                initialAmount: currentAmount,
+                              ));
+
+                              // Navigator.of(context)
+                              //     .pushReplacementNamed(successRoute);
                             }
                           : null,
                       child: Text("Setup",

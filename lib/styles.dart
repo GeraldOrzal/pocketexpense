@@ -7,6 +7,7 @@ const BUTTON_HEIGHT = 48.0;
 //lightmode
 ThemeData get defaultThemeData {
   return ThemeData.light().copyWith(
+      canvasColor: background,
       colorScheme: const ColorScheme(
           brightness: brightness,
           primary: primary,

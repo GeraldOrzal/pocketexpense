@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../constant.dart';
@@ -35,33 +37,90 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 GestureDetector(
                   onTap: () {
                     showModalBottomSheet<void>(
+                        barrierColor: Color.fromARGB(66, 0, 0, 0),
                         enableDrag: true,
                         context: context,
                         builder: (BuildContext builder) {
-                          return Container(
-                            height: 200.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "Remove this transaction?",
-                                  style: Theme.of(context).textTheme.headline2,
-                                ),
-                                Text(
-                                  "Are you sure do you wanna remove this transaction",
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                                ElevatedButton(
-                                    onPressed: onPressed, child: Text("No"))
-                              ],
+                          return BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                            child: Container(
+                              height: 200.0,
+                              color: background,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.drag_handle_rounded),
+                                  Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Text(
+                                      "Remove this transaction?",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline3!
+                                          .copyWith(
+                                              decoration: TextDecoration.none,
+                                              color: onPrimary),
+                                    ),
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                        text:
+                                            "Are you sure do you wanna remove this \n transaction?",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: background),
+                                                onPressed: onPressed,
+                                                child: Text("No",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1!
+                                                        .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ))),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+                                                onPressed: onPressed,
+                                                child: Text("Yes",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1!
+                                                        .copyWith(
+                                                          color: background,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ))),
+                                          ),
+                                        )
+                                      ]),
+                                ],
+                              ),
                             ),
                           );
                         });
                   },
                   child: Icon(
-                    Icons.settings,
+                    Icons.delete,
                   ),
                 )
               ],

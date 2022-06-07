@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/widgets/bottomrowitems.dart';
 
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 
@@ -17,6 +18,8 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Color.fromARGB(54, 255, 255, 255),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -62,13 +65,16 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                           builder: (context, scrollController) {
                             return SingleChildScrollView(
                                 child: Column(
-                              children: [Text("Filter Transaction")],
+                              children: [
+                                Text("Filter Transaction"),
+                                BottomRowItems()
+                              ],
                             ));
                           });
                     })
               },
               child: const Icon(
-                Icons.notifications,
+                Icons.filter_list,
                 size: 32,
               ),
             )
@@ -76,6 +82,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
         ),
       ),
       body: ListView(
+        padding: EdgeInsets.only(top: 40.0),
         children: [
           TransactionBox(isExpense: true),
           TransactionBox(isExpense: true),

@@ -5,6 +5,7 @@ import 'package:pocketexpense/screens/forgotpassword_screen.dart';
 import 'package:pocketexpense/screens/home_screen.dart';
 import 'package:pocketexpense/screens/login_screen.dart';
 import 'package:pocketexpense/screens/mainhome_screen.dart';
+import 'package:pocketexpense/screens/notification_screen.dart';
 import 'package:pocketexpense/screens/register_screen.dart';
 import 'package:pocketexpense/screens/start_screen.dart';
 import 'package:pocketexpense/screens/createAcc_screen.dart';
@@ -30,6 +31,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => TransactionScreen());
     case successRoute:
       return MaterialPageRoute(builder: (_) => SuccessScreen());
+    case notificationRoute:
+      return MaterialPageRoute(builder: (_) => NotificationScreen());
     case homeRoute:
       return MaterialPageRoute(builder: (_) => MainHomeScreen());
     default:

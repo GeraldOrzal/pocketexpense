@@ -238,10 +238,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           Provider.of<UserProvider>(context,
                                                   listen: false)
                                               .saveDetails(UserDetails(
-                                                  firstname: "",
-                                                  middlename: "",
-                                                  isFirstTime: true,
-                                                  accounts: []));
+                                            firstname: "",
+                                            middlename: "",
+                                            isFirstTime: true,
+                                          ));
                                           Navigator.of(context)
                                               .pushNamedAndRemoveUntil(
                                                   startRoute,

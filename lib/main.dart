@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/models/userdetails.dart';
+import 'package:pocketexpense/providers/accountprovider.dart';
+import 'package:pocketexpense/providers/transactionsprovider.dart';
 import 'package:pocketexpense/providers/userprovider.dart';
 import 'package:pocketexpense/routes.dart';
 import 'package:pocketexpense/screens/createacc_screen.dart';
@@ -30,7 +32,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => UserProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => AccountProvider()),
+        ChangeNotifierProvider(create: (_) => TransactionsProvider())
+      ],
       builder: (context, widget) {
         return MaterialApp(
           title: 'Material App',

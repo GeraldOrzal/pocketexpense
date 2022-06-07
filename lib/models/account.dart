@@ -1,20 +1,17 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-import 'package:pocketexpense/models/transaction.dart';
-
 class Account {
+  String? accountID;
   final String accountype;
-  final int amount;
-  final String bankname;
-  final int initialAmount;
-  final List<Transaction> transactions;
+  dynamic amount;
+  String? bankname;
+  final dynamic initialAmount;
   Account({
     required this.accountype,
     required this.amount,
-    required this.bankname,
+    this.bankname,
+    this.accountID,
     required this.initialAmount,
-    required this.transactions,
   });
 
   Account copyWith({
@@ -22,14 +19,12 @@ class Account {
     int? amount,
     String? bankname,
     int? initialAmount,
-    List<Transaction>? transactions,
   }) {
     return Account(
       accountype: accountype ?? this.accountype,
       amount: amount ?? this.amount,
       bankname: bankname ?? this.bankname,
       initialAmount: initialAmount ?? this.initialAmount,
-      transactions: transactions ?? this.transactions,
     );
   }
 
@@ -39,7 +34,6 @@ class Account {
       'amount': amount,
       'bankname': bankname,
       'initialAmount': initialAmount,
-      'transactions': transactions,
     };
   }
 
@@ -49,8 +43,6 @@ class Account {
       amount: map['amount'].toInt() as int,
       bankname: map['bankname'] as String,
       initialAmount: map['initialAmount'].toInt() as int,
-      transactions:
-          List<Transaction>.from(map['transactions'] as List<dynamic>),
     );
   }
 
@@ -61,7 +53,7 @@ class Account {
 
   @override
   String toString() {
-    return 'Account(accountype: $accountype, amount: $amount, bankname: $bankname, initialAmount: $initialAmount, transactions: $transactions)';
+    return 'Account(accountype: $accountype, amount: $amount, bankname: $bankname, initialAmount: $initialAmount)';
   }
 
   @override
@@ -72,8 +64,7 @@ class Account {
         other.accountype == accountype &&
         other.amount == amount &&
         other.bankname == bankname &&
-        other.initialAmount == initialAmount &&
-        listEquals(other.transactions, transactions);
+        other.initialAmount == initialAmount;
   }
 
   @override
@@ -81,7 +72,6 @@ class Account {
     return accountype.hashCode ^
         amount.hashCode ^
         bankname.hashCode ^
-        initialAmount.hashCode ^
-        transactions.hashCode;
+        initialAmount.hashCode;
   }
 }
