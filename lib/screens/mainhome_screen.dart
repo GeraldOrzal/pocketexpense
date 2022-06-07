@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/screens/home_screen.dart';
 import 'package:pocketexpense/screens/profile_screen.dart';
 import 'package:pocketexpense/screens/setting_screen.dart';
@@ -56,7 +58,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.home,
+                            MdiIcons.home,
                             color: currentIndex == 0 ? Colors.red : Colors.grey,
                           ),
                           Text(
@@ -78,7 +80,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.code,
+                            MdiIcons.swapHorizontalBold,
                             color: currentIndex == 1 ? Colors.red : Colors.grey,
                           ),
                           Text(
@@ -105,7 +107,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.settings,
+                            MdiIcons.cog,
                             color: currentIndex == 2 ? Colors.red : Colors.grey,
                           ),
                           Text(
@@ -127,7 +129,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.account_circle,
+                            MdiIcons.account,
                             color: currentIndex == 3 ? Colors.red : Colors.grey,
                           ),
                           Text(
@@ -149,10 +151,14 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: primary,
           onPressed: (() {
-            // _tripModalBottomSheet(context);
+            _tripModalBottomSheet(context);
           }),
-          child: const Icon(Icons.add),
+          child: const Icon(
+            MdiIcons.plus,
+            color: Colors.white,
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: PageView(
@@ -170,4 +176,128 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
       ),
     );
   }
+}
+
+void _tripModalBottomSheet(context) {
+  showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          // padding: const EdgeInsets.only(
+          //   left: 0,
+          //   top: 0,
+          //   bottom: 0,
+          //   right: 0,
+          // ),
+          height: MediaQuery.of(context).size.height * .35,
+          decoration: const BoxDecoration(
+              color: Color.fromARGB(245, 245, 245, 245),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+          child: Column(
+            children: [
+              const Center(
+                child: Icon(
+                  MdiIcons.minus,
+                  color: Colors.grey,
+                  size: 32,
+                ),
+              ),
+              Column(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20),
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: const BoxDecoration(
+                      color: primary,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          MdiIcons.cashMinus,
+                          color: background,
+                          size: 36,
+                        ),
+                        const SizedBox(
+                          width: 100,
+                        ),
+                        Text(
+                          'Expense',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2
+                              ?.copyWith(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20),
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: const BoxDecoration(
+                      color: income,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          MdiIcons.cashPlus,
+                          color: background,
+                          size: 36,
+                        ),
+                        const SizedBox(
+                          width: 100,
+                        ),
+                        Text(
+                          'Income',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2
+                              ?.copyWith(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20),
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: const BoxDecoration(
+                      color: transfer,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          MdiIcons.cashFast,
+                          color: background,
+                          size: 36,
+                        ),
+                        const SizedBox(
+                          width: 100,
+                        ),
+                        Text(
+                          'Transfer',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2
+                              ?.copyWith(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      });
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/styles.dart';
 
@@ -37,7 +38,7 @@ class _TopBarNavState extends State<TopBarNav> {
               style: Theme.of(context).textTheme.bodyText2,
               value: 1,
               hint: const Text("Month"),
-              items: [
+              items: const [
                 DropdownMenuItem(
                     value: 1,
                     child: Text(
@@ -59,7 +60,8 @@ class _TopBarNavState extends State<TopBarNav> {
             ),
           ),
           const Icon(
-            Icons.notifications,
+            MdiIcons.bell,
+            color: primary,
             size: 32,
           )
         ],

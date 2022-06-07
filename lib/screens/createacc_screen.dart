@@ -89,7 +89,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                   decoration: BoxStyle.getBoxDecoration,
                   child: TextFormField(
                     style: Theme.of(context).textTheme.bodyText1,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Name',
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,

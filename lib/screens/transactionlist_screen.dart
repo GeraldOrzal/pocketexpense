@@ -30,7 +30,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
               child: DropdownButton(
                 style: Theme.of(context).textTheme.bodyText2,
                 hint: const Text("Month"),
-                items: [
+                items: const [
                   DropdownMenuItem(
                       value: 1,
                       child: Text(
@@ -62,7 +62,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                           builder: (context, scrollController) {
                             return SingleChildScrollView(
                                 child: Column(
-                              children: [Text("Filter Transaction")],
+                              children: const [Text("Filter Transaction")],
                             ));
                           });
                     })

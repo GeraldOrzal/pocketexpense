@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pocketexpense/screens/start_screen.dart';
 import '../models/user.dart';
 import '../styles.dart';
 
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _email.text, password: _password.text);
-        Navigator.of(context).pushNamed(startScreen);
+        Navigator.of(context).pushNamed(startRoute);
       } on FirebaseAuthException catch (error) {
         errorMessage = error.message!;
       }

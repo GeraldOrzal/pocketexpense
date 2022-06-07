@@ -30,3 +30,6 @@ const onError = Color.fromARGB(255, 255, 15, 15);
 const onBackground = Color.fromARGB(255, 235, 235, 235);
 const surface = Color.fromARGB(0, 66, 66, 65);
 const onSurface = Color.fromARGB(90, 66, 66, 65);
+
+const income = Color.fromARGB(255, 217, 154, 61);
+const transfer = Color.fromARGB(255, 50, 88, 99);
