@@ -86,26 +86,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10.0),
-                          margin: const EdgeInsets.all(10.0),
-                          decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 238, 229, 255),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0))),
-                          child: const Icon(
-                            MdiIcons.wallet,
-                            color: transfer,
-                            size: 32,
+                    GestureDetector(
+                      onTap: () => {Navigator.pushNamed(context, accountRoute)},
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(10.0),
+                            margin: const EdgeInsets.all(10.0),
+                            decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 238, 229, 255),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6.0))),
+                            child: const Icon(
+                              MdiIcons.wallet,
+                              color: transfer,
+                              size: 32,
+                            ),
                           ),
-                        ),
-                        Text(
-                          'Account',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ],
+                          Text(
+                            'Account',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: [

@@ -15,6 +15,9 @@ const transactionRoute = '/transaction';
 const expenseRoute = '/expense';
 const incomeRoute = '/income';
 const transferRoute = '/transfer';
+const accountRoute = '/account';
+const accountDetailsRoute = '/accountDetails';
+const accountEditRoute = '/accountEdit';
 
 const topPad = 5.0;
 const leftPad = 20.0;

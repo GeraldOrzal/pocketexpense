@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/screens/account_screen.dart';
+import 'package:pocketexpense/screens/accountdetails_screen.dart';
+import 'package:pocketexpense/screens/accountedit_screen.dart';
 import 'package:pocketexpense/screens/entry_screen.dart';
 import 'package:pocketexpense/screens/expense_screen.dart';
 import 'package:pocketexpense/screens/forgotpassword_screen.dart';
@@ -41,6 +44,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => IncomeScreen());
     case transferRoute:
       return MaterialPageRoute(builder: (_) => TransferScreen());
+    case accountRoute:
+      return MaterialPageRoute(builder: (_) => AccountScreen());
+    case accountDetailsRoute:
+      return MaterialPageRoute(builder: (_) => AccountDetails());
+    case accountEditRoute:
+      return MaterialPageRoute(builder: (_) => AccountEditScreen());
     default:
       return MaterialPageRoute(
           builder: (_) => Scaffold(
