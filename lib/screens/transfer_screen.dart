@@ -71,21 +71,13 @@ class _TransferScreenState extends State<TransferScreen> {
                         horizontal: 20, vertical: 35),
                     height: 54,
                     decoration: BoxStyle.getBoxDecoration,
-                    child: DropdownButton(
-                      hint: const Text("Category"),
-                      // value: categoryType,
-                      items: [
-                        DropdownMenuItem(
-                            value: "Subscription",
-                            child: Text("Subscription",
-                                style: Theme.of(context).textTheme.bodyText2)),
-                        DropdownMenuItem(
-                            value: "Mortgage",
-                            child: Text("Mortgage",
-                                style: Theme.of(context).textTheme.bodyText2))
-                      ],
-                      onChanged: onChanged,
-                      isExpanded: true,
+                    child: TextFormField(
+                      style: Theme.of(context).textTheme.bodyText1,
+                      decoration: const InputDecoration(
+                        hintText: 'From:',
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                      ),
                     ),
                   ),
                   Container(
@@ -111,21 +103,13 @@ class _TransferScreenState extends State<TransferScreen> {
                         horizontal: 20, vertical: 35),
                     height: 54,
                     decoration: BoxStyle.getBoxDecoration,
-                    child: DropdownButton(
-                      hint: const Text("Wallet"),
-                      // value: categoryType,
-                      items: [
-                        DropdownMenuItem(
-                            value: "Gcash",
-                            child: Text("Gcash",
-                                style: Theme.of(context).textTheme.bodyText2)),
-                        DropdownMenuItem(
-                            value: "Paypal",
-                            child: Text("Paypal",
-                                style: Theme.of(context).textTheme.bodyText2))
-                      ],
-                      onChanged: onChanged,
-                      isExpanded: true,
+                    child: TextFormField(
+                      style: Theme.of(context).textTheme.bodyText1,
+                      decoration: const InputDecoration(
+                        hintText: 'To:',
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                      ),
                     ),
                   ),
                   Container(
