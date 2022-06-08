@@ -12,6 +12,9 @@ const successRoute = '/success';
 const homeRoute = '/home';
 const forgotPasswordRoute = '/forgotpassword';
 const transactionRoute = '/transaction';
+const expenseRoute = '/expense';
+const incomeRoute = '/income';
+const transferRoute = '/transfer';
 
 const topPad = 5.0;
 const leftPad = 20.0;

@@ -207,91 +207,100 @@ void _tripModalBottomSheet(context) {
               ),
               Column(
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 20),
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: const BoxDecoration(
-                      color: primary,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          MdiIcons.cashMinus,
-                          color: background,
-                          size: 36,
-                        ),
-                        const SizedBox(
-                          width: 100,
-                        ),
-                        Text(
-                          'Expense',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline2
-                              ?.copyWith(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 20),
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: const BoxDecoration(
-                      color: income,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          MdiIcons.cashPlus,
-                          color: background,
-                          size: 36,
-                        ),
-                        const SizedBox(
-                          width: 100,
-                        ),
-                        Text(
-                          'Income',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline2
-                              ?.copyWith(color: Colors.white),
-                        ),
-                      ],
+                  GestureDetector(
+                    onTap: () => {Navigator.pushNamed(context, expenseRoute)},
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 20),
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: const BoxDecoration(
+                        color: primary,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            MdiIcons.cashMinus,
+                            color: background,
+                            size: 36,
+                          ),
+                          const SizedBox(
+                            width: 100,
+                          ),
+                          Text(
+                            'Expense',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 20),
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: const BoxDecoration(
-                      color: transfer,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                  GestureDetector(
+                    onTap: () => {Navigator.pushNamed(context, incomeRoute)},
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 20),
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: const BoxDecoration(
+                        color: income,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            MdiIcons.cashPlus,
+                            color: background,
+                            size: 36,
+                          ),
+                          const SizedBox(
+                            width: 100,
+                          ),
+                          Text(
+                            'Income',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          MdiIcons.cashFast,
-                          color: background,
-                          size: 36,
-                        ),
-                        const SizedBox(
-                          width: 100,
-                        ),
-                        Text(
-                          'Transfer',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline2
-                              ?.copyWith(color: Colors.white),
-                        ),
-                      ],
+                  ),
+                  GestureDetector(
+                    onTap: () => {Navigator.pushNamed(context, transferRoute)},
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 20),
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: const BoxDecoration(
+                        color: transfer,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            MdiIcons.cashFast,
+                            color: background,
+                            size: 36,
+                          ),
+                          const SizedBox(
+                            width: 100,
+                          ),
+                          Text(
+                            'Transfer',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
