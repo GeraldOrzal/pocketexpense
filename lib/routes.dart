@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/screens/account_screen.dart';
+import 'package:pocketexpense/screens/accountdetails_screen.dart';
+import 'package:pocketexpense/screens/accountedit_screen.dart';
 import 'package:pocketexpense/screens/entry_screen.dart';
+import 'package:pocketexpense/screens/expense_screen.dart';
 import 'package:pocketexpense/screens/forgotpassword_screen.dart';
 import 'package:pocketexpense/screens/home_screen.dart';
+import 'package:pocketexpense/screens/income_screen.dart';
 import 'package:pocketexpense/screens/login_screen.dart';
 import 'package:pocketexpense/screens/mainhome_screen.dart';
 import 'package:pocketexpense/screens/notification_screen.dart';
@@ -12,6 +17,7 @@ import 'package:pocketexpense/screens/createAcc_screen.dart';
 import 'package:pocketexpense/screens/success_screen.dart';
 import 'package:pocketexpense/screens/transaction_screen.dart';
 import 'package:pocketexpense/screens/transactionlist_screen.dart';
+import 'package:pocketexpense/screens/transfer_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -35,6 +41,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => NotificationScreen());
     case homeRoute:
       return MaterialPageRoute(builder: (_) => MainHomeScreen());
+    case expenseRoute:
+      return MaterialPageRoute(builder: (_) => ExpenseScreen());
+    case incomeRoute:
+      return MaterialPageRoute(builder: (_) => IncomeScreen());
+    case transferRoute:
+      return MaterialPageRoute(builder: (_) => TransferScreen());
+    case accountRoute:
+      return MaterialPageRoute(builder: (_) => AccountScreen());
+    case accountDetailsRoute:
+      return MaterialPageRoute(builder: (_) => AccountDetails());
+    case accountEditRoute:
+      return MaterialPageRoute(builder: (_) => AccountEditScreen());
     default:
       return MaterialPageRoute(
           builder: (_) => Scaffold(

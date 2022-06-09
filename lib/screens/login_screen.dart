@@ -7,6 +7,8 @@ import 'package:pocketexpense/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/userdetails.dart';
+import 'package:pocketexpense/screens/start_screen.dart';
+
 import '../styles.dart';
 
 class LoginScreen extends StatefulWidget {

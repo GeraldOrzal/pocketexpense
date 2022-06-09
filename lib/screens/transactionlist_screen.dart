@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/widgets/bottomrowitems.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 
@@ -20,7 +21,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromARGB(54, 255, 255, 255),
+        backgroundColor: Colors.white,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -34,7 +35,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
               child: DropdownButton(
                 style: Theme.of(context).textTheme.bodyText2,
                 hint: const Text("Month"),
-                items: [
+                items: const [
                   DropdownMenuItem(
                       value: 1,
                       child: Text(

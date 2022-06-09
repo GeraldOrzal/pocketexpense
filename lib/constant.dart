@@ -15,6 +15,12 @@ const homeRoute = '/home';
 const forgotPasswordRoute = '/forgotpassword';
 const transactionRoute = '/transaction';
 const notificationRoute = '/notification';
+const expenseRoute = '/expense';
+const incomeRoute = '/income';
+const transferRoute = '/transfer';
+const accountRoute = '/account';
+const accountDetailsRoute = '/accountDetails';
+const accountEditRoute = '/accountEdit';
 
 const topPad = 5.0;
 const leftPad = 20.0;
@@ -34,5 +40,5 @@ const onBackground = Color.fromARGB(255, 235, 235, 235);
 const surface = Color.fromARGB(0, 66, 66, 65);
 const onSurface = Color.fromARGB(90, 66, 66, 65);
 
-DatabaseReference firebase = FirebaseDatabase.instance.ref();
-FirebaseAuth auth = FirebaseAuth.instance;
+const income = Color.fromARGB(255, 217, 154, 61);
+const transfer = Color.fromARGB(255, 50, 88, 99);

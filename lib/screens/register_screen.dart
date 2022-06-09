@@ -29,6 +29,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _confirmpassword = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   String errorMessage = '';
+<<<<<<< HEAD
+=======
+  void _onPressed() async {
+    if (_formkey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: _email.text, password: _confirmpassword.text);
+        Navigator.of(context).pushNamed(startRoute);
+      } on FirebaseAuthException catch (error) {
+        errorMessage = error.message!;
+      }
+
+      setState(() {});
+    }
+  }
+>>>>>>> origin/origin/jacob-branch
 
   @override
   Widget build(BuildContext context) {

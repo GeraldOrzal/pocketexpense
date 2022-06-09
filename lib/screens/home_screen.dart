@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: LineChart(
                             sampleData1,
                             swapAnimationDuration:
-                                Duration(milliseconds: 150), // Optional
+                                const Duration(milliseconds: 150), // Optional
                             swapAnimationCurve: Curves.linear, // Optional
                           ),
                         ),
@@ -125,14 +125,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                      Text("Account Balance"),
+                      const Text("Account Balance"),
                       Text("₱ 9,400",
                           style: Theme.of(context).textTheme.headline1),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20.0)),
                                   color: Color.fromRGBO(217, 154, 61, 1)),
@@ -140,13 +140,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsets.all(20.0),
                                 child: Row(children: [
                                   Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         color: Colors.white,
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
                                         child: Icon(Icons.send),
                                       )),
                                   Text(
@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ]),
                               )),
                           Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20.0)),
                                   color: Colors.red),
@@ -168,13 +168,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Container(
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)),
                                             color: Colors.white,
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
                                             child: Icon(Icons.send),
                                           )),
                                       Text('Expenses \n ₱ 5000',
@@ -231,14 +231,4 @@ class _HomeScreenState extends State<HomeScreen> {
           ]),
     );
   }
-}
-
-void _tripModalBottomSheet(context) {
-  showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-            height: MediaQuery.of(context).size.height * .35,
-            child: const Text("Add"));
-      });
 }
