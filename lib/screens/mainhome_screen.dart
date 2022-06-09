@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
->>>>>>> origin/origin/jacob-branch
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/screens/home_screen.dart';
 import 'package:pocketexpense/screens/profile_screen.dart';

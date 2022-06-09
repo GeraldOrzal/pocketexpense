@@ -1,13 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/providers/userprovider.dart';
 import 'package:provider/provider.dart';
-=======
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
->>>>>>> origin/origin/jacob-branch
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -25,10 +22,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Column(
-      children: [ElevatedButton(onPressed: onPressed, child: Text("Logout"))],
-=======
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -181,7 +174,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
->>>>>>> origin/origin/jacob-branch
     );
   }
 

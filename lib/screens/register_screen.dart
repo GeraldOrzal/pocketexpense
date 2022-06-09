@@ -29,8 +29,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _confirmpassword = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   String errorMessage = '';
-<<<<<<< HEAD
-=======
   void _onPressed() async {
     if (_formkey.currentState!.validate()) {
       try {
@@ -44,7 +42,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       setState(() {});
     }
   }
->>>>>>> origin/origin/jacob-branch
 
   @override
   Widget build(BuildContext context) {
@@ -243,31 +240,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: ElevatedButton(
-                                    onPressed: () async {
-                                      if (_formkey.currentState!.validate()) {
-                                        try {
-                                          await auth
-                                              .createUserWithEmailAndPassword(
-                                                  email: _email.text,
-                                                  password: _password.text);
-
-                                          Provider.of<UserProvider>(context,
-                                                  listen: false)
-                                              .saveDetails(UserDetails(
-                                            firstname: "",
-                                            middlename: "",
-                                            isFirstTime: true,
-                                          ));
-                                          Navigator.of(context)
-                                              .pushNamedAndRemoveUntil(
-                                                  startRoute,
-                                                  (Route<dynamic> route) =>
-                                                      false);
-                                        } on FirebaseAuthException catch (error) {
-                                          errorMessage = error.message!;
-                                        }
-                                      }
-                                    },
+                                    onPressed: _onPressed,
                                     child: Text("Register",
                                         style: Theme.of(context)
                                             .textTheme
