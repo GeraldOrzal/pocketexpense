@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/widgets/dashline.dart';
 
 import '../constant.dart';
 import '../styles.dart';
@@ -130,8 +131,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
+              padding: EdgeInsets.only(bottom: 8.0),
               height: computedHeight,
-              color: Colors.red,
+              decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15.0),
+                      bottomRight: Radius.circular(15.0))),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -144,11 +150,20 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         children: [
                           Text(
                             "Buy some groceries",
-                            style: TextStyle(fontSize: 24.0),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2!
+                                .copyWith(
+                                    fontSize: 24.0,
+                                    color: background,
+                                    fontWeight: FontWeight.normal),
                           ),
                           Text(
                             "Saturday 4 June 2022",
-                            style: TextStyle(fontSize: 13.0),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(color: background),
                           ),
                         ],
                       ),
@@ -158,8 +173,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          "P 5000.00",
-                          style: TextStyle(fontSize: 35.8),
+                          "₱ 5,000.00",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(fontSize: 38.1, color: background),
                         ),
                       ),
                     ),
@@ -167,26 +185,142 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       children: [
                         TableRow(
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                            ),
+                                color: background,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10.0),
+                                    topRight: Radius.circular(10.0))),
                             children: [
-                              Center(child: Text("Type")),
-                              Center(child: Text("Category")),
-                              Center(child: Text("Wallet"))
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                    child: Text("Type",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                                color: Color.fromRGBO(
+                                                    145, 145, 159, 1)))),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                    child: Text("Category",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                                color: Color.fromRGBO(
+                                                    145, 145, 159, 1)))),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                    child: Text("Wallet",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                                color: Color.fromRGBO(
+                                                    145, 145, 159, 1)))),
+                              )
                             ]),
                         TableRow(
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                            ),
+                                color: background,
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(10.0),
+                                    bottomRight: Radius.circular(10.0))),
                             children: [
-                              Center(child: Text("Expense")),
-                              Center(child: Text("Salary")),
-                              Center(child: Text("Chase"))
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Center(
+                                    child: Text("Expense",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16.0,
+                                                color: onPrimary))),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Center(
+                                    child: Text("Salary",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16.0,
+                                                color: onPrimary))),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Center(
+                                    child: Text("Chase",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16.0,
+                                                color: onPrimary))),
+                              )
                             ])
                       ],
                     )
                   ],
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: DashLine(
+                  height: 1.0, color: Color.fromRGBO(145, 145, 159, 1)),
+            ),
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text("Description",
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Color.fromRGBO(145, 145, 159, 1),
+                            fontSize: 16.0)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text(
+                        "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(fontSize: 16.0)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text(
+                      "Attachment",
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          color: Color.fromRGBO(145, 145, 159, 1),
+                          fontSize: 16.0),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15.0),
+                    child: Image.asset("assets/images/receipt.png"),
+                  ),
+                  ElevatedButton(
+                      onPressed: onPressed,
+                      child: Text(
+                        "Edit",
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: background, fontWeight: FontWeight.bold),
+                      ))
+                ],
               ),
             )
           ],

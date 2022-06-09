@@ -3,6 +3,7 @@ import 'package:pocketexpense/widgets/bottomrowitems.dart';
 
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 
+import '../constant.dart';
 import '../widgets/transaction_box.dart';
 
 class TransactionListScreen extends StatefulWidget {
@@ -65,9 +66,82 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                           builder: (context, scrollController) {
                             return SingleChildScrollView(
                                 child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Filter Transaction"),
-                                BottomRowItems()
+                                Center(child: Icon(Icons.drag_handle_rounded)),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Filter Transaction"),
+                                      GestureDetector(
+                                        onTap: () => {},
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 238, 121, 113),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20.0))),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(
+                                              "Reset",
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 252, 18, 1)),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Text("Filter By"),
+                                BottomRowItems(),
+                                Text("Sort By"),
+                                BottomRowItems(),
+                                Text("Category"),
+                                Row(
+                                  children: [
+                                    Expanded(child: Text("Choose Category")),
+                                    GestureDetector(
+                                      onTap: () => {
+                                        showModalBottomSheet<void>(
+                                            context: context,
+                                            builder: (BuildContext builder) {
+                                              return DraggableScrollableSheet(
+                                                  builder: (context,
+                                                      scrollController) {
+                                                return SingleChildScrollView(
+                                                  child: Container(
+                                                      child: Text("FOOD")),
+                                                );
+                                              });
+                                            })
+                                      },
+                                      child: Container(
+                                          child: Row(
+                                        children: [
+                                          Text("0 selected"),
+                                          Icon(Icons.arrow_right)
+                                        ],
+                                      )),
+                                    )
+                                  ],
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      "Apply",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
+                                              color: background,
+                                              fontWeight: FontWeight.bold),
+                                    ))
                               ],
                             ));
                           });
