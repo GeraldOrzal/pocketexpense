@@ -1,13 +1,19 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/helpers/TextFormatter.dart';
+import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/widgets/dashline.dart';
+import 'package:provider/provider.dart';
 
 import '../constant.dart';
+import '../providers/accountprovider.dart';
 import '../styles.dart';
 
 class TransactionScreen extends StatefulWidget {
-  TransactionScreen({Key? key}) : super(key: key);
+  Transaction selectedTransaction;
+  TransactionScreen({Key? key, required this.selectedTransaction})
+      : super(key: key);
 
   @override
   State<TransactionScreen> createState() => _TransactionScreenState();
@@ -17,6 +23,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
   void onPressed() {}
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime =
+        DateTime.parse(widget.selectedTransaction.timestamp as String);
     double screenHeight = MediaQuery.of(context).size.height;
     double computedHeight = screenHeight * 0.3;
     return SafeArea(
@@ -159,7 +167,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                     fontWeight: FontWeight.normal),
                           ),
                           Text(
-                            "Saturday 4 June 2022",
+                            "${weekday[dateTime.weekday]} ${dateTime.day} ${months[dateTime.month]} ${dateTime.year}",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!
@@ -173,7 +181,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          "₱ 5,000.00",
+                          "₱ ${TextFormatter.formatNumber(widget.selectedTransaction.amount.toString())}",
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
@@ -234,7 +242,10 @@ class _TransactionScreenState extends State<TransactionScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Center(
-                                    child: Text("Expense",
+                                    child: Text(
+                                        widget.selectedTransaction.isExpense
+                                            ? "Expense"
+                                            : "Income",
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
@@ -246,7 +257,9 @@ class _TransactionScreenState extends State<TransactionScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Center(
-                                    child: Text("Salary",
+                                    child: Text(
+                                        widget.selectedTransaction.category
+                                            as String,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
@@ -258,7 +271,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Center(
-                                    child: Text("Chase",
+                                    child: Text(
+                                        Provider.of<AccountProvider>(context,
+                                                listen: false)
+                                            .getAccount(widget
+                                                .selectedTransaction
+                                                .accountID as String)
+                                            .accounttype,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
@@ -293,8 +312,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                        "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+                    child: Text(widget.selectedTransaction.description,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1!

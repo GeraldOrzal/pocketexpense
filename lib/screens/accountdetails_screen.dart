@@ -95,14 +95,7 @@ class _AccountDetailsState extends State<AccountDetails> {
               height: 200.0,
               child: ListView(
                 scrollDirection: Axis.vertical,
-                children: [
-                  TransactionBox(
-                    isExpense: true,
-                  ),
-                  TransactionBox(
-                    isExpense: false,
-                  ),
-                ],
+                children: [],
               ),
             ),
             Padding(

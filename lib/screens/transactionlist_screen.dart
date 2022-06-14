@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/widgets/bottomrowitems.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import 'package:provider/provider.dart';
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 
 import '../constant.dart';
+import '../providers/transactionsprovider.dart';
 import '../widgets/transaction_box.dart';
 
 class TransactionListScreen extends StatefulWidget {
@@ -16,8 +18,20 @@ class TransactionListScreen extends StatefulWidget {
 
 class _TransactionListScreenState extends State<TransactionListScreen> {
   void _onChanged(data) {}
+
   @override
   Widget build(BuildContext context) {
+    List<TransactionBox> renderAllTransactions() {
+      List<TransactionBox> list = [];
+      List<Transaction> tempList =
+          context.watch<TransactionsProvider>().allTransactions;
+
+      for (var i = 0; i < tempList.length; i++) {
+        list.add(TransactionBox(transaction: tempList[i]));
+      }
+      return list;
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -158,23 +172,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
       ),
       body: ListView(
         padding: EdgeInsets.only(top: 40.0),
-        children: [
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-        ],
+        children: renderAllTransactions(),
       ),
     );
   }

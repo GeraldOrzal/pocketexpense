@@ -1,21 +1,37 @@
 import 'dart:convert';
 
 class Transaction {
-  final int amount;
+  int amount;
   final bool isExpense;
-  final String timestamp;
+  String? transactionID;
+  String? accountID;
+  String? timestamp;
+  String description;
+  String? category;
   Transaction({
+    this.transactionID,
+    required this.category,
+    required this.accountID,
     required this.amount,
+    required this.description,
     required this.isExpense,
-    required this.timestamp,
+    this.timestamp,
   });
 
   Transaction copyWith({
+    String? transactionID,
+    String? category,
     int? amount,
+    String? accountID,
     bool? isExpense,
+    String? description,
     String? timestamp,
   }) {
     return Transaction(
+      transactionID: transactionID ?? this.transactionID,
+      category: category ?? this.category,
+      description: description ?? this.description,
+      accountID: accountID ?? this.accountID,
       amount: amount ?? this.amount,
       isExpense: isExpense ?? this.isExpense,
       timestamp: timestamp ?? this.timestamp,
@@ -24,6 +40,9 @@ class Transaction {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'description': description,
+      'accountID': accountID,
+      'category': category,
       'amount': amount,
       'isExpense': isExpense,
       'timestamp': timestamp,
@@ -32,6 +51,9 @@ class Transaction {
 
   factory Transaction.fromMap(Map<String, dynamic> map) {
     return Transaction(
+      category: map['category'] as String,
+      accountID: map['accountID'] as String,
+      description: map['description'] as String,
       amount: map['amount'].toInt() as int,
       isExpense: map['isExpense'] as bool,
       timestamp: map['timestamp'] as String,

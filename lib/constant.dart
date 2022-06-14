@@ -4,7 +4,29 @@ import 'package:flutter/material.dart';
 
 const entryScreenItems =
     '[{"path":"assets/images/slide1.png","text":"Make a better budget"},{"path":"assets/images/slide2.png","text":"You will spend mindfully"},{"path":"assets/images/slide3.png","text":"Tracking your financial progress"}]';
-
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+const weekday = [
+  "",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+];
 const entryRoute = '/';
 const loginRoute = '/login';
 const registerRoute = '/register';

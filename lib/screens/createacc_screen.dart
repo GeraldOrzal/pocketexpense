@@ -299,9 +299,9 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                                   Provider.of<AccountProvider>(context,
                                           listen: false)
                                       .addAccount(Account(
-                                    accountype: accountType as String,
-                                    amount: currentAmount,
-                                    initialAmount: currentAmount,
+                                    accounttype: accountType as String,
+                                    amount: currentAmount.toString(),
+                                    initialAmount: currentAmount.toString(),
                                   ));
 
                                   // Navigator.of(context)

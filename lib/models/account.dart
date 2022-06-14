@@ -2,47 +2,51 @@ import 'dart:convert';
 
 class Account {
   String? accountID;
-  final String accountype;
-  dynamic amount;
-  String? bankname;
-  final dynamic initialAmount;
+  final String accounttype;
+  String amount;
+  String? bankName;
+  final String initialAmount;
   Account({
-    required this.accountype,
-    required this.amount,
-    this.bankname,
     this.accountID,
+    required this.accounttype,
+    required this.amount,
+    this.bankName,
     required this.initialAmount,
   });
 
   Account copyWith({
-    String? accountype,
-    int? amount,
-    String? bankname,
-    int? initialAmount,
+    String? accountID,
+    String? accounttype,
+    String? amount,
+    String? bankName,
+    String? initialAmount,
   }) {
     return Account(
-      accountype: accountype ?? this.accountype,
+      accountID: accountID ?? this.accountID,
+      accounttype: accounttype ?? this.accounttype,
       amount: amount ?? this.amount,
-      bankname: bankname ?? this.bankname,
+      bankName: bankName ?? this.bankName,
       initialAmount: initialAmount ?? this.initialAmount,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'accountype': accountype,
+      'accountID': accountID,
+      'accounttype': accounttype,
       'amount': amount,
-      'bankname': bankname,
+      'bankName': bankName,
       'initialAmount': initialAmount,
     };
   }
 
   factory Account.fromMap(Map<String, dynamic> map) {
     return Account(
-      accountype: map['accountype'] as String,
-      amount: map['amount'].toInt() as int,
-      bankname: map['bankname'] as String,
-      initialAmount: map['initialAmount'].toInt() as int,
+      accountID: map['accountID'] == null ? null : map['accountID'] as String,
+      accounttype: map['accounttype'] as String,
+      amount: map['amount'] as String,
+      bankName: map['bankName'] == null ? null : map['bankName'] as String,
+      initialAmount: map['initialAmount'] as String,
     );
   }
 
@@ -53,7 +57,7 @@ class Account {
 
   @override
   String toString() {
-    return 'Account(accountype: $accountype, amount: $amount, bankname: $bankname, initialAmount: $initialAmount)';
+    return 'Account(accountID: $accountID, accounttype: $accounttype, amount: $amount, bankName: $bankName, initialAmount: $initialAmount)';
   }
 
   @override
@@ -61,17 +65,19 @@ class Account {
     if (identical(this, other)) return true;
 
     return other is Account &&
-        other.accountype == accountype &&
+        other.accountID == accountID &&
+        other.accounttype == accounttype &&
         other.amount == amount &&
-        other.bankname == bankname &&
+        other.bankName == bankName &&
         other.initialAmount == initialAmount;
   }
 
   @override
   int get hashCode {
-    return accountype.hashCode ^
+    return accountID.hashCode ^
+        accounttype.hashCode ^
         amount.hashCode ^
-        bankname.hashCode ^
+        bankName.hashCode ^
         initialAmount.hashCode;
   }
 }

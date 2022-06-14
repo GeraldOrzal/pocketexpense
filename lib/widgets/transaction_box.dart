@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/styles.dart';
 import '../constant.dart';
 import '../styles.dart';
 
 class TransactionBox extends StatelessWidget {
-  bool isExpense;
-  TransactionBox({Key? key, required this.isExpense}) : super(key: key);
+  Transaction transaction;
+  TransactionBox({Key? key, required this.transaction}) : super(key: key);
+
+  IconData? returnCategoryIcon(String category) {
+    switch (category) {
+      case "Subscription":
+        return Icons.subscriptions;
+      case "Food":
+        return Icons.restaurant;
+      default:
+        return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateTime.parse(transaction.timestamp as String);
     return GestureDetector(
-      onTap: () => {Navigator.pushNamed(context, transactionRoute)},
+      onTap: () => {
+        Navigator.pushNamed(context, transactionRoute, arguments: transaction)
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -27,7 +42,7 @@ class TransactionBox extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "  12 \n May",
+                        " ${dateTime.day} \n ${months[dateTime.month]}  ",
                         style: Theme.of(context).textTheme.headline3?.copyWith(
                             decoration: TextDecoration.none,
                             color: Colors.black),
@@ -50,8 +65,9 @@ class TransactionBox extends StatelessWidget {
                                       fontSize: 18),
                             ),
                             Icon(
-                              Icons.restaurant,
-                              color: isExpense
+                              returnCategoryIcon(
+                                  transaction.category as String),
+                              color: transaction.isExpense
                                   ? Colors.red
                                   : Color.fromRGBO(217, 154, 61, 1),
                             )
@@ -59,11 +75,12 @@ class TransactionBox extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    (isExpense ? "-" : "+") + "₱ 20,000",
+                    (transaction.isExpense ? "-" : "+") +
+                        "₱ ${transaction.amount}",
                     style: Theme.of(context).textTheme.headline2?.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: isExpense
+                        color: transaction.isExpense
                             ? Colors.red
                             : Color.fromRGBO(217, 154, 61, 1)),
                   )

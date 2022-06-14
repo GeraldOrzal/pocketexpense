@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/screens/account_screen.dart';
 import 'package:pocketexpense/screens/accountdetails_screen.dart';
 import 'package:pocketexpense/screens/accountedit_screen.dart';
@@ -34,7 +35,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case crtAccountRoute:
       return MaterialPageRoute(builder: (_) => CreateAccScreen());
     case transactionRoute:
-      return MaterialPageRoute(builder: (_) => TransactionScreen());
+      Transaction transaction = settings.arguments as Transaction;
+      return MaterialPageRoute(
+          builder: (_) => TransactionScreen(
+                selectedTransaction: transaction,
+              ));
     case successRoute:
       return MaterialPageRoute(builder: (_) => SuccessScreen());
     case notificationRoute:
