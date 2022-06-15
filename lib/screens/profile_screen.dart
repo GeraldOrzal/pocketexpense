@@ -209,21 +209,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 20,
-                        ),
-                        decoration: const BoxDecoration(
-                            color: primary,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0))),
-                        child: const Text(
-                          'Yes',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: 'Inter',
+                      GestureDetector(
+                        onTap: onPressed,
+                        child: Container(
+                          padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 20,
+                          ),
+                          decoration: const BoxDecoration(
+                              color: primary,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          child: const Text(
+                            'Yes',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                            ),
                           ),
                         ),
                       ),

@@ -6,9 +6,14 @@ import 'package:flutterfire_ui/auth.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import '../models/account.dart';
 import '../models/userdetails.dart';
 import 'package:pocketexpense/screens/start_screen.dart';
-
+import '../models/transaction.dart' as TransactionDetails;
+import '../providers/accountprovider.dart';
+import '../providers/transactionsprovider.dart';
+import '../providers/userprovider.dart';
 import '../styles.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -29,12 +34,54 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DatabaseReference userDetailsRef =
+        FirebaseDatabase.instance.ref().child('users');
+    DatabaseReference accountRef =
+        FirebaseDatabase.instance.ref().child('accounts');
+    DatabaseReference transactionRef =
+        FirebaseDatabase.instance.ref().child('transactions');
     return AuthFlowBuilder<EmailFlowController>(
         listener: (oldstate, state, controller) async {
       if (state is SignedIn) {
         var user = FirebaseAuth.instance.currentUser;
         DataSnapshot snapshot =
             await userDetailsRef.child("${user!.uid}/isFirstTime").get();
+
+        DataSnapshot data = await userDetailsRef.child(user!.uid).get();
+        UserDetails userDetails = UserDetails.fromJson(jsonEncode(data.value));
+        DataSnapshot allAccounts = await accountRef.child(user!.uid).get();
+        DataSnapshot allTransactions =
+            await transactionRef.child(user.uid).get();
+
+        List<Account> tempAccounts = [];
+
+        allAccounts?.children.forEach((element) {
+          Account tempAccount = Account.fromJson(jsonEncode(element.value));
+          tempAccount.accountID = element.key;
+          tempAccounts.add(tempAccount);
+        });
+        List<TransactionDetails.Transaction> tempTransactions = [];
+        if (allTransactions.children.length != 0) {
+          allTransactions.children?.forEach((element) {
+            TransactionDetails.Transaction tempTransaction =
+                TransactionDetails.Transaction.fromJson(
+                    jsonEncode(element.value));
+            tempTransaction.transactionID = element.key;
+            tempTransactions.add(tempTransaction);
+          });
+        }
+
+        // print(tempTransactions);
+
+        tempTransactions?.sort((a, b) => DateTime.parse(b.timestamp as String)!
+            .compareTo(DateTime.parse(a.timestamp as String)));
+
+        Provider.of<UserProvider>(context, listen: false)
+            .setMydata(userDetails);
+        Provider.of<AccountProvider>(context, listen: false)
+            .setAllAccount(tempAccounts);
+        Provider.of<TransactionsProvider>(context, listen: false)
+            .setAllTransactions(tempTransactions);
 
         Navigator.of(context).pushNamedAndRemoveUntil(
             snapshot.value as bool ? startRoute : homeRoute,

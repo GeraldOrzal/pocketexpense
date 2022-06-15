@@ -63,8 +63,8 @@ class _AuthWidgetState extends State<AuthWidget> {
     Provider.of<UserProvider>(context, listen: false).setMydata(userDetails);
     Provider.of<AccountProvider>(context, listen: false)
         .setAllAccount(tempAccounts);
-    // Provider.of<TransactionsProvider>(context, listen: false)
-    //     .setAllTransactions(tempTransactions);
+    Provider.of<TransactionsProvider>(context, listen: false)
+        .setAllTransactions(tempTransactions);
 
     return userDetails.isFirstTime;
   }

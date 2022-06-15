@@ -37,6 +37,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
 
   void onPressed() {
     if (isEditable) {
+      Provider.of<AccountProvider>(context, listen: false)
+          .makeChangesToWalletAmount(
+              widget.selectedTransaction.amount.toDouble(),
+              widget.selectedTransaction.accountID as String,
+              widget.selectedTransaction.transactionType == "Income"
+                  ? TransactOperation.addition
+                  : TransactOperation.subtraction);
       Provider.of<TransactionsProvider>(context, listen: false)
           .editTransaction(widget.selectedTransaction);
     }
@@ -53,8 +60,12 @@ class _TransactionScreenState extends State<TransactionScreen> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 2),
-            () => {Navigator.of(context).pushReplacementNamed(homeRoute)});
+        Future.delayed(
+            Duration(seconds: 2),
+            () => {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil(homeRoute, (route) => false)
+                });
         return AlertDialog(
           title: Text('Notice', style: Theme.of(context).textTheme.headline2),
           content: SingleChildScrollView(
