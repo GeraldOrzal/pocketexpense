@@ -12,6 +12,7 @@ import 'package:fl_chart/fl_chart.dart';
 
 import '../providers/accountprovider.dart';
 import '../providers/transactionsprovider.dart';
+import '../widgets/chart.dart';
 import '../widgets/custom_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,78 +28,19 @@ class _HomeScreenState extends State<HomeScreen> {
   //   allTransaction = context.watch<TransactionsProvider>().allTransactions;
   // }
 
-  List<Color> gradientColors = [
-    const Color(0x8B50FF),
-    Color.fromARGB(255, 245, 244, 244),
-  ];
+  String filterData = "today";
+  List filter = ["today", "week", "month", "year"];
+
+  void onPressed(data) {
+    setState(() {
+      filterData = filter[data];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     List<Transaction>? allTransaction =
         context.watch<TransactionsProvider>().allTransactions;
-    List<FlSpot> generateData() {
-      List<FlSpot> list = [];
-      allTransaction?.reversed.forEach((element) {
-        list.add(FlSpot(
-            DateTime.parse(element.timestamp as String)
-                .millisecondsSinceEpoch
-                .toDouble(),
-            element.amount.toDouble()));
-      });
-
-      return list;
-    }
-
-    LineChartData getChartData() {
-      return LineChartData(
-          borderData: FlBorderData(show: false),
-          titlesData: FlTitlesData(show: false),
-          gridData: FlGridData(
-            show: false,
-            drawVerticalLine: false,
-            horizontalInterval: 1,
-            verticalInterval: 1,
-            getDrawingHorizontalLine: (value) {
-              return FlLine(
-                color: const Color(0xff37434d),
-                strokeWidth: 1,
-              );
-            },
-            getDrawingVerticalLine: (value) {
-              return FlLine(
-                color: const Color(0xff37434d),
-                strokeWidth: 1,
-              );
-            },
-          ),
-          lineBarsData: [
-            LineChartBarData(
-              color: Colors.red,
-              spots: generateData(),
-              isCurved: true,
-              // gradient: LinearGradient(
-              //   colors: gradientColors,
-              //   begin: Alignment.topCenter,
-              //   end: Alignment.bottomCenter,
-              // ),
-              barWidth: 5,
-              isStrokeCapRound: true,
-              dotData: FlDotData(
-                show: false,
-              ),
-              belowBarData: BarAreaData(
-                show: true,
-                gradient: LinearGradient(
-                  colors: gradientColors
-                      .map((color) => color.withOpacity(0.3))
-                      .toList(),
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-            ),
-          ]);
-    }
 
     List<TransactionBox> renderAllTransactions() {
       List<TransactionBox> list = [];
@@ -137,15 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: LineChart(
-                            getChartData(),
-                            swapAnimationDuration:
-                                const Duration(milliseconds: 150), // Optional
-                            swapAnimationCurve: Curves.linear, // Optional
+                          child: ChartWidget(
+                            filterData: filterData,
                           ),
                         ),
                       ),
-                      BottomRowItems()
+                      BottomRowItems(
+                        callBack: onPressed,
+                      )
                     ],
                   ),
                 ),

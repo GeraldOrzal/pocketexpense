@@ -114,9 +114,9 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                                   ),
                                 ),
                                 Text("Filter By"),
-                                BottomRowItems(),
+                                // BottomRowItems(),
                                 Text("Sort By"),
-                                BottomRowItems(),
+                                // BottomRowItems(),
                                 Text("Category"),
                                 Row(
                                   children: [

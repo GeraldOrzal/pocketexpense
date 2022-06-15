@@ -7,7 +7,9 @@ import 'package:pocketexpense/widgets/dashline.dart';
 import 'package:provider/provider.dart';
 
 import '../constant.dart';
+import '../helpers/layoutdesign.dart';
 import '../providers/accountprovider.dart';
+import '../providers/transactionsprovider.dart';
 import '../styles.dart';
 
 class TransactionScreen extends StatefulWidget {
@@ -20,7 +22,71 @@ class TransactionScreen extends StatefulWidget {
 }
 
 class _TransactionScreenState extends State<TransactionScreen> {
-  void onPressed() {}
+  TextEditingController? _controller;
+
+  TextEditingController? _description;
+
+  bool isEditable = false;
+  initState() {
+    _description =
+        TextEditingController(text: widget.selectedTransaction.description);
+    _controller = TextEditingController(
+        text:
+            "₱ ${TextFormatter.formatNumber(widget.selectedTransaction.amount.toString())}");
+  }
+
+  void onPressed() {
+    if (isEditable) {
+      Provider.of<TransactionsProvider>(context, listen: false)
+          .editTransaction(widget.selectedTransaction);
+    }
+    setState(() {
+      isEditable = !isEditable;
+    });
+  }
+
+  Future<void> onPressedModal() async {
+    Provider.of<TransactionsProvider>(context, listen: false)
+        .removeTransaction(widget.selectedTransaction);
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 2),
+            () => {Navigator.of(context).pushReplacementNamed(homeRoute)});
+        return AlertDialog(
+          title: Text('Notice', style: Theme.of(context).textTheme.headline2),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  'Successfully removed',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Icon(Icons.check_circle),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void onChangeText(data) {
+    setState(() {
+      widget.selectedTransaction.description = data;
+    });
+  }
+
+  void onChangeAmount(data) {
+    String newString = data.toString().substring(2, data.toString().length);
+    String tempString = newString.replaceAll(",", "");
+    setState(() {
+      widget.selectedTransaction!.amount = int.parse(tempString);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime dateTime =
@@ -32,7 +98,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
         appBar: AppBar(
             // leading: Icon(Icons.arrow_back, color: Colors.white),
             foregroundColor: background,
-            backgroundColor: Colors.red,
+            backgroundColor: LayoutDesign.returnTransactionColor(
+                widget.selectedTransaction.transactionType as String),
             elevation: 0,
             title: Row(
               children: [
@@ -109,7 +176,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: ElevatedButton(
-                                                onPressed: onPressed,
+                                                onPressed: onPressedModal,
                                                 child: Text("Yes",
                                                     style: Theme.of(context)
                                                         .textTheme
@@ -142,7 +209,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
               padding: EdgeInsets.only(bottom: 8.0),
               height: computedHeight,
               decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: LayoutDesign.returnTransactionColor(
+                      widget.selectedTransaction.transactionType as String),
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0))),
@@ -180,12 +248,21 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       margin: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: Text(
-                          "₱ ${TextFormatter.formatNumber(widget.selectedTransaction.amount.toString())}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline1!
-                              .copyWith(fontSize: 38.1, color: background),
+                        child: TextFormField(
+                          enabled: isEditable,
+                          controller: _controller,
+                          style: TxtStyle.getAmountTxt,
+                          textAlign: TextAlign.end,
+                          inputFormatters: [TextFormatter()],
+                          onChanged: onChangeAmount,
+                          decoration: const InputDecoration(
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                          ),
+                          keyboardType: TextInputType.number,
+                          onTap: () {
+                            _controller!.clear();
+                          },
                         ),
                       ),
                     ),
@@ -243,9 +320,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Center(
                                     child: Text(
-                                        widget.selectedTransaction.isExpense
-                                            ? "Expense"
-                                            : "Income",
+                                        widget.selectedTransaction
+                                            .transactionType as String,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
@@ -311,13 +387,25 @@ class _TransactionScreenState extends State<TransactionScreen> {
                             fontSize: 16.0)),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(widget.selectedTransaction.description,
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: TextFormField(
+                        enabled: isEditable,
+                        controller: _description,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1!
-                            .copyWith(fontSize: 16.0)),
-                  ),
+                            .copyWith(fontSize: 16.0),
+                        textAlign: TextAlign.start,
+                        onChanged: onChangeText,
+                        decoration: const InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
+                        keyboardType: TextInputType.text,
+                        onTap: () {
+                          _description!.clear();
+                        },
+                      )),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
@@ -334,7 +422,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   ElevatedButton(
                       onPressed: onPressed,
                       child: Text(
-                        "Edit",
+                        isEditable ? "Done" : "Edit",
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                             color: background, fontWeight: FontWeight.bold),
                       ))

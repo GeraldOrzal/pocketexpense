@@ -40,26 +40,31 @@ class _AuthWidgetState extends State<AuthWidget> {
 
     List<Account> tempAccounts = [];
 
-    allAccounts.children.forEach((element) {
+    allAccounts?.children.forEach((element) {
       Account tempAccount = Account.fromJson(jsonEncode(element.value));
       tempAccount.accountID = element.key;
       tempAccounts.add(tempAccount);
     });
     List<TransactionDetails.Transaction> tempTransactions = [];
-    allTransactions.children?.forEach((element) {
-      tempTransactions.add(
-          TransactionDetails.Transaction.fromJson(jsonEncode(element.value)));
-    });
+    if (allTransactions.children.length != 0) {
+      allTransactions.children?.forEach((element) {
+        TransactionDetails.Transaction tempTransaction =
+            TransactionDetails.Transaction.fromJson(jsonEncode(element.value));
+        tempTransaction.transactionID = element.key;
+        tempTransactions.add(tempTransaction);
+      });
+    }
 
     // print(tempTransactions);
-    tempTransactions.sort((a, b) => DateTime.parse(b.timestamp as String)!
+
+    tempTransactions?.sort((a, b) => DateTime.parse(b.timestamp as String)!
         .compareTo(DateTime.parse(a.timestamp as String)));
 
     Provider.of<UserProvider>(context, listen: false).setMydata(userDetails);
     Provider.of<AccountProvider>(context, listen: false)
         .setAllAccount(tempAccounts);
-    Provider.of<TransactionsProvider>(context, listen: false)
-        .setAllTransactions(tempTransactions);
+    // Provider.of<TransactionsProvider>(context, listen: false)
+    //     .setAllTransactions(tempTransactions);
 
     return userDetails.isFirstTime;
   }
@@ -72,6 +77,7 @@ class _AuthWidgetState extends State<AuthWidget> {
         if (!snapshot.hasData) {
           return EntryScreen();
         }
+
         return FutureBuilder(
             future: setup(),
             builder: (context, snapshot) {

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class Transaction {
   int amount;
-  final bool isExpense;
+  String? transactionType;
   String? transactionID;
   String? accountID;
   String? timestamp;
@@ -14,7 +14,7 @@ class Transaction {
     required this.accountID,
     required this.amount,
     required this.description,
-    required this.isExpense,
+    this.transactionType,
     this.timestamp,
   });
 
@@ -23,7 +23,7 @@ class Transaction {
     String? category,
     int? amount,
     String? accountID,
-    bool? isExpense,
+    String? transactionType,
     String? description,
     String? timestamp,
   }) {
@@ -33,7 +33,7 @@ class Transaction {
       description: description ?? this.description,
       accountID: accountID ?? this.accountID,
       amount: amount ?? this.amount,
-      isExpense: isExpense ?? this.isExpense,
+      transactionType: transactionType ?? this.transactionType,
       timestamp: timestamp ?? this.timestamp,
     );
   }
@@ -44,7 +44,7 @@ class Transaction {
       'accountID': accountID,
       'category': category,
       'amount': amount,
-      'isExpense': isExpense,
+      'transactionType': transactionType,
       'timestamp': timestamp,
     };
   }
@@ -54,8 +54,8 @@ class Transaction {
       category: map['category'] as String,
       accountID: map['accountID'] as String,
       description: map['description'] as String,
-      amount: map['amount'].toInt() as int,
-      isExpense: map['isExpense'] as bool,
+      amount: map['amount'] as int,
+      transactionType: map['transactionType'] as String,
       timestamp: map['timestamp'] as String,
     );
   }
@@ -67,7 +67,7 @@ class Transaction {
 
   @override
   String toString() =>
-      'Transaction(amount: $amount, isExpense: $isExpense, timestamp: $timestamp)';
+      'Transaction(amount: $amount, transactionType: $transactionType, timestamp: $timestamp)';
 
   @override
   bool operator ==(Object other) {
@@ -75,10 +75,11 @@ class Transaction {
 
     return other is Transaction &&
         other.amount == amount &&
-        other.isExpense == isExpense &&
+        other.transactionType == transactionType &&
         other.timestamp == timestamp;
   }
 
   @override
-  int get hashCode => amount.hashCode ^ isExpense.hashCode ^ timestamp.hashCode;
+  int get hashCode =>
+      amount.hashCode ^ transactionType.hashCode ^ timestamp.hashCode;
 }

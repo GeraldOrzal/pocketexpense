@@ -5,13 +5,15 @@ import 'package:pocketexpense/helpers/TextFormatter.dart';
 import 'package:pocketexpense/providers/accountprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:pocketexpense/styles.dart';
+import '../helpers/layoutdesign.dart';
 import '../models/account.dart';
 import 'package:intl/intl.dart';
 import '../models/transaction.dart' as TransactionDetails;
 import '../providers/transactionsprovider.dart';
 
 class ExpenseScreen extends StatefulWidget {
-  ExpenseScreen({Key? key}) : super(key: key);
+  final String transactionType;
+  ExpenseScreen({Key? key, required this.transactionType}) : super(key: key);
 
   @override
   State<ExpenseScreen> createState() => _ExpenseScreenState();
@@ -20,11 +22,12 @@ class ExpenseScreen extends StatefulWidget {
 class _ExpenseScreenState extends State<ExpenseScreen> {
   TransactionDetails.Transaction? currentTransaction;
   TextEditingController? _controller;
+
   void initState() {
     currentTransaction = TransactionDetails.Transaction(
         accountID: null,
         timestamp: "",
-        isExpense: true,
+        transactionType: widget.transactionType,
         category: null,
         amount: 0,
         description: "");
@@ -67,7 +70,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         .makeChangesToWalletAmount(
             currentTransaction!.amount.toDouble(),
             currentTransaction!.accountID as String,
-            TransactOperation.subtraction);
+            widget.transactionType == "Income"
+                ? TransactOperation.addition
+                : TransactOperation.subtraction);
     Provider.of<TransactionsProvider>(context, listen: false)
         .addTransaction(currentTransaction!);
   }
@@ -95,10 +100,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           foregroundColor: background,
-          backgroundColor: primary,
+          backgroundColor: LayoutDesign.returnTransactionColor(
+              widget.transactionType as String),
           elevation: 0,
           centerTitle: true,
-          title: Text("Expense",
+          title: Text(widget.transactionType,
               style: Theme.of(context)
                   .textTheme
                   .headline2
@@ -114,8 +120,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 right: 0,
               ),
               height: size.height * 0.2,
-              decoration: const BoxDecoration(
-                color: primary,
+              decoration: BoxDecoration(
+                color: LayoutDesign.returnTransactionColor(
+                    widget.transactionType as String),
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),

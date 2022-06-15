@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BottomRowItems extends StatefulWidget {
-  BottomRowItems({Key? key}) : super(key: key);
+  Function callBack;
+  BottomRowItems({Key? key, required this.callBack}) : super(key: key);
 
   @override
   State<BottomRowItems> createState() => _BottomRowItemsState();
@@ -9,7 +10,9 @@ class BottomRowItems extends StatefulWidget {
 
 class _BottomRowItemsState extends State<BottomRowItems> {
   int currentIndex = 0;
+
   void _onTap(index) {
+    widget.callBack(index);
     setState(() {
       currentIndex = index;
     });

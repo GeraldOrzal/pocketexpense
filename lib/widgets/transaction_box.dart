@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/styles.dart';
 import '../constant.dart';
+import '../helpers/layoutdesign.dart';
 import '../styles.dart';
 
 class TransactionBox extends StatelessWidget {
@@ -67,22 +68,21 @@ class TransactionBox extends StatelessWidget {
                             Icon(
                               returnCategoryIcon(
                                   transaction.category as String),
-                              color: transaction.isExpense
-                                  ? Colors.red
-                                  : Color.fromRGBO(217, 154, 61, 1),
+                              color: LayoutDesign.returnTransactionColor(
+                                  transaction.transactionType as String),
                             )
                           ]),
                     ),
                   ),
                   Text(
-                    (transaction.isExpense ? "-" : "+") +
+                    (transaction.transactionType == "Income" ? "+" : "-") +
                         "₱ ${transaction.amount}",
                     style: Theme.of(context).textTheme.headline2?.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: transaction.isExpense
-                            ? Colors.red
-                            : Color.fromRGBO(217, 154, 61, 1)),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: LayoutDesign.returnTransactionColor(
+                              transaction.transactionType as String),
+                        ),
                   )
                 ],
               ),
@@ -95,8 +95,14 @@ class TransactionBox extends StatelessWidget {
                     blurRadius: 5,
                   )
                 ],
-                gradient: new LinearGradient(
-                    stops: [0.02, 0.02], colors: [Colors.red, Colors.white]),
+                gradient: new LinearGradient(stops: [
+                  0.02,
+                  0.02
+                ], colors: [
+                  LayoutDesign.returnTransactionColor(
+                      transaction.transactionType as String) as Color,
+                  Colors.white
+                ]),
                 borderRadius:
                     new BorderRadius.all(const Radius.circular(6.0)))),
       ),

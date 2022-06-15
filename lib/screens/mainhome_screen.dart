@@ -212,7 +212,12 @@ void _tripModalBottomSheet(context) {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () => {Navigator.pushNamed(context, expenseRoute)},
+                    onTap: () => {
+                      Navigator.pushNamed(context, expenseRoute,
+                          arguments: <String, String>{
+                            "transactionType": "Expense"
+                          })
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.symmetric(
@@ -244,7 +249,12 @@ void _tripModalBottomSheet(context) {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => {Navigator.pushNamed(context, incomeRoute)},
+                    onTap: () => {
+                      Navigator.pushNamed(context, expenseRoute,
+                          arguments: <String, String>{
+                            "transactionType": "Income"
+                          })
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.symmetric(
@@ -276,7 +286,10 @@ void _tripModalBottomSheet(context) {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => {Navigator.pushNamed(context, transferRoute)},
+                    onTap: () => {
+                      Navigator.pushNamed(context, transferRoute,
+                          arguments: {"transactionType": "Transfer"})
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.symmetric(

@@ -47,7 +47,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case homeRoute:
       return MaterialPageRoute(builder: (_) => MainHomeScreen());
     case expenseRoute:
-      return MaterialPageRoute(builder: (_) => ExpenseScreen());
+      var obj = settings.arguments as Map<String, String>;
+
+      return MaterialPageRoute(
+          builder: (_) =>
+              ExpenseScreen(transactionType: obj["transactionType"] as String));
     case incomeRoute:
       return MaterialPageRoute(builder: (_) => IncomeScreen());
     case transferRoute:

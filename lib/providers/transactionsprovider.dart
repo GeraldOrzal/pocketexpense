@@ -13,9 +13,9 @@ class TransactionsProvider extends ChangeNotifier {
   double allIncome = 0.00;
   void addTransaction(TransactionDetails.Transaction transaction) {
     transaction.transactionID = transactionRef.child(user!.uid).push().key!;
-    transaction.isExpense
-        ? allExpense += transaction.amount
-        : allIncome += transaction.amount;
+    transaction.transactionType == "Income"
+        ? allIncome += transaction.amount
+        : allExpense += transaction.amount;
     allTransactions.insert(0, transaction);
     transactionRef
         .child("${user!.uid}/${transaction.transactionID}")
@@ -31,17 +31,37 @@ class TransactionsProvider extends ChangeNotifier {
   }
 
   void calculateData() {
+    allIncome = 0;
+    allExpense = 0;
     allTransactions.forEach((element) {
-      if (element.isExpense) {
-        allExpense += element.amount;
-      } else {
+      print(element);
+      if (element.transactionType == "Income") {
         allIncome += element.amount;
+      } else {
+        allExpense += element.amount;
       }
     });
   }
-  // Account getAccount(String id) {
-  //   return allTransactions.firstWhere((element) => element.accountID == id);
-  // }
+
+  void editTransaction(TransactionDetails.Transaction transaction) {
+    allTransactions.forEach((element) {
+      if (element == transaction) {
+        element = transaction;
+      }
+    });
+    transactionRef
+        .child("${user!.uid}/${transaction.transactionID}")
+        .set(transaction.toMap());
+    calculateData();
+    notifyListeners();
+  }
+
+  void removeTransaction(TransactionDetails.Transaction transaction) {
+    allTransactions.remove(transaction);
+    transactionRef.child("${user!.uid}/${transaction.transactionID}").remove();
+    calculateData();
+    notifyListeners();
+  }
 
   // List<Account> getAllAccounts() {
   //   return allTransactions;
