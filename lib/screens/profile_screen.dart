@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
@@ -10,6 +11,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  String errorMessage = '';
+  void onPressed() {
+    FirebaseAuth.instance.signOut();
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(entryRoute, (Route<dynamic> route) => true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -208,12 +217,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: primary,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0))),
-                        child: const Text(
-                          'Yes',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: 'Inter',
+                        child: GestureDetector(
+                          onTap: onPressed,
+                          child: const Text(
+                            'Yes',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                            ),
                           ),
                         ),
                       ),
