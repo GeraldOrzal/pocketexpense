@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/styles.dart';
+import 'package:provider/provider.dart';
+
+import '../models/account.dart';
+import '../providers/accountprovider.dart';
 
 class AccountScreen extends StatefulWidget {
   AccountScreen({Key? key}) : super(key: key);
@@ -13,6 +17,43 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
+    List<Account> allAccounts = context.watch<AccountProvider>().allAccounts;
+    List<Widget> generateWidgets() {
+      List<Widget> list = [];
+
+      allAccounts.forEach((element) {
+        list.add(GestureDetector(
+          onTap: () => {Navigator.pushNamed(context, accountDetailsRoute)},
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10.0),
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 241, 241, 250),
+                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                child: const Icon(
+                  MdiIcons.wallet,
+                  color: transfer,
+                  size: 32,
+                ),
+              ),
+              Text(
+                '${element.accounttype == "Custom" ? "Wallet" : element.bankName}',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              const Spacer(),
+              Text(
+                '₱ ${element.amount}',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+        ));
+      });
+      return list;
+    }
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -46,13 +87,13 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: const [
+                children: [
                   SizedBox(
                     height: 40,
                   ),
                   Center(
                     child: Text(
-                      '₱ 9,400.00',
+                      '₱ ${context.watch<AccountProvider>().totalAmount.toStringAsFixed(2)}',
                       style: TxtStyle.getAmountTxt,
                     ),
                   ),
@@ -77,125 +118,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 ],
               ),
               child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () =>
-                        {Navigator.pushNamed(context, accountDetailsRoute)},
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10.0),
-                          margin: const EdgeInsets.all(10.0),
-                          decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 241, 241, 250),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0))),
-                          child: const Icon(
-                            MdiIcons.wallet,
-                            color: transfer,
-                            size: 32,
-                          ),
-                        ),
-                        Text(
-                          'Wallet',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        const Spacer(),
-                        Text(
-                          '₱ 400.00',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () =>
-                        {Navigator.pushNamed(context, accountDetailsRoute)},
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(13.0),
-                          margin: const EdgeInsets.all(10.0),
-                          decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 241, 241, 250),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0))),
-                          child: Image.asset(
-                            'assets/images/bank1.png',
-                            scale: 1,
-                          ),
-                        ),
-                        Text(
-                          'Chase',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        const Spacer(),
-                        Text(
-                          '₱ 1,000.00',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () =>
-                        {Navigator.pushNamed(context, accountDetailsRoute)},
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10.0),
-                          margin: const EdgeInsets.all(10.0),
-                          decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 241, 241, 250),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0))),
-                          child: Image.asset(
-                            'assets/images/bank3.png',
-                            scale: 1,
-                          ),
-                        ),
-                        Text(
-                          'Citi',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        const Spacer(),
-                        Text(
-                          '₱ 6,000.00',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () =>
-                        {Navigator.pushNamed(context, accountDetailsRoute)},
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(13.0),
-                          margin: const EdgeInsets.all(10.0),
-                          decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 241, 241, 250),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0))),
-                          child: Image.asset(
-                            'assets/images/bank2.png',
-                            scale: 1,
-                          ),
-                        ),
-                        Text(
-                          'Paypal',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        const Spacer(),
-                        Text(
-                          '₱ 2,000.00',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                children: generateWidgets(),
               ),
             ),
             const Spacer(),

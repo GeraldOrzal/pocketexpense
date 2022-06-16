@@ -189,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               height: 200.0,
               child: ListView(
+                semanticChildCount: 2,
                 children: renderAllTransactions(),
                 scrollDirection: Axis.vertical,
               ),

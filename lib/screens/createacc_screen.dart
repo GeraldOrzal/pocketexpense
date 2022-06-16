@@ -18,6 +18,7 @@ class CreateAccScreen extends StatefulWidget {
 
 class _CreateAccScreenState extends State<CreateAccScreen> {
   String? bankName;
+  String? userName;
   String? accountType;
   bool isEnabled = false;
   final DatabaseReference userDetailsRef =
@@ -29,6 +30,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
     return myExp.hasMatch(data);
   }
 
+  void onChangedInput(data) {}
   void onChanged(data) {
     String _data = data;
     if (_data.isEmpty) {
@@ -104,6 +106,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                       decoration: BoxStyle.getBoxDecoration,
                       child: TextFormField(
                         style: Theme.of(context).textTheme.bodyText1,
+                        onChanged: onChangedInput,
                         decoration: const InputDecoration(
                           hintText: 'Name',
                           enabledBorder: InputBorder.none,
@@ -293,9 +296,9 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                                   Provider.of<UserProvider>(context,
                                           listen: false)
                                       .updateDetails(UserDetails(
-                                          firstname: "Gerald",
-                                          isFirstTime: false,
-                                          middlename: "Lerio"));
+                                    fullname: userName!,
+                                    isFirstTime: false,
+                                  ));
                                   Provider.of<AccountProvider>(context,
                                           listen: false)
                                       .addAccount(Account(
@@ -304,8 +307,8 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                                     initialAmount: currentAmount.toString(),
                                   ));
 
-                                  // Navigator.of(context)
-                                  //     .pushReplacementNamed(successRoute);
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(successRoute);
                                 }
                               : null,
                           child: Text("Setup",

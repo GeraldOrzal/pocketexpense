@@ -63,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 10,
                       ),
                       Text(
-                        'Tony Stark',
+                        '${context.read<UserProvider>().userDetails!.fullname}',
                         style: Theme.of(context).textTheme.headline2,
                       )
                     ],

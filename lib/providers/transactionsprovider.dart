@@ -8,9 +8,11 @@ class TransactionsProvider extends ChangeNotifier {
 
   DatabaseReference transactionRef =
       FirebaseDatabase.instance.ref().child('transactions');
+
   List<TransactionDetails.Transaction> allTransactions = [];
   double allExpense = 0.00;
   double allIncome = 0.00;
+
   void addTransaction(TransactionDetails.Transaction transaction) {
     transaction.transactionID = transactionRef.child(user!.uid).push().key!;
     transaction.transactionType == "Income"

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/widgets/bottomrowitems.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocketexpense/widgets/foodcategoryfilter.dart';
 import 'package:provider/provider.dart';
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 
 import '../constant.dart';
 import '../providers/transactionsprovider.dart';
+import '../widgets/filter.dart';
 import '../widgets/transaction_box.dart';
 
 class TransactionListScreen extends StatefulWidget {
@@ -17,18 +19,28 @@ class TransactionListScreen extends StatefulWidget {
 }
 
 class _TransactionListScreenState extends State<TransactionListScreen> {
+  List<String> filter = [];
+
   void _onChanged(data) {}
 
   @override
   Widget build(BuildContext context) {
-    List<TransactionBox> renderAllTransactions() {
-      List<TransactionBox> list = [];
-      List<Transaction> tempList =
-          context.watch<TransactionsProvider>().allTransactions;
+    List<TransactionBox> list = [];
+    print(list);
+    List<Transaction> tempList =
+        context.watch<TransactionsProvider>().allTransactions;
 
-      for (var i = 0; i < tempList.length; i++) {
-        list.add(TransactionBox(transaction: tempList[i]));
+    List<TransactionBox> renderAllTransactions() {
+      if (filter.isEmpty) {
+        for (var i = 0; i < tempList.length; i++) {
+          list.add(TransactionBox(transaction: tempList[i]));
+        }
+      } else {
+        filter.forEach((filterelement) {
+          tempList.where((element) => element.category == filterelement);
+        });
       }
+
       return list;
     }
 
@@ -75,6 +87,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                 showModalBottomSheet<void>(
                     context: context,
                     builder: (BuildContext builder) {
+                      List<String> tempList = [];
                       return DraggableScrollableSheet(
                           snap: true,
                           initialChildSize: 1,
@@ -92,7 +105,14 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                                     children: [
                                       Text("Filter Transaction"),
                                       GestureDetector(
-                                        onTap: () => {},
+                                        onTap: () {
+                                          // transactionType = null;
+                                          // order = null;
+                                          // Provider.of<TransactionsProvider>(
+                                          //         context,
+                                          //         listen: false)
+                                          //     .clearFilter();
+                                        },
                                         child: Container(
                                           decoration: const BoxDecoration(
                                               color: Color.fromARGB(
@@ -114,40 +134,44 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                                   ),
                                 ),
                                 Text("Filter By"),
-                                // BottomRowItems(),
-                                Text("Sort By"),
-                                // BottomRowItems(),
-                                Text("Category"),
-                                Row(
-                                  children: [
-                                    Expanded(child: Text("Choose Category")),
-                                    GestureDetector(
-                                      onTap: () => {
-                                        showModalBottomSheet<void>(
-                                            context: context,
-                                            builder: (BuildContext builder) {
-                                              return DraggableScrollableSheet(
-                                                  builder: (context,
-                                                      scrollController) {
-                                                return SingleChildScrollView(
-                                                  child: Container(
-                                                      child: Text("FOOD")),
-                                                );
-                                              });
-                                            })
-                                      },
-                                      child: Container(
-                                          child: Row(
-                                        children: [
-                                          Text("0 selected"),
-                                          Icon(Icons.arrow_right)
-                                        ],
-                                      )),
-                                    )
+                                FilterRow(
+                                  filterEntry: <TextFilterEntry>[
+                                    TextFilterEntry("Expense"),
+                                    TextFilterEntry("Income"),
                                   ],
+                                  callBack: (data) {
+                                    if (!tempList.contains(data)) {
+                                      tempList.add(data);
+                                    } else {
+                                      tempList.remove(data);
+                                    }
+                                  },
+                                  allowMultipleSelected: false,
                                 ),
+                                Text("Sort By"),
+                                FilterRow(
+                                  callBack: (data) {
+                                    if (!tempList.contains(data)) {
+                                      tempList.add(data);
+                                    } else {
+                                      tempList.remove(data);
+                                    }
+                                  },
+                                  filterEntry: <TextFilterEntry>[
+                                    TextFilterEntry("Highest"),
+                                    TextFilterEntry("Lowest"),
+                                  ],
+                                  allowMultipleSelected: false,
+                                ),
+                                Text("Category"),
+                                FoodCategoryFilter(),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      print("APPLY");
+                                      // setState(() {
+                                      //   filter = tempList;
+                                      // });
+                                    },
                                     child: Text(
                                       "Apply",
                                       style: Theme.of(context)
