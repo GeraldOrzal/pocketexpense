@@ -1,40 +1,35 @@
 import 'dart:convert';
 
 class UserDetails {
-  String firstname;
+  String fullname;
   bool isFirstTime;
-  String middlename;
+
   UserDetails({
-    required this.firstname,
+    required this.fullname,
     required this.isFirstTime,
-    required this.middlename,
   });
 
   UserDetails copyWith({
-    String? firstname,
+    String? fullname,
     bool? isFirstTime,
-    String? middlename,
   }) {
     return UserDetails(
-      firstname: firstname ?? this.firstname,
+      fullname: fullname ?? this.fullname,
       isFirstTime: isFirstTime ?? this.isFirstTime,
-      middlename: middlename ?? this.middlename,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'firstname': firstname,
+      'fullname': fullname,
       'isFirstTime': isFirstTime,
-      'middlename': middlename,
     };
   }
 
   factory UserDetails.fromMap(Map<String, dynamic> map) {
     return UserDetails(
-      firstname: map['firstname'] as String,
+      fullname: map['fullname'] as String,
       isFirstTime: map['isFirstTime'] as bool,
-      middlename: map['middlename'] as String,
     );
   }
 
@@ -45,19 +40,17 @@ class UserDetails {
 
   @override
   String toString() =>
-      'UserDetails(firstname: $firstname, isFirstTime: $isFirstTime, middlename: $middlename)';
+      'UserDetails(fullname: $fullname, isFirstTime: $isFirstTime)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is UserDetails &&
-        other.firstname == firstname &&
-        other.isFirstTime == isFirstTime &&
-        other.middlename == middlename;
+        other.fullname == fullname &&
+        other.isFirstTime == isFirstTime;
   }
 
   @override
-  int get hashCode =>
-      firstname.hashCode ^ isFirstTime.hashCode ^ middlename.hashCode;
+  int get hashCode => fullname.hashCode ^ isFirstTime.hashCode;
 }

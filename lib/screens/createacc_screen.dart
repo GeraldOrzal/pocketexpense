@@ -293,9 +293,9 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                                   Provider.of<UserProvider>(context,
                                           listen: false)
                                       .updateDetails(UserDetails(
-                                          firstname: "Gerald",
-                                          isFirstTime: false,
-                                          middlename: "Lerio"));
+                                    fullname: "Gerald Orzal",
+                                    isFirstTime: false,
+                                  ));
                                   Provider.of<AccountProvider>(context,
                                           listen: false)
                                       .addAccount(Account(
