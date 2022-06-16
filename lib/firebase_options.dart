@@ -8,11 +8,11 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-// / import 'firebase_options.dart';
-// / // ...
-// / await Firebase.initializeApp(
-// /   options: DefaultFirebaseOptions.currentPlatform,
-// / );
+/// import 'firebase_options.dart';
+/// // ...
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
 /// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '393182782323',
     projectId: 'pocketexpense-ddc1f',
     authDomain: 'pocketexpense-ddc1f.firebaseapp.com',
+    databaseURL: 'https://pocketexpense-ddc1f-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pocketexpense-ddc1f.appspot.com',
   );
 
@@ -57,6 +58,7 @@ class DefaultFirebaseOptions {
     appId: '1:393182782323:android:f9867eb678f5115aa21b06',
     messagingSenderId: '393182782323',
     projectId: 'pocketexpense-ddc1f',
+    databaseURL: 'https://pocketexpense-ddc1f-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pocketexpense-ddc1f.appspot.com',
   );
 
@@ -65,9 +67,9 @@ class DefaultFirebaseOptions {
     appId: '1:393182782323:ios:8d7d1b8dab0f51b9a21b06',
     messagingSenderId: '393182782323',
     projectId: 'pocketexpense-ddc1f',
+    databaseURL: 'https://pocketexpense-ddc1f-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pocketexpense-ddc1f.appspot.com',
-    iosClientId:
-        '393182782323-obk5n0t0tlrh5s8f4sur57f302c5p05h.apps.googleusercontent.com',
+    iosClientId: '393182782323-obk5n0t0tlrh5s8f4sur57f302c5p05h.apps.googleusercontent.com',
     iosBundleId: 'com.example.pocketexpense',
   );
 
@@ -76,9 +78,9 @@ class DefaultFirebaseOptions {
     appId: '1:393182782323:ios:8d7d1b8dab0f51b9a21b06',
     messagingSenderId: '393182782323',
     projectId: 'pocketexpense-ddc1f',
+    databaseURL: 'https://pocketexpense-ddc1f-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pocketexpense-ddc1f.appspot.com',
-    iosClientId:
-        '393182782323-obk5n0t0tlrh5s8f4sur57f302c5p05h.apps.googleusercontent.com',
+    iosClientId: '393182782323-obk5n0t0tlrh5s8f4sur57f302c5p05h.apps.googleusercontent.com',
     iosBundleId: 'com.example.pocketexpense',
   );
 }

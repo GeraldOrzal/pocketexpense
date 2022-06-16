@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/models/transaction.dart';
+import 'package:pocketexpense/widgets/bottomrowitems.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import 'package:provider/provider.dart';
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 
+import '../constant.dart';
+import '../providers/transactionsprovider.dart';
 import '../widgets/transaction_box.dart';
 
 class TransactionListScreen extends StatefulWidget {
@@ -14,10 +18,23 @@ class TransactionListScreen extends StatefulWidget {
 
 class _TransactionListScreenState extends State<TransactionListScreen> {
   void _onChanged(data) {}
+
   @override
   Widget build(BuildContext context) {
+    List<TransactionBox> renderAllTransactions() {
+      List<TransactionBox> list = [];
+      List<Transaction> tempList =
+          context.watch<TransactionsProvider>().allTransactions;
+
+      for (var i = 0; i < tempList.length; i++) {
+        list.add(TransactionBox(transaction: tempList[i]));
+      }
+      return list;
+    }
+
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,13 +81,89 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                           builder: (context, scrollController) {
                             return SingleChildScrollView(
                                 child: Column(
-                              children: const [Text("Filter Transaction")],
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(child: Icon(Icons.drag_handle_rounded)),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Filter Transaction"),
+                                      GestureDetector(
+                                        onTap: () => {},
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 238, 121, 113),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20.0))),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(
+                                              "Reset",
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 252, 18, 1)),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Text("Filter By"),
+                                // BottomRowItems(),
+                                Text("Sort By"),
+                                // BottomRowItems(),
+                                Text("Category"),
+                                Row(
+                                  children: [
+                                    Expanded(child: Text("Choose Category")),
+                                    GestureDetector(
+                                      onTap: () => {
+                                        showModalBottomSheet<void>(
+                                            context: context,
+                                            builder: (BuildContext builder) {
+                                              return DraggableScrollableSheet(
+                                                  builder: (context,
+                                                      scrollController) {
+                                                return SingleChildScrollView(
+                                                  child: Container(
+                                                      child: Text("FOOD")),
+                                                );
+                                              });
+                                            })
+                                      },
+                                      child: Container(
+                                          child: Row(
+                                        children: [
+                                          Text("0 selected"),
+                                          Icon(Icons.arrow_right)
+                                        ],
+                                      )),
+                                    )
+                                  ],
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      "Apply",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
+                                              color: background,
+                                              fontWeight: FontWeight.bold),
+                                    ))
+                              ],
                             ));
                           });
                     })
               },
               child: const Icon(
-                MdiIcons.filterVariant,
+                Icons.filter_list,
                 size: 32,
               ),
             )
@@ -78,23 +171,8 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
         ),
       ),
       body: ListView(
-        children: [
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-          TransactionBox(isExpense: true),
-        ],
+        padding: EdgeInsets.only(top: 40.0),
+        children: renderAllTransactions(),
       ),
     );
   }

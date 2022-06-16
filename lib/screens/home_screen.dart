@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/helpers/TextFormatter.dart';
+import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/styles.dart';
-
+import 'package:provider/provider.dart';
 import 'package:pocketexpense/widgets/bottomrowitems.dart';
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 import 'package:pocketexpense/widgets/transaction_box.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import '../providers/accountprovider.dart';
+import '../providers/transactionsprovider.dart';
+import '../widgets/chart.dart';
 import '../widgets/custom_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,69 +24,35 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Color> gradientColors = [
-    const Color(0x8B50FF),
-    Color.fromARGB(255, 245, 244, 244),
-  ];
-  LineChartData get sampleData1 => LineChartData(
-          borderData: FlBorderData(show: false),
-          titlesData: FlTitlesData(show: false),
-          gridData: FlGridData(
-            show: false,
-            drawVerticalLine: false,
-            horizontalInterval: 1,
-            verticalInterval: 1,
-            getDrawingHorizontalLine: (value) {
-              return FlLine(
-                color: const Color(0xff37434d),
-                strokeWidth: 1,
-              );
-            },
-            getDrawingVerticalLine: (value) {
-              return FlLine(
-                color: const Color(0xff37434d),
-                strokeWidth: 1,
-              );
-            },
-          ),
-          lineBarsData: [
-            LineChartBarData(
-              color: Colors.red,
-              spots: const [
-                FlSpot(0, 0),
-                FlSpot(2.6, 2),
-                FlSpot(4.9, 5),
-                FlSpot(6.8, 3.1),
-                FlSpot(8, 4),
-                FlSpot(9.5, 3),
-                FlSpot(11, 4),
-              ],
-              isCurved: true,
-              // gradient: LinearGradient(
-              //   colors: gradientColors,
-              //   begin: Alignment.topCenter,
-              //   end: Alignment.bottomCenter,
-              // ),
-              barWidth: 5,
-              isStrokeCapRound: true,
-              dotData: FlDotData(
-                show: false,
-              ),
-              belowBarData: BarAreaData(
-                show: true,
-                gradient: LinearGradient(
-                  colors: gradientColors
-                      .map((color) => color.withOpacity(0.3))
-                      .toList(),
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-            ),
-          ]);
+  // initState() {
+  //   allTransaction = context.watch<TransactionsProvider>().allTransactions;
+  // }
+
+  String filterData = "today";
+  List filter = ["today", "week", "month", "year"];
+
+  void onPressed(data) {
+    setState(() {
+      filterData = filter[data];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<Transaction>? allTransaction =
+        context.watch<TransactionsProvider>().allTransactions;
+
+    List<TransactionBox> renderAllTransactions() {
+      List<TransactionBox> list = [];
+      List<Transaction> tempList =
+          context.watch<TransactionsProvider>().allTransactions;
+
+      for (var i = 0; i < tempList.length; i++) {
+        list.add(TransactionBox(transaction: tempList[i]));
+      }
+      return list;
+    }
+
     return Scaffold(
       appBar: TopBarNav(),
       body: Column(
@@ -108,15 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: LineChart(
-                            sampleData1,
-                            swapAnimationDuration:
-                                const Duration(milliseconds: 150), // Optional
-                            swapAnimationCurve: Curves.linear, // Optional
+                          child: ChartWidget(
+                            filterData: filterData,
                           ),
                         ),
                       ),
-                      BottomRowItems()
+                      BottomRowItems(
+                        callBack: onPressed,
+                      )
                     ],
                   ),
                 ),
@@ -125,7 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                       const Text("Account Balance"),
-                      Text("₱ 9,400",
+                      Text(
+                          "₱ ${TextFormatter.formatNumber(context.watch<AccountProvider>().totalAmount.toStringAsFixed(2))}",
                           style: Theme.of(context).textTheme.headline1),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -149,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Icon(Icons.send),
                                       )),
                                   Text(
-                                    'Income \n ₱ 5000',
+                                    'Income \n ₱ ${TextFormatter.formatNumber(context.watch<TransactionsProvider>().allIncome.toStringAsFixed(2))}',
                                     style:
                                         Theme.of(context).textTheme.bodyText1,
                                   )
@@ -176,7 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             padding: EdgeInsets.all(8.0),
                                             child: Icon(Icons.send),
                                           )),
-                                      Text('Expenses \n ₱ 5000',
+                                      Text(
+                                          'Expenses \n ₱ ${TextFormatter.formatNumber(context.watch<TransactionsProvider>().allExpense.toStringAsFixed(2))}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1)
@@ -217,15 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               height: 200.0,
               child: ListView(
+                children: renderAllTransactions(),
                 scrollDirection: Axis.vertical,
-                children: [
-                  TransactionBox(
-                    isExpense: true,
-                  ),
-                  TransactionBox(
-                    isExpense: false,
-                  ),
-                ],
               ),
             )
           ]),

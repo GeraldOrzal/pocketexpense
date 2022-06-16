@@ -1,8 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 const entryScreenItems =
     '[{"path":"assets/images/slide1.png","text":"Make a better budget"},{"path":"assets/images/slide2.png","text":"You will spend mindfully"},{"path":"assets/images/slide3.png","text":"Tracking your financial progress"}]';
-
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+const weekday = [
+  "",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+];
 const entryRoute = '/';
 const loginRoute = '/login';
 const registerRoute = '/register';
@@ -12,6 +36,7 @@ const successRoute = '/success';
 const homeRoute = '/home';
 const forgotPasswordRoute = '/forgotpassword';
 const transactionRoute = '/transaction';
+const notificationRoute = '/notification';
 const expenseRoute = '/expense';
 const incomeRoute = '/income';
 const transferRoute = '/transfer';

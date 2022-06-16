@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/providers/userprovider.dart';
+import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
 
@@ -11,12 +14,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  String errorMessage = '';
   void onPressed() {
     FirebaseAuth.instance.signOut();
     Navigator.of(context)
-        .pushNamedAndRemoveUntil(entryRoute, (Route<dynamic> route) => true);
+        .pushNamedAndRemoveUntil(entryRoute, (Route<dynamic> route) => false);
   }
 
   @override
@@ -208,17 +209,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 20,
-                        ),
-                        decoration: const BoxDecoration(
-                            color: primary,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0))),
-                        child: GestureDetector(
-                          onTap: onPressed,
+                      GestureDetector(
+                        onTap: onPressed,
+                        child: Container(
+                          padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 20,
+                          ),
+                          decoration: const BoxDecoration(
+                              color: primary,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
                           child: const Text(
                             'Yes',
                             style: TextStyle(

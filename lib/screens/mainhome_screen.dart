@@ -1,12 +1,22 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/models/transaction.dart' as TransactionDetails;
 import 'package:pocketexpense/screens/home_screen.dart';
 import 'package:pocketexpense/screens/profile_screen.dart';
 import 'package:pocketexpense/screens/setting_screen.dart';
 import 'package:pocketexpense/screens/transactionlist_screen.dart';
 
 import 'package:pocketexpense/widgets/topbar_nav.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/accountprovider.dart';
+import '../providers/transactionsprovider.dart';
+import '../providers/userprovider.dart';
 
 class MainHomeScreen extends StatefulWidget {
   MainHomeScreen({Key? key}) : super(key: key);
@@ -17,6 +27,23 @@ class MainHomeScreen extends StatefulWidget {
 
 class _MainHomeScreenState extends State<MainHomeScreen> {
   int currentIndex = 0;
+  void initState() {
+    var subscription = FirebaseDatabase.instance
+        .ref()
+        .child('transactions/${FirebaseAuth.instance.currentUser!.uid}')
+        .onChildAdded
+        .listen((event) {
+      if (event.type == DatabaseEventType.childAdded) {
+        TransactionDetails.Transaction currentTransaction =
+            TransactionDetails.Transaction.fromJson(
+                jsonEncode(event.snapshot.value));
+        if (currentTransaction.transactionType == "Transfer") {
+          Provider.of<TransactionsProvider>(context, listen: false)
+              .addTransaction(currentTransaction);
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +235,12 @@ void _tripModalBottomSheet(context) {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () => {Navigator.pushNamed(context, expenseRoute)},
+                    onTap: () => {
+                      Navigator.pushNamed(context, expenseRoute,
+                          arguments: <String, String>{
+                            "transactionType": "Expense"
+                          })
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.symmetric(
@@ -240,7 +272,12 @@ void _tripModalBottomSheet(context) {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => {Navigator.pushNamed(context, incomeRoute)},
+                    onTap: () => {
+                      Navigator.pushNamed(context, expenseRoute,
+                          arguments: <String, String>{
+                            "transactionType": "Income"
+                          })
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.symmetric(
@@ -272,7 +309,10 @@ void _tripModalBottomSheet(context) {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => {Navigator.pushNamed(context, transferRoute)},
+                    onTap: () => {
+                      Navigator.pushNamed(context, transferRoute,
+                          arguments: {"transactionType": "Transfer"})
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.symmetric(

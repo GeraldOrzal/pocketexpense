@@ -1,6 +1,13 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/models/account.dart';
 import 'package:pocketexpense/styles.dart';
+import 'package:provider/provider.dart';
+
+import '../models/userdetails.dart';
+import '../providers/accountprovider.dart';
+import '../providers/userprovider.dart';
 
 class CreateAccScreen extends StatefulWidget {
   const CreateAccScreen({Key? key}) : super(key: key);
@@ -10,8 +17,11 @@ class CreateAccScreen extends StatefulWidget {
 }
 
 class _CreateAccScreenState extends State<CreateAccScreen> {
+  String? bankName;
   String? accountType;
   bool isEnabled = false;
+  final DatabaseReference userDetailsRef =
+      FirebaseDatabase.instance.ref().child('users');
   String? currentAmount = "0.00";
 
   bool isValid(String data) {
@@ -47,6 +57,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
   }
 
   void _onPressed() {}
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -275,7 +286,28 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                     Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: ElevatedButton(
-                          onPressed: isEnabled ? _onPressed : null,
+                          onPressed: isEnabled
+                              ? () {
+                                  print(
+                                      "${accountType} sadsd ${currentAmount}");
+                                  Provider.of<UserProvider>(context,
+                                          listen: false)
+                                      .updateDetails(UserDetails(
+                                          firstname: "Gerald",
+                                          isFirstTime: false,
+                                          middlename: "Lerio"));
+                                  Provider.of<AccountProvider>(context,
+                                          listen: false)
+                                      .addAccount(Account(
+                                    accounttype: accountType as String,
+                                    amount: currentAmount.toString(),
+                                    initialAmount: currentAmount.toString(),
+                                  ));
+
+                                  // Navigator.of(context)
+                                  //     .pushReplacementNamed(successRoute);
+                                }
+                              : null,
                           child: Text("Setup",
                               style: Theme.of(context).textTheme.button),
                         )),
