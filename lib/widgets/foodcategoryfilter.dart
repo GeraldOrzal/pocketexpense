@@ -5,7 +5,10 @@ import '../providers/transactionsprovider.dart';
 import 'filter.dart';
 
 class FoodCategoryFilter extends StatefulWidget {
-  FoodCategoryFilter({Key? key}) : super(key: key);
+  Function callBack;
+  List<String>? initialData;
+  FoodCategoryFilter({Key? key, required this.callBack, this.initialData})
+      : super(key: key);
 
   @override
   State<FoodCategoryFilter> createState() => _FoodCategoryFilterState();
@@ -14,7 +17,7 @@ class FoodCategoryFilter extends StatefulWidget {
 class _FoodCategoryFilterState extends State<FoodCategoryFilter> {
   @override
   Widget build(BuildContext context) {
-    List<String> categorySelected = [];
+    List<String>? categorySelected = widget.initialData;
 
     return Row(
       children: [
@@ -28,12 +31,18 @@ class _FoodCategoryFilterState extends State<FoodCategoryFilter> {
                   return Container(
                     height: 200,
                     child: FilterRow(
-                      callBack: (data) {},
+                      callBack: (data) {
+                        setState(() {
+                          categorySelected = data;
+                        });
+
+                        widget.callBack(data);
+                      },
                       filterEntry: <TextFilterEntry>[
                         TextFilterEntry("Food"),
                         TextFilterEntry("Subscription"),
                       ],
-                      selectedData: [],
+                      selectedData: categorySelected,
                       allowMultipleSelected: true,
                     ),
                   );
@@ -42,7 +51,7 @@ class _FoodCategoryFilterState extends State<FoodCategoryFilter> {
           child: Container(
               child: Row(
             children: [
-              Text("${categorySelected.length} selected"),
+              Text("${categorySelected?.length ?? "0"} selected"),
               Icon(Icons.arrow_right)
             ],
           )),

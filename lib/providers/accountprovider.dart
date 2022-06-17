@@ -20,6 +20,7 @@ class AccountProvider extends ChangeNotifier {
     allAccounts.add(account);
     accountRef.child("${user!.uid}/${account.accountID}").set(account.toMap());
     totalAmount += double.parse(account.amount);
+    notifyListeners();
   }
 
   double calculateWalletAmount() {
@@ -64,6 +65,8 @@ class AccountProvider extends ChangeNotifier {
   void removeAccount(Account account) {
     allAccounts.remove(account);
     accountRef.child("${user!.uid}/${account.accountID}").remove();
+    totalAmount = calculateWalletAmount();
+    notifyListeners();
   }
 
   Account updateAccount(Account account, index) {

@@ -5,7 +5,10 @@ import 'package:pocketexpense/styles.dart';
 
 class TopBarNav extends StatefulWidget implements PreferredSizeWidget {
   final AppBar topBar = AppBar();
-  TopBarNav({Key? key}) : super(key: key);
+  Function callBack;
+  int? initData;
+  TopBarNav({Key? key, required this.callBack, this.initData})
+      : super(key: key);
 
   @override
   State<TopBarNav> createState() => _TopBarNavState();
@@ -13,7 +16,21 @@ class TopBarNav extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _TopBarNavState extends State<TopBarNav> {
-  void _onChanged(data) {}
+  int? currentMonth;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    currentMonth = widget.initData;
+  }
+
+  void _onChanged(data) {
+    widget.callBack(data);
+    setState(() {
+      currentMonth = data;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -43,25 +60,25 @@ class _TopBarNavState extends State<TopBarNav> {
             ),
             child: DropdownButton(
               style: Theme.of(context).textTheme.bodyText2,
-              value: 1,
+              value: currentMonth,
               hint: const Text("Month"),
               items: const [
                 DropdownMenuItem(
-                    value: 1,
+                    value: 0,
                     child: Text(
                       "January",
                     )),
-                DropdownMenuItem(value: 2, child: Text("February")),
-                DropdownMenuItem(value: 3, child: Text("March")),
-                DropdownMenuItem(value: 4, child: Text("April")),
-                DropdownMenuItem(value: 5, child: Text("May")),
-                DropdownMenuItem(value: 6, child: Text("June")),
-                DropdownMenuItem(value: 7, child: Text("July")),
-                DropdownMenuItem(value: 8, child: Text("August")),
-                DropdownMenuItem(value: 9, child: Text("September")),
-                DropdownMenuItem(value: 10, child: Text("October")),
-                DropdownMenuItem(value: 11, child: Text("November")),
-                DropdownMenuItem(value: 12, child: Text("December")),
+                DropdownMenuItem(value: 1, child: Text("February")),
+                DropdownMenuItem(value: 2, child: Text("March")),
+                DropdownMenuItem(value: 3, child: Text("April")),
+                DropdownMenuItem(value: 4, child: Text("May")),
+                DropdownMenuItem(value: 5, child: Text("June")),
+                DropdownMenuItem(value: 6, child: Text("July")),
+                DropdownMenuItem(value: 7, child: Text("August")),
+                DropdownMenuItem(value: 8, child: Text("September")),
+                DropdownMenuItem(value: 9, child: Text("October")),
+                DropdownMenuItem(value: 10, child: Text("November")),
+                DropdownMenuItem(value: 11, child: Text("December")),
               ],
               onChanged: _onChanged,
             ),

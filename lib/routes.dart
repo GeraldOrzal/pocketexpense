@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/models/account.dart';
 import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/screens/account_screen.dart';
 import 'package:pocketexpense/screens/accountdetails_screen.dart';
@@ -59,9 +60,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case accountRoute:
       return MaterialPageRoute(builder: (_) => AccountScreen());
     case accountDetailsRoute:
-      return MaterialPageRoute(builder: (_) => AccountDetails());
+      var obj = settings.arguments as Account;
+      return MaterialPageRoute(
+          builder: (_) => AccountDetails(
+                account: obj,
+              ));
     case accountEditRoute:
-      return MaterialPageRoute(builder: (_) => AccountEditScreen());
+      var obj = settings.arguments as Account;
+
+      return MaterialPageRoute(
+          builder: (_) => AccountEditScreen(
+                selectedAccount: obj,
+              ));
     default:
       return MaterialPageRoute(
           builder: (_) => Scaffold(

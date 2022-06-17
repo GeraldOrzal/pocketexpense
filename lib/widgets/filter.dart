@@ -31,7 +31,7 @@ class _FilterRowState extends State<FilterRow> {
   List<String> filters = [];
   initState() {
     if (widget.allowMultipleSelected) {
-      filters = widget.selectedData!;
+      filters = widget.selectedData ?? [];
     } else {
       transactionFilter = widget.singleSelectedData ?? "";
     }
@@ -55,11 +55,13 @@ class _FilterRowState extends State<FilterRow> {
                 if (widget.allowMultipleSelected) {
                   if (!filters.contains(transactionType.text)) {
                     filters.add(transactionType.text);
-                  } else {
-                    filters.remove(transactionType.text);
                   }
                 } else {
                   transactionFilter = transactionType.text;
+                }
+              } else {
+                if (widget.allowMultipleSelected) {
+                  filters.remove(transactionType.text);
                 }
               }
             });

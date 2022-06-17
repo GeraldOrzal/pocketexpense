@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CircleAvatar(
-                    radius: 80,
+                    radius: 50,
                     backgroundColor: primary,
                     child: ClipOval(
                       child: SizedBox(

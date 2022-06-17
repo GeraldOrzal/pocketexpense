@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/helpers/textformatter.dart';
 import 'package:pocketexpense/styles.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,10 @@ class _AccountScreenState extends State<AccountScreen> {
 
       allAccounts.forEach((element) {
         list.add(GestureDetector(
-          onTap: () => {Navigator.pushNamed(context, accountDetailsRoute)},
+          onTap: () => {
+            Navigator.pushNamed(context, accountDetailsRoute,
+                arguments: element)
+          },
           child: Row(
             children: [
               Container(
@@ -44,7 +48,7 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               const Spacer(),
               Text(
-                '₱ ${element.amount}',
+                '₱ ${TextFormatter.formatNumber(element.amount)}',
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ],
@@ -93,7 +97,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                   Center(
                     child: Text(
-                      '₱ ${context.watch<AccountProvider>().totalAmount.toStringAsFixed(2)}',
+                      '₱ ${TextFormatter.formatNumber(context.watch<AccountProvider>().totalAmount.toStringAsFixed(2))}',
                       style: TxtStyle.getAmountTxt,
                     ),
                   ),
@@ -135,7 +139,9 @@ class _AccountScreenState extends State<AccountScreen> {
                     style: Theme.of(context).textTheme.button,
                   ),
                   style: ElevatedButton.styleFrom(primary: transfer),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, crtAccountRoute);
+                  },
                 )),
           ],
         ),
