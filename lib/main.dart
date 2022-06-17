@@ -7,6 +7,7 @@ import 'package:pocketexpense/providers/userprovider.dart';
 import 'package:pocketexpense/routes.dart';
 import 'package:pocketexpense/screens/account_screen.dart';
 import 'package:pocketexpense/screens/createacc_screen.dart';
+import 'package:pocketexpense/screens/entry_screen.dart';
 import 'package:pocketexpense/screens/expense_screen.dart';
 import 'package:pocketexpense/screens/home_screen.dart';
 import 'package:pocketexpense/screens/loading_screen.dart';

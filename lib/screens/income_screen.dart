@@ -39,7 +39,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 bottom: 0,
                 right: 0,
               ),
-              height: size.height * 0.3,
+              height: size.height * 0.5,
               decoration: const BoxDecoration(
                 color: income,
                 borderRadius: BorderRadius.only(
