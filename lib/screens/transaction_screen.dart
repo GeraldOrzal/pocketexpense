@@ -236,7 +236,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            "Buy some groceries",
+                            "${widget.selectedTransaction.transTitle}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline2!

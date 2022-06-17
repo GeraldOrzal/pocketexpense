@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
 import 'package:pocketexpense/providers/accountprovider.dart';
+import 'package:pocketexpense/providers/transactionsprovider.dart';
 import 'package:pocketexpense/screens/account_screen.dart';
 import 'package:pocketexpense/styles.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/TextFormatter.dart';
 import '../models/account.dart';
 
 class AccountEditScreen extends StatefulWidget {
@@ -63,7 +65,7 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
                                 Padding(
                                   padding: EdgeInsets.all(20.0),
                                   child: Text(
-                                    "Remove this transaction?",
+                                    "Remove this account?",
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline3!
@@ -75,7 +77,7 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
                                 RichText(
                                   text: TextSpan(
                                       text:
-                                          "Are you sure do you wanna remove this \n transaction?",
+                                          "Removing account will also result in removing the transaction conducted from that account. Would you still want to continue?",
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1),
@@ -157,7 +159,7 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
                     height: 20,
                   ),
                   Text(
-                    '₱ ${widget.selectedAccount.amount}',
+                    '₱ ${TextFormatter.formatNumber(widget.selectedAccount.amount)}',
                     style: TxtStyle.getAmountTxt,
                   ),
                 ],
@@ -303,29 +305,21 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
               ),
             ),
             const Spacer(),
-            Container(
-                margin: const EdgeInsets.symmetric(vertical: 60),
-                padding: const EdgeInsets.all(15.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: transfer),
-                  onPressed: () {},
-                  child: Text(
-                    "Continue",
-                    style: Theme.of(context).textTheme.button,
-                  ),
-                )),
           ],
         ),
       ),
     );
   }
 
-  void onPressed() {}
+  void onPressed() {
+    Navigator.pop(context);
+  }
 
   Future<void> onPressedModal() async {
     Provider.of<AccountProvider>(context, listen: false)
         .removeAccount(selectedAccount as Account);
-
+    Provider.of<TransactionsProvider>(context, listen: false)
+        .removeTransactionByAccount(widget.selectedAccount.accountID as String);
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!

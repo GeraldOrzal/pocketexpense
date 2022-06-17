@@ -37,6 +37,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
         context.watch<TransactionsProvider>().allTransactions;
 
     List<TransactionBox> renderAllTransactions() {
+      print(orderingFilter);
       if (orderingFilter.isEmpty &&
           transactionTypeFilter.isEmpty &&
           foodCategory.isEmpty &&

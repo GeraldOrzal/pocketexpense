@@ -44,8 +44,16 @@ class _HomeScreenState extends State<HomeScreen> {
     List<TransactionBox> renderAllTransactions() {
       List<TransactionBox> list = [];
 
-      for (var i = 0; i < 2; i++) {
-        list.add(TransactionBox(transaction: tempList[i]));
+      if (tempList.isNotEmpty) {
+        if (tempList.length > 2) {
+          for (var i = 0; i < 2; i++) {
+            list.add(TransactionBox(transaction: tempList[i]));
+          }
+        } else {
+          for (var i = 0; i < tempList.length; i++) {
+            list.add(TransactionBox(transaction: tempList[i]));
+          }
+        }
       }
       return list;
     }
@@ -214,7 +222,6 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               height: 200.0,
               child: ListView(
-                semanticChildCount: 2,
                 children: renderAllTransactions(),
                 scrollDirection: Axis.vertical,
               ),
