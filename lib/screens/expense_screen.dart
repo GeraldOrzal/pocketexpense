@@ -32,7 +32,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         transactionType: widget.transactionType,
         category: null,
         amount: 0,
-        description: "");
+        description: "",
+        transTitle: "");
     _controller = TextEditingController(
         text: "₱ ${currentTransaction!.amount.toStringAsFixed(2)}");
   }
@@ -52,6 +53,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   void onChangeDescription(data) {
     setState(() {
       currentTransaction!.description = data;
+    });
+  }
+
+  void onChangeTitle(data) {
+    setState(() {
+      currentTransaction!.transTitle = data;
     });
   }
 
@@ -350,7 +357,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   Center(
                     child: TextFormField(
                       style: Theme.of(context).textTheme.bodyText1,
-                      onChanged: onChangeDescription,
+                      onChanged: onChangeTitle,
                       decoration: const InputDecoration(
                         hintText: 'Please Input Title',
                         enabledBorder: InputBorder.none,

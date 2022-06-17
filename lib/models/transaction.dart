@@ -8,12 +8,14 @@ class Transaction {
   String? timestamp;
   String description;
   String? category;
+  String transTitle;
   Transaction({
     this.transactionID,
     required this.category,
     required this.accountID,
     required this.amount,
     required this.description,
+    required this.transTitle,
     this.transactionType,
     this.timestamp,
   });
@@ -26,6 +28,7 @@ class Transaction {
     String? transactionType,
     String? description,
     String? timestamp,
+    String? transTitle,
   }) {
     return Transaction(
       transactionID: transactionID ?? this.transactionID,
@@ -35,6 +38,7 @@ class Transaction {
       amount: amount ?? this.amount,
       transactionType: transactionType ?? this.transactionType,
       timestamp: timestamp ?? this.timestamp,
+      transTitle: transTitle ?? this.transTitle,
     );
   }
 
@@ -46,6 +50,7 @@ class Transaction {
       'amount': amount,
       'transactionType': transactionType,
       'timestamp': timestamp,
+      'transTitle': transTitle,
     };
   }
 
@@ -57,6 +62,7 @@ class Transaction {
       amount: map['amount'] as int,
       transactionType: map['transactionType'] as String,
       timestamp: map['timestamp'] as String,
+      transTitle: map['transTitle'] as String,
     );
   }
 

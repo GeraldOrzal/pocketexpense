@@ -57,7 +57,7 @@ class TransactionBox extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Bumili ng Pares",
+                              "${transaction.transTitle}",
                               style: Theme.of(context)
                                   .textTheme
                                   .headline2
