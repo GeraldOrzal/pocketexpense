@@ -35,7 +35,9 @@ class _TopBarNavState extends State<TopBarNav> {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).brightness == Brightness.light
+          ? Colors.white
+          : Colors.black12,
       elevation: 0,
       title: Row(
         mainAxisSize: MainAxisSize.max,
@@ -89,6 +91,7 @@ class _TopBarNavState extends State<TopBarNav> {
             },
             child: const Icon(
               Icons.notifications,
+              color: primary,
               size: 32,
             ),
           )

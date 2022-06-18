@@ -111,7 +111,7 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: Colors.white,
+                // color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketexpense/models/userdetails.dart';
 import 'package:pocketexpense/providers/accountprovider.dart';
+import 'package:pocketexpense/providers/theme_provider.dart';
 import 'package:pocketexpense/providers/transactionsprovider.dart';
 import 'package:pocketexpense/providers/userprovider.dart';
 import 'package:pocketexpense/routes.dart';
@@ -37,17 +38,20 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => AccountProvider()),
-        ChangeNotifierProvider(create: (_) => TransactionsProvider())
+        ChangeNotifierProvider(create: (_) => TransactionsProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider())
       ],
       builder: (context, widget) {
-        return MaterialApp(
-          title: 'Material App',
-          theme: defaultThemeData,
-          darkTheme: darkThemeData,
-          themeMode: ThemeMode.dark,
-          onGenerateRoute: generateRoute,
-          home: AuthWidget(),
-        );
+        return Consumer<ThemeProvider>(builder: (context, provider, child) {
+          return MaterialApp(
+            title: 'Material App',
+            theme: defaultThemeData,
+            darkTheme: darkThemeData,
+            themeMode: provider.themeMode,
+            onGenerateRoute: generateRoute,
+            home: AuthWidget(),
+          );
+        });
       },
     );
   }

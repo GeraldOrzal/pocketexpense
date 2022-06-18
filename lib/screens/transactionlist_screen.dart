@@ -89,7 +89,9 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : Colors.black12,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -235,6 +237,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
               },
               child: const Icon(
                 Icons.filter_list,
+                color: primary,
                 size: 32,
               ),
             )

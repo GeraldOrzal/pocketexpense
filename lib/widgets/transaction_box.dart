@@ -101,7 +101,9 @@ class TransactionBox extends StatelessWidget {
                 ], colors: [
                   LayoutDesign.returnTransactionColor(
                       transaction.transactionType as String) as Color,
-                  Colors.white
+                  Theme.of(context).brightness == Brightness.light
+                      ? Colors.white
+                      : Colors.black38
                 ]),
                 borderRadius:
                     new BorderRadius.all(const Radius.circular(6.0)))),
