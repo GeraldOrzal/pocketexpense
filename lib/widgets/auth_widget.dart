@@ -46,14 +46,15 @@ class _AuthWidgetState extends State<AuthWidget> {
       tempAccounts.add(tempAccount);
     });
     List<TransactionDetails.Transaction> tempTransactions = [];
-    if (allTransactions.children.length != 0) {
-      allTransactions.children?.forEach((element) {
+
+    allTransactions.children?.forEach((element) {
+      element.children.forEach((each) {
         TransactionDetails.Transaction tempTransaction =
-            TransactionDetails.Transaction.fromJson(jsonEncode(element.value));
-        tempTransaction.transactionID = element.key;
+            TransactionDetails.Transaction.fromJson(jsonEncode(each.value));
+        tempTransaction.transactionID = each.key;
         tempTransactions.add(tempTransaction);
       });
-    }
+    });
 
     // print(tempTransactions);
 

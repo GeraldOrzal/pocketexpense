@@ -1,16 +1,33 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocketexpense/constant.dart';
+import 'package:pocketexpense/providers/accountprovider.dart';
+import 'package:pocketexpense/providers/transactionsprovider.dart';
+import 'package:pocketexpense/screens/account_screen.dart';
 import 'package:pocketexpense/styles.dart';
+import 'package:provider/provider.dart';
+
+import '../helpers/TextFormatter.dart';
+import '../models/account.dart';
 
 class AccountEditScreen extends StatefulWidget {
-  AccountEditScreen({Key? key}) : super(key: key);
+  Account selectedAccount;
+  AccountEditScreen({Key? key, required this.selectedAccount})
+      : super(key: key);
 
   @override
   State<AccountEditScreen> createState() => _AccountEditScreenState();
 }
 
 class _AccountEditScreenState extends State<AccountEditScreen> {
+  Account? selectedAccount;
+
+  initState() {
+    selectedAccount = widget.selectedAccount;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,7 +44,92 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
                   .headline2
                   ?.copyWith(color: background)),
           actions: [
-            IconButton(onPressed: () => {}, icon: const Icon(MdiIcons.delete)),
+            IconButton(
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                      barrierColor: Color.fromARGB(66, 0, 0, 0),
+                      enableDrag: true,
+                      context: context,
+                      builder: (BuildContext builder) {
+                        return BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                          child: Container(
+                            height: 200.0,
+                            color: background,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.drag_handle_rounded),
+                                Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Text(
+                                    "Remove this account?",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline3!
+                                        .copyWith(
+                                            decoration: TextDecoration.none,
+                                            color: onPrimary),
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                      text:
+                                          "Removing account will also result in removing the transaction conducted from that account. Would you still want to continue?",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  primary: background),
+                                              onPressed: onPressed,
+                                              child: Text("No",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ))),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ElevatedButton(
+                                              onPressed: onPressedModal,
+                                              child: Text("Yes",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color: background,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ))),
+                                        ),
+                                      )
+                                    ]),
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+                },
+                icon: const Icon(MdiIcons.delete)),
           ],
         ),
         body: Column(
@@ -56,8 +158,8 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    '₱ 9,400.00',
+                  Text(
+                    '₱ ${TextFormatter.formatNumber(widget.selectedAccount.amount)}',
                     style: TxtStyle.getAmountTxt,
                   ),
                 ],
@@ -203,20 +305,43 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
               ),
             ),
             const Spacer(),
-            Container(
-                margin: const EdgeInsets.symmetric(vertical: 60),
-                padding: const EdgeInsets.all(15.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: transfer),
-                  onPressed: () {},
-                  child: Text(
-                    "Continue",
-                    style: Theme.of(context).textTheme.button,
-                  ),
-                )),
           ],
         ),
       ),
+    );
+  }
+
+  void onPressed() {
+    Navigator.pop(context);
+  }
+
+  Future<void> onPressedModal() async {
+    Provider.of<AccountProvider>(context, listen: false)
+        .removeAccount(selectedAccount as Account);
+    Provider.of<TransactionsProvider>(context, listen: false)
+        .removeTransactionByAccount(widget.selectedAccount.accountID as String);
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 2), () {
+          Navigator.popUntil(context, (route) => route.isFirst);
+        });
+        return AlertDialog(
+          title: Text('Notice', style: Theme.of(context).textTheme.headline2),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  'Successfully removed',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Icon(Icons.check_circle),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

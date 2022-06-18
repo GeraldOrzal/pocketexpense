@@ -8,9 +8,11 @@ class TransactionsProvider extends ChangeNotifier {
 
   DatabaseReference transactionRef =
       FirebaseDatabase.instance.ref().child('transactions');
+
   List<TransactionDetails.Transaction> allTransactions = [];
   double allExpense = 0.00;
   double allIncome = 0.00;
+
   void addTransaction(TransactionDetails.Transaction transaction) {
     transaction.transactionID = transactionRef.child(user!.uid).push().key!;
     transaction.transactionType == "Income"
@@ -18,7 +20,8 @@ class TransactionsProvider extends ChangeNotifier {
         : allExpense += transaction.amount;
     allTransactions.insert(0, transaction);
     transactionRef
-        .child("${user!.uid}/${transaction.transactionID}")
+        .child(
+            "${user!.uid}/${transaction.accountID}/${transaction.transactionID}")
         .set(transaction.toMap());
 
     notifyListeners();
@@ -30,10 +33,20 @@ class TransactionsProvider extends ChangeNotifier {
     calculateData();
   }
 
+  void removeTransactionByAccount(String accountID) {
+    allTransactions = allTransactions
+        .where((element) => element.accountID != accountID)
+        .toList();
+    transactionRef.child("${user!.uid}/${accountID}").remove();
+    calculateData();
+    notifyListeners();
+  }
+
   void calculateData() {
     allIncome = 0;
     allExpense = 0;
-    allTransactions.forEach((element) {
+
+    allTransactions?.forEach((element) {
       print(element);
       if (element.transactionType == "Income") {
         allIncome += element.amount;
@@ -50,7 +63,8 @@ class TransactionsProvider extends ChangeNotifier {
       }
     });
     transactionRef
-        .child("${user!.uid}/${transaction.transactionID}")
+        .child(
+            "${user!.uid}/${transaction.accountID}/${transaction.transactionID}")
         .set(transaction.toMap());
     calculateData();
     notifyListeners();
@@ -58,7 +72,10 @@ class TransactionsProvider extends ChangeNotifier {
 
   void removeTransaction(TransactionDetails.Transaction transaction) {
     allTransactions.remove(transaction);
-    transactionRef.child("${user!.uid}/${transaction.transactionID}").remove();
+    transactionRef
+        .child(
+            "${user!.uid}/${transaction.accountID}/${transaction.transactionID}")
+        .remove();
     calculateData();
     notifyListeners();
   }

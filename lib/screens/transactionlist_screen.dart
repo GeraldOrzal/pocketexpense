@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pocketexpense/models/transaction.dart';
 import 'package:pocketexpense/widgets/bottomrowitems.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocketexpense/widgets/foodcategoryfilter.dart';
 import 'package:provider/provider.dart';
 import 'package:pocketexpense/widgets/topbar_nav.dart';
 
 import '../constant.dart';
 import '../providers/transactionsprovider.dart';
+import '../widgets/filter.dart';
 import '../widgets/transaction_box.dart';
 
 class TransactionListScreen extends StatefulWidget {
@@ -17,18 +19,70 @@ class TransactionListScreen extends StatefulWidget {
 }
 
 class _TransactionListScreenState extends State<TransactionListScreen> {
-  void _onChanged(data) {}
+  String transactionTypeFilter = "";
+  String orderingFilter = "";
+  List<String> foodCategory = [];
+  int? currentMonth;
+  void _onChanged(data) {
+    setState(() {
+      currentMonth = data;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<TransactionBox> renderAllTransactions() {
-      List<TransactionBox> list = [];
-      List<Transaction> tempList =
-          context.watch<TransactionsProvider>().allTransactions;
+    List<TransactionBox> list = [];
+    print(foodCategory);
+    List<Transaction> tempList =
+        context.watch<TransactionsProvider>().allTransactions;
 
-      for (var i = 0; i < tempList.length; i++) {
-        list.add(TransactionBox(transaction: tempList[i]));
+    List<TransactionBox> renderAllTransactions() {
+      print(orderingFilter);
+      if (orderingFilter.isEmpty &&
+          transactionTypeFilter.isEmpty &&
+          foodCategory.isEmpty &&
+          currentMonth == null) {
+        for (var i = 0; i < tempList.length; i++) {
+          list.add(TransactionBox(transaction: tempList[i]));
+        }
+        return list;
+      } else {
+        List<Transaction> newList = [];
+        if (newList.isEmpty) {
+          newList = tempList;
+        }
+        if (currentMonth != null) {
+          newList = newList
+              .where((element) =>
+                  DateTime.parse(element.timestamp as String).month ==
+                  currentMonth)
+              .toList();
+        }
+        if (transactionTypeFilter.isNotEmpty) {
+          newList = newList
+              .where(
+                  (element) => element.transactionType == transactionTypeFilter)
+              .toList();
+        }
+
+        if (orderingFilter.isNotEmpty) {
+          if (orderingFilter == "Highest") {
+            newList.sort((b, a) => a.amount.compareTo(b.amount));
+          } else {
+            newList.sort((a, b) => a.amount.compareTo(b.amount));
+          }
+        }
+        if (foodCategory.isNotEmpty) {
+          newList = newList
+              .where((element) => foodCategory.contains(element.category))
+              .toList();
+        }
+
+        newList.forEach((element) {
+          list.add(TransactionBox(transaction: element));
+        });
       }
+
       return list;
     }
 
@@ -49,23 +103,24 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
               child: DropdownButton(
                 style: Theme.of(context).textTheme.bodyText2,
                 hint: const Text("Month"),
+                value: currentMonth,
                 items: const [
                   DropdownMenuItem(
-                      value: 1,
+                      value: 0,
                       child: Text(
                         "January",
                       )),
-                  DropdownMenuItem(value: 2, child: Text("February")),
-                  DropdownMenuItem(value: 3, child: Text("March")),
-                  DropdownMenuItem(value: 4, child: Text("April")),
-                  DropdownMenuItem(value: 5, child: Text("May")),
-                  DropdownMenuItem(value: 6, child: Text("June")),
-                  DropdownMenuItem(value: 7, child: Text("July")),
-                  DropdownMenuItem(value: 8, child: Text("August")),
-                  DropdownMenuItem(value: 9, child: Text("September")),
-                  DropdownMenuItem(value: 10, child: Text("October")),
-                  DropdownMenuItem(value: 11, child: Text("November")),
-                  DropdownMenuItem(value: 12, child: Text("December")),
+                  DropdownMenuItem(value: 1, child: Text("February")),
+                  DropdownMenuItem(value: 2, child: Text("March")),
+                  DropdownMenuItem(value: 3, child: Text("April")),
+                  DropdownMenuItem(value: 4, child: Text("May")),
+                  DropdownMenuItem(value: 5, child: Text("June")),
+                  DropdownMenuItem(value: 6, child: Text("July")),
+                  DropdownMenuItem(value: 7, child: Text("August")),
+                  DropdownMenuItem(value: 8, child: Text("September")),
+                  DropdownMenuItem(value: 9, child: Text("October")),
+                  DropdownMenuItem(value: 10, child: Text("November")),
+                  DropdownMenuItem(value: 11, child: Text("December")),
                 ],
                 onChanged: _onChanged,
               ),
@@ -75,6 +130,9 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                 showModalBottomSheet<void>(
                     context: context,
                     builder: (BuildContext builder) {
+                      List<String> tempCategoryFilterList = [];
+                      String tempTransactionFilter = "";
+                      String temporderFilter = "";
                       return DraggableScrollableSheet(
                           snap: true,
                           initialChildSize: 1,
@@ -92,7 +150,15 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                                     children: [
                                       Text("Filter Transaction"),
                                       GestureDetector(
-                                        onTap: () => {},
+                                        onTap: () {
+                                          setState(() {
+                                            transactionTypeFilter = "";
+                                            currentMonth = null;
+                                            orderingFilter = "";
+                                            foodCategory = [];
+                                          });
+                                          Navigator.pop(context);
+                                        },
                                         child: Container(
                                           decoration: const BoxDecoration(
                                               color: Color.fromARGB(
@@ -114,40 +180,45 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
                                   ),
                                 ),
                                 Text("Filter By"),
-                                // BottomRowItems(),
-                                Text("Sort By"),
-                                // BottomRowItems(),
-                                Text("Category"),
-                                Row(
-                                  children: [
-                                    Expanded(child: Text("Choose Category")),
-                                    GestureDetector(
-                                      onTap: () => {
-                                        showModalBottomSheet<void>(
-                                            context: context,
-                                            builder: (BuildContext builder) {
-                                              return DraggableScrollableSheet(
-                                                  builder: (context,
-                                                      scrollController) {
-                                                return SingleChildScrollView(
-                                                  child: Container(
-                                                      child: Text("FOOD")),
-                                                );
-                                              });
-                                            })
-                                      },
-                                      child: Container(
-                                          child: Row(
-                                        children: [
-                                          Text("0 selected"),
-                                          Icon(Icons.arrow_right)
-                                        ],
-                                      )),
-                                    )
+                                FilterRow(
+                                  filterEntry: <TextFilterEntry>[
+                                    TextFilterEntry("Expense"),
+                                    TextFilterEntry("Income"),
                                   ],
+                                  singleSelectedData: transactionTypeFilter,
+                                  callBack: (data) {
+                                    tempTransactionFilter = data;
+                                  },
+                                  allowMultipleSelected: false,
+                                ),
+                                Text("Sort By"),
+                                FilterRow(
+                                  callBack: (data) {
+                                    temporderFilter = data;
+                                  },
+                                  singleSelectedData: orderingFilter,
+                                  filterEntry: <TextFilterEntry>[
+                                    TextFilterEntry("Highest"),
+                                    TextFilterEntry("Lowest"),
+                                  ],
+                                  allowMultipleSelected: false,
+                                ),
+                                Text("Category"),
+                                FoodCategoryFilter(
+                                  callBack: (data) {
+                                    tempCategoryFilterList = data;
+                                  },
+                                  initialData: foodCategory,
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        transactionTypeFilter =
+                                            tempTransactionFilter;
+                                        orderingFilter = temporderFilter;
+                                        foodCategory = tempCategoryFilterList;
+                                      });
+                                    },
                                     child: Text(
                                       "Apply",
                                       style: Theme.of(context)

@@ -18,6 +18,7 @@ class CreateAccScreen extends StatefulWidget {
 
 class _CreateAccScreenState extends State<CreateAccScreen> {
   String? bankName;
+  String? userName;
   String? accountType;
   bool isEnabled = false;
   final DatabaseReference userDetailsRef =
@@ -29,6 +30,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
     return myExp.hasMatch(data);
   }
 
+  void onChangedInput(data) {}
   void onChanged(data) {
     String _data = data;
     if (_data.isEmpty) {
@@ -56,10 +58,47 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
     });
   }
 
+  Future<void> onPressedModal() async {
+    Provider.of<AccountProvider>(context, listen: false).addAccount(Account(
+      accounttype: accountType as String,
+      amount: currentAmount.toString(),
+      initialAmount: currentAmount.toString(),
+    ));
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 2), () {
+          setState(() {
+            currentAmount = "0.00";
+            accountType = null;
+          });
+          Navigator.of(context).pop();
+        });
+        return AlertDialog(
+          title: Text('Notice', style: Theme.of(context).textTheme.headline2),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  'Successfully Created',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Icon(Icons.check_circle),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void _onPressed() {}
 
   @override
   Widget build(BuildContext context) {
+    UserDetails? userDetails = context.watch<UserProvider>().userDetails;
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -95,19 +134,26 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
               Form(
                 child: Column(
                   children: [
-                    Container(
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 40),
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      height: 54,
-                      decoration: BoxStyle.getBoxDecoration,
-                      child: TextFormField(
-                        style: Theme.of(context).textTheme.bodyText1,
-                        decoration: const InputDecoration(
-                          hintText: 'Name',
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
+                    Visibility(
+                      visible: userDetails != null && userDetails.isFirstTime
+                          ? true
+                          : false,
+                      child: Container(
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 40),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        height: 54,
+                        decoration: BoxStyle.getBoxDecoration,
+                        child: TextFormField(
+                          initialValue: userName,
+                          style: Theme.of(context).textTheme.bodyText1,
+                          onChanged: onChangedInput,
+                          decoration: const InputDecoration(
+                            hintText: 'Name',
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                          ),
                         ),
                       ),
                     ),
@@ -276,6 +322,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                                   )
                                 : TextFormField(
                                     keyboardType: TextInputType.number,
+                                    initialValue: currentAmount,
                                     style:
                                         Theme.of(context).textTheme.bodyText1,
                                     decoration:
@@ -286,14 +333,15 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                     Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: ElevatedButton(
-                          onPressed: isEnabled
-                              ? () {
-                                  print(
-                                      "${accountType} sadsd ${currentAmount}");
+                          onPressed: isEnabled &&
+                                  userDetails != null &&
+                                  !userDetails.isFirstTime
+                              ? onPressedModal
+                              : () {
                                   Provider.of<UserProvider>(context,
                                           listen: false)
                                       .updateDetails(UserDetails(
-                                    fullname: "Gerald Orzal",
+                                    fullname: userName as String,
                                     isFirstTime: false,
                                   ));
                                   Provider.of<AccountProvider>(context,
@@ -303,12 +351,11 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                                     amount: currentAmount.toString(),
                                     initialAmount: currentAmount.toString(),
                                   ));
-
-                                  // Navigator.of(context)
-                                  //     .pushReplacementNamed(successRoute);
-                                }
-                              : null,
-                          child: Text("Setup",
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(successRoute);
+                                },
+                          child: Text(
+                              "${userDetails != null && userDetails.isFirstTime ? "Setup" : "Create Account"}",
                               style: Theme.of(context).textTheme.button),
                         )),
                   ],

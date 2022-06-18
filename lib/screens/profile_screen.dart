@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CircleAvatar(
-                    radius: 80,
+                    radius: 50,
                     backgroundColor: primary,
                     child: ClipOval(
                       child: SizedBox(
@@ -63,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 10,
                       ),
                       Text(
-                        'Tony Stark',
+                        '${context.read<UserProvider>().userDetails!.fullname}',
                         style: Theme.of(context).textTheme.headline2,
                       )
                     ],

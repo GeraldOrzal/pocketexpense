@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // initState() {
   //   allTransaction = context.watch<TransactionsProvider>().allTransactions;
   // }
-
+  int? currentMonth;
   String filterData = "today";
   List filter = ["today", "week", "month", "year"];
 
@@ -39,22 +39,55 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Transaction>? allTransaction =
+    List<Transaction> tempList =
         context.watch<TransactionsProvider>().allTransactions;
-
     List<TransactionBox> renderAllTransactions() {
       List<TransactionBox> list = [];
-      List<Transaction> tempList =
-          context.watch<TransactionsProvider>().allTransactions;
 
-      for (var i = 0; i < tempList.length; i++) {
-        list.add(TransactionBox(transaction: tempList[i]));
+      if (tempList.isNotEmpty) {
+        if (tempList.length > 2) {
+          for (var i = 0; i < 2; i++) {
+            list.add(TransactionBox(transaction: tempList[i]));
+          }
+        } else {
+          for (var i = 0; i < tempList.length; i++) {
+            list.add(TransactionBox(transaction: tempList[i]));
+          }
+        }
       }
       return list;
     }
 
+    String renderAmount(String transactionType) {
+      print(currentMonth);
+      if (currentMonth == null) {
+        return transactionType == "Income"
+            ? context.watch<TransactionsProvider>().allIncome.toStringAsFixed(2)
+            : context
+                .watch<TransactionsProvider>()
+                .allExpense
+                .toStringAsFixed(2);
+      }
+      double totalAmount = 0;
+      tempList.forEach((element) {
+        if (transactionType == element.transactionType &&
+            currentMonth == DateTime.parse(element.timestamp as String).month) {
+          totalAmount += element.amount;
+        }
+      });
+
+      return totalAmount.toStringAsFixed(2);
+    }
+
     return Scaffold(
-      appBar: TopBarNav(),
+      appBar: TopBarNav(
+        initData: currentMonth,
+        callBack: (data) {
+          setState(() {
+            currentMonth = data;
+          });
+        },
+      ),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -120,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Icon(Icons.send),
                                       )),
                                   Text(
-                                    'Income \n ₱ ${TextFormatter.formatNumber(context.watch<TransactionsProvider>().allIncome.toStringAsFixed(2))}',
+                                    'Income \n ₱ ${TextFormatter.formatNumber(renderAmount("Income"))}',
                                     style:
                                         Theme.of(context).textTheme.bodyText1,
                                   )
@@ -148,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             child: Icon(Icons.send),
                                           )),
                                       Text(
-                                          'Expenses \n ₱ ${TextFormatter.formatNumber(context.watch<TransactionsProvider>().allExpense.toStringAsFixed(2))}',
+                                          'Expenses \n ₱ ${TextFormatter.formatNumber(renderAmount("Expense"))}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1)
