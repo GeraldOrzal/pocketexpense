@@ -95,9 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
       return SafeArea(
           child: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/bg.png"),
+              image: AssetImage(Theme.of(context).brightness == Brightness.light
+                  ? 'assets/images/bg.png'
+                  : 'assets/images/dark-bg.png'),
               fit: BoxFit.cover,
             ),
           ),

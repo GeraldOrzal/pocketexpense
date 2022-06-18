@@ -69,9 +69,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Scaffold(
               resizeToAvoidBottomInset: false,
               body: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/bg.png"),
+                    image: AssetImage(
+                        Theme.of(context).brightness == Brightness.light
+                            ? 'assets/images/bg.png'
+                            : 'assets/images/dark-bg.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -183,8 +186,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     text: TextSpan(
                                         text:
                                             'By signing up, you agree to the ',
-                                        style: TxtStyle.getBodyText1(
-                                            12, Colors.black),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText2,
                                         children: [
                                           TextSpan(
                                               text:

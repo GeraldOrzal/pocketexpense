@@ -43,6 +43,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Material App',
           theme: defaultThemeData,
+          darkTheme: darkThemeData,
+          themeMode: ThemeMode.dark,
           onGenerateRoute: generateRoute,
           home: AuthWidget(),
         );

@@ -51,6 +51,7 @@ const rightPad = 20.0;
 
 //Colors use in app
 const brightness = Brightness.light;
+const dark = Brightness.dark;
 const primary = Color.fromRGBO(220, 4, 25, 1);
 const background = Colors.white;
 const onPrimary = Colors.black;
