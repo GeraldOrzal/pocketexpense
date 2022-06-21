@@ -46,7 +46,7 @@ class _AuthWidgetState extends State<AuthWidget> {
       tempAccounts.add(tempAccount);
     });
     List<TransactionDetails.Transaction> tempTransactions = [];
-
+    print(allAccounts);
     allTransactions.children?.forEach((element) {
       element.children.forEach((each) {
         TransactionDetails.Transaction tempTransaction =
@@ -56,7 +56,7 @@ class _AuthWidgetState extends State<AuthWidget> {
       });
     });
 
-    // print(tempTransactions);
+    print(tempTransactions);
 
     tempTransactions?.sort((a, b) => DateTime.parse(b.timestamp as String)!
         .compareTo(DateTime.parse(a.timestamp as String)));
@@ -66,7 +66,7 @@ class _AuthWidgetState extends State<AuthWidget> {
         .setAllAccount(tempAccounts);
     Provider.of<TransactionsProvider>(context, listen: false)
         .setAllTransactions(tempTransactions);
-
+    print(userDetails.isFirstTime);
     return userDetails.isFirstTime;
   }
 
@@ -83,7 +83,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             future: setup(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.data as bool) {
+                if (!snapshot.hasData) {
                   return StartScreen();
                 } else {
                   return MainHomeScreen();

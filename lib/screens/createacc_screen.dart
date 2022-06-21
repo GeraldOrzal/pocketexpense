@@ -30,7 +30,13 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
     return myExp.hasMatch(data);
   }
 
-  void onChangedInput(data) {}
+  void onChangedInput(data) {
+    print(data);
+    setState(() {
+      userName = data;
+    });
+  }
+
   void onChanged(data) {
     String _data = data;
     if (_data.isEmpty) {
@@ -135,9 +141,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                 child: Column(
                   children: [
                     Visibility(
-                      visible: userDetails != null && userDetails.isFirstTime
-                          ? true
-                          : false,
+                      visible: userDetails == null ? true : false,
                       child: Container(
                         alignment: Alignment.center,
                         margin: const EdgeInsets.symmetric(
@@ -344,6 +348,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                                     fullname: userName as String,
                                     isFirstTime: false,
                                   ));
+
                                   Provider.of<AccountProvider>(context,
                                           listen: false)
                                       .addAccount(Account(
@@ -355,7 +360,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
                                       .pushReplacementNamed(successRoute);
                                 },
                           child: Text(
-                              "${userDetails != null && userDetails.isFirstTime ? "Setup" : "Create Account"}",
+                              "${userDetails == null ? "Setup" : "Create Account"}",
                               style: Theme.of(context).textTheme.button),
                         )),
                   ],
