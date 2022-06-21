@@ -55,11 +55,13 @@ class _ChartWidgetState extends State<ChartWidget> {
             if (element.transactionType != "Income") {
               DateTime date = DateTime.parse(element.timestamp as String);
               if (date.year == today.year && date.month == today.month) {
-                if (getDate(date.subtract(Duration(days: today.weekday - 1)))
+                if (getDate(today.subtract(Duration(days: today.weekday - 1)))
                         .isBefore(date) &&
-                    getDate(date.add(Duration(
+                    getDate(today.add(Duration(
                             days: DateTime.daysPerWeek - today.weekday)))
                         .isAfter(date)) {
+                  print(today.subtract(Duration(days: today.weekday - 1)));
+                  print(today.weekday);
                   if (allData[date.weekday.toString()] == null) {
                     allData[date.weekday.toString()] =
                         element.amount.toDouble();
