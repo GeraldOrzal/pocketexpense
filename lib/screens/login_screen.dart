@@ -62,13 +62,14 @@ class _LoginScreenState extends State<LoginScreen> {
         });
         List<TransactionDetails.Transaction> tempTransactions = [];
         if (allTransactions.children.length != 0) {
-          allTransactions.children?.forEach((element) {
-            TransactionDetails.Transaction tempTransaction =
-                TransactionDetails.Transaction.fromJson(
-                    jsonEncode(element.value));
-            tempTransaction.transactionID = element.key;
-            tempTransactions.add(tempTransaction);
-          });
+         allTransactions.children?.forEach((element) {
+      element.children.forEach((each) {
+        TransactionDetails.Transaction tempTransaction =
+            TransactionDetails.Transaction.fromJson(jsonEncode(each.value));
+        tempTransaction.transactionID = each.key;
+        tempTransactions.add(tempTransaction);
+      });
+    });
         }
 
         // print(tempTransactions);
