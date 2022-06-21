@@ -25,7 +25,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          color: background,
           padding: const EdgeInsets.fromLTRB(10, 80, 0, 0),
           child: Column(
             children: [
@@ -84,7 +83,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.white
+                      : Colors.black,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(

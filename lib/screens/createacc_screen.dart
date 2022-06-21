@@ -108,6 +108,7 @@ class _CreateAccScreenState extends State<CreateAccScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             backgroundColor: primary,
             elevation: 0,

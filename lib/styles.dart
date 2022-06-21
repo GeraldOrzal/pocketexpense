@@ -185,3 +185,77 @@ abstract class BoxStyle {
         )
       ]);
 }
+
+//darkmode
+ThemeData get darkThemeData {
+  return ThemeData.dark().copyWith(
+      canvasColor: background,
+      colorScheme: const ColorScheme(
+          brightness: dark,
+          primary: primary,
+          onPrimary: onPrimary,
+          secondary: secondary,
+          onSecondary: onSecondary,
+          error: error,
+          onError: onError,
+          background: background,
+          onBackground: onBackground,
+          surface: surface,
+          onSurface: onSurface),
+      textTheme: const TextTheme(
+        headline1: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 40.0,
+            color: background,
+            fontFamily: 'Inter'),
+        headline2: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20.0,
+            color: background,
+            fontFamily: 'Inter'),
+        headline3: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+            color: primary,
+            decoration: TextDecoration.underline,
+            fontFamily: 'Inter'),
+        headline4: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12.0,
+            decoration: TextDecoration.underline,
+            color: primary,
+            fontFamily: 'Inter'),
+        bodyText1:
+            TextStyle(color: background, fontSize: 14.0, fontFamily: 'Inter'),
+        bodyText2:
+            TextStyle(color: background, fontSize: 12.0, fontFamily: 'Inter'),
+        button: TextStyle(
+            color: background,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Inter'),
+      ),
+      buttonTheme: ButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(BORDER_RADIUS),
+          ),
+          minWidth: 200.0),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(BORDER_RADIUS),
+        ),
+        shadowColor: Colors.transparent,
+        minimumSize: const Size.fromHeight(BUTTON_HEIGHT),
+      )),
+      inputDecorationTheme: const InputDecorationTheme(
+        fillColor: onPrimary,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(13)),
+          borderSide: BorderSide(color: Colors.white, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(13)),
+          borderSide: BorderSide(color: Colors.black, width: 1),
+        ),
+      ));
+}
